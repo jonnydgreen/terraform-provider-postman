@@ -5,6 +5,7 @@ NAME=postman
 BINARY=terraform-provider-${NAME}
 VERSION=0.2
 OS_ARCH=darwin_amd64
+GOBIN=$(shell pwd)/bin
 
 .PHONY: default
 default: install
@@ -28,6 +29,15 @@ release:
 	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
 	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
 
+.PHONY: install-docs
+install-docs:
+	@go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+
+.PHONY: docs
+docs: install-docs
+	${GOBIN}/tfplugindocs generate
+	${GOBIN}/tfplugindocs generate
+
 .PHONY: install
 install: build
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
@@ -45,3 +55,7 @@ testacc:
 .PHONY: format
 format:
 	go fmt ./...
+
+.PHONY: local-test
+local-test:
+	cd examples/testing && rm -rf .terraform .terraform.lock.hcl && terraform init && terraform apply --auto-approve

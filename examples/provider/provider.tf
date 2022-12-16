@@ -1,3 +1,3 @@
-provider "scaffolding" {
+provider "postman" {
   # example configuration here
 }

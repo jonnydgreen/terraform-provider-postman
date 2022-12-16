@@ -4,7 +4,7 @@ import (
 	"flag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
-	"github.com/jonnydgreen/terraform-provider-postman/internal/provider"
+	"github.com/jonnydgreen/terraform-provider-postman/postman"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website
@@ -20,7 +20,7 @@ import (
 var (
 	// these will be set by the goreleaser configuration
 	// to appropriate values for the compiled binary
-	version string = "dev"
+	version string = "0.2"
 
 	// goreleaser can also pass the specific commit if you want
 	// commit  string = ""
@@ -33,12 +33,9 @@ func main() {
 	flag.Parse()
 
 	opts := &plugin.ServeOpts{
-		Debug: debugMode,
-
-		// TODO: update this string with the full name of your provider as used in your configs
+		Debug:        debugMode,
 		ProviderAddr: "registry.terraform.io/jonnydgreen/postman",
-
-		ProviderFunc: provider.New(version),
+		ProviderFunc: postman.New(version),
 	}
 
 	plugin.Serve(opts)

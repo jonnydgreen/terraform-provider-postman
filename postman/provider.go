@@ -1,4 +1,4 @@
-package provider
+package postman
 
 import (
 	"context"
@@ -27,11 +27,9 @@ func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
 			DataSourcesMap: map[string]*schema.Resource{
-				"scaffolding_data_source": dataSourceScaffolding(),
+				"postman_coffees": dataSourceCoffees(),
 			},
-			ResourcesMap: map[string]*schema.Resource{
-				"scaffolding_resource": resourceScaffolding(),
-			},
+			ResourcesMap: map[string]*schema.Resource{},
 		}
 
 		p.ConfigureContextFunc = configure(version, p)
@@ -49,7 +47,7 @@ type apiClient struct {
 func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (any, diag.Diagnostics) {
 	return func(context.Context, *schema.ResourceData) (any, diag.Diagnostics) {
 		// Setup a User-Agent for your API client (replace the provider name for yours):
-		// userAgent := p.UserAgent("terraform-provider-scaffolding", version)
+		// userAgent := p.UserAgent("terraform-provider-postman", version)
 		// TODO: myClient.UserAgent = userAgent
 
 		return &apiClient{}, nil

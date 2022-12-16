@@ -55,3 +55,12 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
   -g go \
   -o /local/pkg/postman-sdk
 ```
+
+## Local testing
+
+```bash
+(cd examples/testing && \
+  rm -rf .terraform .terraform.lock.hcl && \
+  terraform init && \
+  terraform apply --auto-approve)
+```
