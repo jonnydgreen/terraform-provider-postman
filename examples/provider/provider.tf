@@ -1,3 +1,4 @@
 provider "postman" {
-  # example configuration here
+  username = "eduscation"
+  password = "test123"
 }
