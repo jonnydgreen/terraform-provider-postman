@@ -3,9 +3,9 @@ package postman
 import (
 	"context"
 
-	"github.com/hashicorp-demoapp/hashicups-client-go"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	postmanSDK "github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
 func init() {
@@ -28,21 +28,16 @@ func New(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
 			Schema: map[string]*schema.Schema{
-				"username": &schema.Schema{
+				"api_key": {
 					Type:        schema.TypeString,
 					Optional:    true,
-					DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_USERNAME", nil),
-				},
-				"password": &schema.Schema{
-					Type:        schema.TypeString,
-					Optional:    true,
-					Sensitive:   true,
-					DefaultFunc: schema.EnvDefaultFunc("HASHICUPS_PASSWORD", nil),
+					DefaultFunc: schema.EnvDefaultFunc("POSTMAN_API_KEY", nil),
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
-				"postman_coffees": dataSourceCoffees(),
-				"hashicups_order": dataSourceOrder(),
+				"postman_workspace": dataSourceWorkspace(),
+				"postman_coffees":   dataSourceCoffees(),
+				"hashicups_order":   dataSourceOrder(),
 			},
 			ResourcesMap: map[string]*schema.Resource{},
 		}
@@ -69,26 +64,42 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 	// 	return &apiClient{}, nil
 	// }
 	return func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
-		username := d.Get("username").(string)
-		password := d.Get("password").(string)
+		apiKey := d.Get("api_key").(string)
 
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
 
-		if (username != "") && (password != "") {
-			c, err := hashicups.NewClient(nil, &username, &password)
-			if err != nil {
-				return nil, diag.FromErr(err)
-			}
+		diags = append(diags, diag.Diagnostic{
+			Severity: diag.Warning,
+			Summary:  "Some debug info",
+			Detail:   "Some debug info",
+		})
 
-			return c, diags
+		if apiKey == "" {
+			diags = append(diags, diag.Diagnostic{
+				Severity: diag.Error,
+				Summary:  "Unable to create Postman API client",
+				Detail:   "No API Key specified for Postman API client. Please provider via environment variable (POSTMAN_API_KEY) or Provider variable (api_key).",
+			})
+			return nil, diags
 		}
 
-		c, err := hashicups.NewClient(nil, nil, nil)
-		if err != nil {
-			return nil, diag.FromErr(err)
-		}
+		// // Example ApiKey provider
+		// // See: https://swagger.io/docs/specification/authentication/api-keys/
+		// apiKeyProvider, apiKeyProviderErr := securityprovider.NewSecurityProviderApiKey("header", "x-api-key", apiKey)
+		// if apiKeyProviderErr != nil {
+		// 	diags = append(diags, diag.Diagnostic{
+		// 		Severity: diag.Error,
+		// 		Summary:  "Unable to setup the Postman API Key Provider",
+		// 		Detail:   "Unable to auth API Key for authenticated Postman API client.",
+		// 	})
+		// 	return nil, diags
+		// }
 
-		return c, diags
+		configuration := postmanSDK.NewConfiguration()
+		// TODO: This works for now
+		configuration.AddDefaultHeader("x-api-key", apiKey)
+		apiClient := postmanSDK.NewAPIClient(configuration)
+		return apiClient, diags
 	}
 }

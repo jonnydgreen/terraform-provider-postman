@@ -36,3 +36,10 @@ website/vendor
 
 # Examples
 examples/testing/
+
+# Generated Client
+!client/
+client/*
+!client/postman/
+client/postman/*
+!client/postman/*.go

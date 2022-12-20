@@ -6,6 +6,8 @@ BINARY=terraform-provider-${NAME}
 VERSION=0.2
 OS_ARCH=darwin_amd64
 GOBIN=$(shell pwd)/bin
+CLIENT_PATH=client/postman
+PACKAGE_NAME=postman
 
 .PHONY: default
 default: install
@@ -58,4 +60,28 @@ format:
 
 .PHONY: local-test
 local-test:
-	cd examples/testing && rm -rf .terraform .terraform.lock.hcl && terraform init && terraform apply --auto-approve
+	cd examples/testing && \
+	rm -rf .terraform .terraform.lock.hcl terraform.tfstate* && \
+	terraform init && terraform apply --auto-approve
+
+.PHONY: gen-client
+gen-client:
+	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
+		-i /local/openapi.yaml \
+		-g go \
+		-o /local/${CLIENT_PATH} \
+		-p=isGoSubmodule=true,packageName=${PACKAGE_NAME} \
+		--strict-spec true;
+	rm -f ${CLIENT_PATH}/go.*
+	rm -rf ${CLIENT_PATH}/api
+	rm -rf ${CLIENT_PATH}/test
+	rm -rf ${CLIENT_PATH}/docs
+	rm -rf ${CLIENT_PATH}/.openapi-generator
+	rm -rf ${CLIENT_PATH}/.gitignore
+	rm -rf ${CLIENT_PATH}/.travis.yml
+	rm -rf ${CLIENT_PATH}/.openapi-generator-ignore
+	rm -rf ${CLIENT_PATH}/git_push.sh
+# TODO: find best tool
+# rm -f ${CLIENT_PATH}/postman-sdk.gen.go
+# go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
+# ${GOBIN}/oapi-codegen -package ${PACKAGE_NAME} openapi.yaml > ${CLIENT_PATH}/postman-sdk.gen.go

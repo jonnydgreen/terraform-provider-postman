@@ -3,6 +3,10 @@
     "demoapp",
     "diag",
     "goreleaser",
+    "securityprovider",
     "tfplugindocs"
-  ]
+  ],
+  "search.exclude": {
+    "**/vendor": true,
+  }
 }
