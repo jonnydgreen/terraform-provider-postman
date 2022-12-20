@@ -64,3 +64,11 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
   terraform init && \
   terraform apply --auto-approve)
 ```
+
+## Local dev
+
+Setup git commit hooks by running the following command at the root of the repo:
+
+```sh
+git config core.hooksPath .githooks
+```

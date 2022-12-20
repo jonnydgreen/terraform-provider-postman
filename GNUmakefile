@@ -64,6 +64,10 @@ local-test:
 	rm -rf .terraform .terraform.lock.hcl terraform.tfstate* && \
 	terraform init && terraform apply --auto-approve
 
+.PHONY: gen-docs
+gen-docs:
+	go generate ./...
+
 .PHONY: gen-client
 gen-client:
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
@@ -85,3 +89,9 @@ gen-client:
 # rm -f ${CLIENT_PATH}/postman-sdk.gen.go
 # go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
 # ${GOBIN}/oapi-codegen -package ${PACKAGE_NAME} openapi.yaml > ${CLIENT_PATH}/postman-sdk.gen.go
+
+.PHONY: pre-commit
+pre-commit:
+	make
+	make test
+	make gen-docs && git add docs
