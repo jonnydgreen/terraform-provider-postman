@@ -36,10 +36,11 @@ func New(version string) func() *schema.Provider {
 			},
 			DataSourcesMap: map[string]*schema.Resource{
 				"postman_workspace": dataSourceWorkspace(),
-				"postman_coffees":   dataSourceCoffees(),
-				"hashicups_order":   dataSourceOrder(),
 			},
-			ResourcesMap: map[string]*schema.Resource{},
+			ResourcesMap: map[string]*schema.Resource{
+				"postman_workspace":   resourceWorkspace(),
+				"postman_environment": resourceEnvironment(),
+			},
 		}
 
 		p.ConfigureContextFunc = configure(version, p)
@@ -68,12 +69,6 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 
 		// Warning or errors can be collected in a slice type
 		var diags diag.Diagnostics
-
-		diags = append(diags, diag.Diagnostic{
-			Severity: diag.Warning,
-			Summary:  "Some debug info",
-			Detail:   "Some debug info",
-		})
 
 		if apiKey == "" {
 			diags = append(diags, diag.Diagnostic{

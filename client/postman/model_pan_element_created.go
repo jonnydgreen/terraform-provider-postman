@@ -25,28 +25,28 @@ type PANElementCreated struct {
 	AddedAt *time.Time `json:"addedAt,omitempty"`
 	// The user who added the element.
 	AddedBy *int32 `json:"addedBy,omitempty"`
-	// The user who created the element.
-	CreatedBy *int32 `json:"createdBy,omitempty"`
 	// The date and time at which the element was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// The user who last updated the element.
-	UpdatedBy *int32 `json:"updatedBy,omitempty"`
-	// The date and time at which the element was last updated.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
-	// The element's type.
-	Type *string `json:"type,omitempty"`
-	// The element's ID or UID.
-	Id *string `json:"id,omitempty"`
-	// The element's name.
-	Name *string `json:"name,omitempty"`
-	// The element's summary.
-	Summary *string `json:"summary,omitempty"`
+	// The user who created the element.
+	CreatedBy *int32 `json:"createdBy,omitempty"`
 	// The element's description.
 	Description *string `json:"description,omitempty"`
 	// The element's Postman URL.
 	Href *string `json:"href,omitempty"`
+	// The element's ID or UID.
+	Id *string `json:"id,omitempty"`
+	// The element's name.
+	Name *string `json:"name,omitempty"`
 	// The parent folder's ID.
 	ParentFolderId *int32 `json:"parentFolderId,omitempty"`
+	// The element's summary.
+	Summary *string `json:"summary,omitempty"`
+	// The element's type.
+	Type *string `json:"type,omitempty"`
+	// The date and time at which the element was last updated.
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// The user who last updated the element.
+	UpdatedBy *int32 `json:"updatedBy,omitempty"`
 }
 
 // NewPANElementCreated instantiates a new PANElementCreated object
@@ -130,38 +130,6 @@ func (o *PANElementCreated) SetAddedBy(v int32) {
 	o.AddedBy = &v
 }
 
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *PANElementCreated) GetCreatedBy() int32 {
-	if o == nil || isNil(o.CreatedBy) {
-		var ret int32
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetCreatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *PANElementCreated) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given int32 and assigns it to the CreatedBy field.
-func (o *PANElementCreated) SetCreatedBy(v int32) {
-	o.CreatedBy = &v
-}
-
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PANElementCreated) GetCreatedAt() time.Time {
 	if o == nil || isNil(o.CreatedAt) {
@@ -194,196 +162,36 @@ func (o *PANElementCreated) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
-func (o *PANElementCreated) GetUpdatedBy() int32 {
-	if o == nil || isNil(o.UpdatedBy) {
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *PANElementCreated) GetCreatedBy() int32 {
+	if o == nil || isNil(o.CreatedBy) {
 		var ret int32
 		return ret
 	}
-	return *o.UpdatedBy
+	return *o.CreatedBy
 }
 
-// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetUpdatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
+func (o *PANElementCreated) GetCreatedByOk() (*int32, bool) {
+	if o == nil || isNil(o.CreatedBy) {
 		return nil, false
 	}
-	return o.UpdatedBy, true
+	return o.CreatedBy, true
 }
 
-// HasUpdatedBy returns a boolean if a field has been set.
-func (o *PANElementCreated) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *PANElementCreated) HasCreatedBy() bool {
+	if o != nil && !isNil(o.CreatedBy) {
 		return true
 	}
 
 	return false
 }
 
-// SetUpdatedBy gets a reference to the given int32 and assigns it to the UpdatedBy field.
-func (o *PANElementCreated) SetUpdatedBy(v int32) {
-	o.UpdatedBy = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *PANElementCreated) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *PANElementCreated) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *PANElementCreated) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *PANElementCreated) GetType() string {
-	if o == nil || isNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *PANElementCreated) HasType() bool {
-	if o != nil && !isNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *PANElementCreated) SetType(v string) {
-	o.Type = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *PANElementCreated) GetId() string {
-	if o == nil || isNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *PANElementCreated) HasId() bool {
-	if o != nil && !isNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *PANElementCreated) SetId(v string) {
-	o.Id = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *PANElementCreated) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *PANElementCreated) HasName() bool {
-	if o != nil && !isNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *PANElementCreated) SetName(v string) {
-	o.Name = &v
-}
-
-// GetSummary returns the Summary field value if set, zero value otherwise.
-func (o *PANElementCreated) GetSummary() string {
-	if o == nil || isNil(o.Summary) {
-		var ret string
-		return ret
-	}
-	return *o.Summary
-}
-
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANElementCreated) GetSummaryOk() (*string, bool) {
-	if o == nil || isNil(o.Summary) {
-		return nil, false
-	}
-	return o.Summary, true
-}
-
-// HasSummary returns a boolean if a field has been set.
-func (o *PANElementCreated) HasSummary() bool {
-	if o != nil && !isNil(o.Summary) {
-		return true
-	}
-
-	return false
-}
-
-// SetSummary gets a reference to the given string and assigns it to the Summary field.
-func (o *PANElementCreated) SetSummary(v string) {
-	o.Summary = &v
+// SetCreatedBy gets a reference to the given int32 and assigns it to the CreatedBy field.
+func (o *PANElementCreated) SetCreatedBy(v int32) {
+	o.CreatedBy = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -450,6 +258,70 @@ func (o *PANElementCreated) SetHref(v string) {
 	o.Href = &v
 }
 
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *PANElementCreated) GetId() string {
+	if o == nil || isNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetIdOk() (*string, bool) {
+	if o == nil || isNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *PANElementCreated) HasId() bool {
+	if o != nil && !isNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *PANElementCreated) SetId(v string) {
+	o.Id = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PANElementCreated) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PANElementCreated) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PANElementCreated) SetName(v string) {
+	o.Name = &v
+}
+
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *PANElementCreated) GetParentFolderId() int32 {
 	if o == nil || isNil(o.ParentFolderId) {
@@ -482,6 +354,134 @@ func (o *PANElementCreated) SetParentFolderId(v int32) {
 	o.ParentFolderId = &v
 }
 
+// GetSummary returns the Summary field value if set, zero value otherwise.
+func (o *PANElementCreated) GetSummary() string {
+	if o == nil || isNil(o.Summary) {
+		var ret string
+		return ret
+	}
+	return *o.Summary
+}
+
+// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetSummaryOk() (*string, bool) {
+	if o == nil || isNil(o.Summary) {
+		return nil, false
+	}
+	return o.Summary, true
+}
+
+// HasSummary returns a boolean if a field has been set.
+func (o *PANElementCreated) HasSummary() bool {
+	if o != nil && !isNil(o.Summary) {
+		return true
+	}
+
+	return false
+}
+
+// SetSummary gets a reference to the given string and assigns it to the Summary field.
+func (o *PANElementCreated) SetSummary(v string) {
+	o.Summary = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PANElementCreated) GetType() string {
+	if o == nil || isNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetTypeOk() (*string, bool) {
+	if o == nil || isNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PANElementCreated) HasType() bool {
+	if o != nil && !isNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PANElementCreated) SetType(v string) {
+	o.Type = &v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *PANElementCreated) GetUpdatedAt() time.Time {
+	if o == nil || isNil(o.UpdatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *PANElementCreated) HasUpdatedAt() bool {
+	if o != nil && !isNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *PANElementCreated) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
+}
+
+// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
+func (o *PANElementCreated) GetUpdatedBy() int32 {
+	if o == nil || isNil(o.UpdatedBy) {
+		var ret int32
+		return ret
+	}
+	return *o.UpdatedBy
+}
+
+// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANElementCreated) GetUpdatedByOk() (*int32, bool) {
+	if o == nil || isNil(o.UpdatedBy) {
+		return nil, false
+	}
+	return o.UpdatedBy, true
+}
+
+// HasUpdatedBy returns a boolean if a field has been set.
+func (o *PANElementCreated) HasUpdatedBy() bool {
+	if o != nil && !isNil(o.UpdatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedBy gets a reference to the given int32 and assigns it to the UpdatedBy field.
+func (o *PANElementCreated) SetUpdatedBy(v int32) {
+	o.UpdatedBy = &v
+}
+
 func (o PANElementCreated) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -498,29 +498,11 @@ func (o PANElementCreated) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.AddedBy) {
 		toSerialize["addedBy"] = o.AddedBy
 	}
-	if !isNil(o.CreatedBy) {
-		toSerialize["createdBy"] = o.CreatedBy
-	}
 	if !isNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.UpdatedBy) {
-		toSerialize["updatedBy"] = o.UpdatedBy
-	}
-	if !isNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
-	}
-	if !isNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !isNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
+	if !isNil(o.CreatedBy) {
+		toSerialize["createdBy"] = o.CreatedBy
 	}
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
@@ -528,8 +510,26 @@ func (o PANElementCreated) ToMap() (map[string]interface{}, error) {
 	if !isNil(o.Href) {
 		toSerialize["href"] = o.Href
 	}
+	if !isNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !isNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
+	}
+	if !isNil(o.Summary) {
+		toSerialize["summary"] = o.Summary
+	}
+	if !isNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !isNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if !isNil(o.UpdatedBy) {
+		toSerialize["updatedBy"] = o.UpdatedBy
 	}
 	return toSerialize, nil
 }

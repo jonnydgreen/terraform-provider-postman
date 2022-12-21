@@ -20,10 +20,10 @@ var _ MappedNullable = &ScimUserResourceName{}
 
 // ScimUserResourceName Information about the Postman team member.
 type ScimUserResourceName struct {
-	// The team member's first name.
-	GivenName *string `json:"givenName,omitempty"`
 	// The team member's last name.
 	FamilyName *string `json:"familyName,omitempty"`
+	// The team member's first name.
+	GivenName *string `json:"givenName,omitempty"`
 }
 
 // NewScimUserResourceName instantiates a new ScimUserResourceName object
@@ -41,38 +41,6 @@ func NewScimUserResourceName() *ScimUserResourceName {
 func NewScimUserResourceNameWithDefaults() *ScimUserResourceName {
 	this := ScimUserResourceName{}
 	return &this
-}
-
-// GetGivenName returns the GivenName field value if set, zero value otherwise.
-func (o *ScimUserResourceName) GetGivenName() string {
-	if o == nil || isNil(o.GivenName) {
-		var ret string
-		return ret
-	}
-	return *o.GivenName
-}
-
-// GetGivenNameOk returns a tuple with the GivenName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimUserResourceName) GetGivenNameOk() (*string, bool) {
-	if o == nil || isNil(o.GivenName) {
-		return nil, false
-	}
-	return o.GivenName, true
-}
-
-// HasGivenName returns a boolean if a field has been set.
-func (o *ScimUserResourceName) HasGivenName() bool {
-	if o != nil && !isNil(o.GivenName) {
-		return true
-	}
-
-	return false
-}
-
-// SetGivenName gets a reference to the given string and assigns it to the GivenName field.
-func (o *ScimUserResourceName) SetGivenName(v string) {
-	o.GivenName = &v
 }
 
 // GetFamilyName returns the FamilyName field value if set, zero value otherwise.
@@ -107,6 +75,38 @@ func (o *ScimUserResourceName) SetFamilyName(v string) {
 	o.FamilyName = &v
 }
 
+// GetGivenName returns the GivenName field value if set, zero value otherwise.
+func (o *ScimUserResourceName) GetGivenName() string {
+	if o == nil || isNil(o.GivenName) {
+		var ret string
+		return ret
+	}
+	return *o.GivenName
+}
+
+// GetGivenNameOk returns a tuple with the GivenName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimUserResourceName) GetGivenNameOk() (*string, bool) {
+	if o == nil || isNil(o.GivenName) {
+		return nil, false
+	}
+	return o.GivenName, true
+}
+
+// HasGivenName returns a boolean if a field has been set.
+func (o *ScimUserResourceName) HasGivenName() bool {
+	if o != nil && !isNil(o.GivenName) {
+		return true
+	}
+
+	return false
+}
+
+// SetGivenName gets a reference to the given string and assigns it to the GivenName field.
+func (o *ScimUserResourceName) SetGivenName(v string) {
+	o.GivenName = &v
+}
+
 func (o ScimUserResourceName) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,11 +117,11 @@ func (o ScimUserResourceName) MarshalJSON() ([]byte, error) {
 
 func (o ScimUserResourceName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.GivenName) {
-		toSerialize["givenName"] = o.GivenName
-	}
 	if !isNil(o.FamilyName) {
 		toSerialize["familyName"] = o.FamilyName
+	}
+	if !isNil(o.GivenName) {
+		toSerialize["givenName"] = o.GivenName
 	}
 	return toSerialize, nil
 }

@@ -15,99 +15,133 @@ import (
 	"encoding/json"
 )
 
-// checks if the SingleWorkspace429Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SingleWorkspace429Response{}
+// checks if the CreateEnvironment200ResponseEnvironment type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateEnvironment200ResponseEnvironment{}
 
-// SingleWorkspace429Response struct for SingleWorkspace429Response
-type SingleWorkspace429Response struct {
-	// The error name.
-	Error *string `json:"error,omitempty"`
-	// The error message.
-	Message *string `json:"message,omitempty"`
+// CreateEnvironment200ResponseEnvironment struct for CreateEnvironment200ResponseEnvironment
+type CreateEnvironment200ResponseEnvironment struct {
+	// The environment's ID.
+	Id *string `json:"id,omitempty"`
+	// The environment's name.
+	Name *string `json:"name,omitempty"`
+	// The environment's unique ID.
+	Uid *string `json:"uid,omitempty"`
 }
 
-// NewSingleWorkspace429Response instantiates a new SingleWorkspace429Response object
+// NewCreateEnvironment200ResponseEnvironment instantiates a new CreateEnvironment200ResponseEnvironment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleWorkspace429Response() *SingleWorkspace429Response {
-	this := SingleWorkspace429Response{}
+func NewCreateEnvironment200ResponseEnvironment() *CreateEnvironment200ResponseEnvironment {
+	this := CreateEnvironment200ResponseEnvironment{}
 	return &this
 }
 
-// NewSingleWorkspace429ResponseWithDefaults instantiates a new SingleWorkspace429Response object
+// NewCreateEnvironment200ResponseEnvironmentWithDefaults instantiates a new CreateEnvironment200ResponseEnvironment object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSingleWorkspace429ResponseWithDefaults() *SingleWorkspace429Response {
-	this := SingleWorkspace429Response{}
+func NewCreateEnvironment200ResponseEnvironmentWithDefaults() *CreateEnvironment200ResponseEnvironment {
+	this := CreateEnvironment200ResponseEnvironment{}
 	return &this
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *SingleWorkspace429Response) GetError() string {
-	if o == nil || isNil(o.Error) {
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *CreateEnvironment200ResponseEnvironment) GetId() string {
+	if o == nil || isNil(o.Id) {
 		var ret string
 		return ret
 	}
-	return *o.Error
+	return *o.Id
 }
 
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace429Response) GetErrorOk() (*string, bool) {
-	if o == nil || isNil(o.Error) {
+func (o *CreateEnvironment200ResponseEnvironment) GetIdOk() (*string, bool) {
+	if o == nil || isNil(o.Id) {
 		return nil, false
 	}
-	return o.Error, true
+	return o.Id, true
 }
 
-// HasError returns a boolean if a field has been set.
-func (o *SingleWorkspace429Response) HasError() bool {
-	if o != nil && !isNil(o.Error) {
+// HasId returns a boolean if a field has been set.
+func (o *CreateEnvironment200ResponseEnvironment) HasId() bool {
+	if o != nil && !isNil(o.Id) {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given string and assigns it to the Error field.
-func (o *SingleWorkspace429Response) SetError(v string) {
-	o.Error = &v
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *CreateEnvironment200ResponseEnvironment) SetId(v string) {
+	o.Id = &v
 }
 
-// GetMessage returns the Message field value if set, zero value otherwise.
-func (o *SingleWorkspace429Response) GetMessage() string {
-	if o == nil || isNil(o.Message) {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateEnvironment200ResponseEnvironment) GetName() string {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
-	return *o.Message
+	return *o.Name
 }
 
-// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace429Response) GetMessageOk() (*string, bool) {
-	if o == nil || isNil(o.Message) {
+func (o *CreateEnvironment200ResponseEnvironment) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
-	return o.Message, true
+	return o.Name, true
 }
 
-// HasMessage returns a boolean if a field has been set.
-func (o *SingleWorkspace429Response) HasMessage() bool {
-	if o != nil && !isNil(o.Message) {
+// HasName returns a boolean if a field has been set.
+func (o *CreateEnvironment200ResponseEnvironment) HasName() bool {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *SingleWorkspace429Response) SetMessage(v string) {
-	o.Message = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateEnvironment200ResponseEnvironment) SetName(v string) {
+	o.Name = &v
 }
 
-func (o SingleWorkspace429Response) MarshalJSON() ([]byte, error) {
+// GetUid returns the Uid field value if set, zero value otherwise.
+func (o *CreateEnvironment200ResponseEnvironment) GetUid() string {
+	if o == nil || isNil(o.Uid) {
+		var ret string
+		return ret
+	}
+	return *o.Uid
+}
+
+// GetUidOk returns a tuple with the Uid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateEnvironment200ResponseEnvironment) GetUidOk() (*string, bool) {
+	if o == nil || isNil(o.Uid) {
+		return nil, false
+	}
+	return o.Uid, true
+}
+
+// HasUid returns a boolean if a field has been set.
+func (o *CreateEnvironment200ResponseEnvironment) HasUid() bool {
+	if o != nil && !isNil(o.Uid) {
+		return true
+	}
+
+	return false
+}
+
+// SetUid gets a reference to the given string and assigns it to the Uid field.
+func (o *CreateEnvironment200ResponseEnvironment) SetUid(v string) {
+	o.Uid = &v
+}
+
+func (o CreateEnvironment200ResponseEnvironment) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,49 +149,52 @@ func (o SingleWorkspace429Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SingleWorkspace429Response) ToMap() (map[string]interface{}, error) {
+func (o CreateEnvironment200ResponseEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Error) {
-		toSerialize["error"] = o.Error
+	if !isNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Message) {
-		toSerialize["message"] = o.Message
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !isNil(o.Uid) {
+		toSerialize["uid"] = o.Uid
 	}
 	return toSerialize, nil
 }
 
-type NullableSingleWorkspace429Response struct {
-	value *SingleWorkspace429Response
+type NullableCreateEnvironment200ResponseEnvironment struct {
+	value *CreateEnvironment200ResponseEnvironment
 	isSet bool
 }
 
-func (v NullableSingleWorkspace429Response) Get() *SingleWorkspace429Response {
+func (v NullableCreateEnvironment200ResponseEnvironment) Get() *CreateEnvironment200ResponseEnvironment {
 	return v.value
 }
 
-func (v *NullableSingleWorkspace429Response) Set(val *SingleWorkspace429Response) {
+func (v *NullableCreateEnvironment200ResponseEnvironment) Set(val *CreateEnvironment200ResponseEnvironment) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSingleWorkspace429Response) IsSet() bool {
+func (v NullableCreateEnvironment200ResponseEnvironment) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSingleWorkspace429Response) Unset() {
+func (v *NullableCreateEnvironment200ResponseEnvironment) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSingleWorkspace429Response(val *SingleWorkspace429Response) *NullableSingleWorkspace429Response {
-	return &NullableSingleWorkspace429Response{value: val, isSet: true}
+func NewNullableCreateEnvironment200ResponseEnvironment(val *CreateEnvironment200ResponseEnvironment) *NullableCreateEnvironment200ResponseEnvironment {
+	return &NullableCreateEnvironment200ResponseEnvironment{value: val, isSet: true}
 }
 
-func (v NullableSingleWorkspace429Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateEnvironment200ResponseEnvironment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSingleWorkspace429Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateEnvironment200ResponseEnvironment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

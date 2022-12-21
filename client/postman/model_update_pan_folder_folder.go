@@ -20,10 +20,10 @@ var _ MappedNullable = &UpdatePANFolderFolder{}
 
 // UpdatePANFolderFolder struct for UpdatePANFolderFolder
 type UpdatePANFolderFolder struct {
-	// The folder's new name.
-	Name *string `json:"name,omitempty"`
 	// The folder's updated description.
 	Description *string `json:"description,omitempty"`
+	// The folder's new name.
+	Name *string `json:"name,omitempty"`
 	// The folder's new parent folder ID.
 	ParentFolderId *int32 `json:"parentFolderId,omitempty"`
 }
@@ -43,38 +43,6 @@ func NewUpdatePANFolderFolder() *UpdatePANFolderFolder {
 func NewUpdatePANFolderFolderWithDefaults() *UpdatePANFolderFolder {
 	this := UpdatePANFolderFolder{}
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdatePANFolderFolder) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePANFolderFolder) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *UpdatePANFolderFolder) HasName() bool {
-	if o != nil && !isNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdatePANFolderFolder) SetName(v string) {
-	o.Name = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -107,6 +75,38 @@ func (o *UpdatePANFolderFolder) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *UpdatePANFolderFolder) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdatePANFolderFolder) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePANFolderFolder) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdatePANFolderFolder) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdatePANFolderFolder) SetName(v string) {
+	o.Name = &v
 }
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
@@ -151,11 +151,11 @@ func (o UpdatePANFolderFolder) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANFolderFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !isNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId

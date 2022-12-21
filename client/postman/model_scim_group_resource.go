@@ -20,16 +20,16 @@ var _ MappedNullable = &ScimGroupResource{}
 
 // ScimGroupResource The SCIM group resource object.
 type ScimGroupResource struct {
-	// A list of schema resource URIs.
-	Schemas []string `json:"schemas,omitempty"`
-	// The group's SCIM ID.
-	Id *string `json:"id,omitempty"`
 	// The group's display name.
 	DisplayName *string `json:"displayName,omitempty"`
-	Members *ScimGroupResourceMembers `json:"members,omitempty"`
 	// The group's external ID.
 	ExternalId *string `json:"externalId,omitempty"`
+	// The group's SCIM ID.
+	Id *string `json:"id,omitempty"`
+	Members *ScimGroupResourceMembers `json:"members,omitempty"`
 	Meta *ScimGroupResourceMeta `json:"meta,omitempty"`
+	// A list of schema resource URIs.
+	Schemas []string `json:"schemas,omitempty"`
 }
 
 // NewScimGroupResource instantiates a new ScimGroupResource object
@@ -47,70 +47,6 @@ func NewScimGroupResource() *ScimGroupResource {
 func NewScimGroupResourceWithDefaults() *ScimGroupResource {
 	this := ScimGroupResource{}
 	return &this
-}
-
-// GetSchemas returns the Schemas field value if set, zero value otherwise.
-func (o *ScimGroupResource) GetSchemas() []string {
-	if o == nil || isNil(o.Schemas) {
-		var ret []string
-		return ret
-	}
-	return o.Schemas
-}
-
-// GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimGroupResource) GetSchemasOk() ([]string, bool) {
-	if o == nil || isNil(o.Schemas) {
-		return nil, false
-	}
-	return o.Schemas, true
-}
-
-// HasSchemas returns a boolean if a field has been set.
-func (o *ScimGroupResource) HasSchemas() bool {
-	if o != nil && !isNil(o.Schemas) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchemas gets a reference to the given []string and assigns it to the Schemas field.
-func (o *ScimGroupResource) SetSchemas(v []string) {
-	o.Schemas = v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *ScimGroupResource) GetId() string {
-	if o == nil || isNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimGroupResource) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *ScimGroupResource) HasId() bool {
-	if o != nil && !isNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ScimGroupResource) SetId(v string) {
-	o.Id = &v
 }
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
@@ -145,38 +81,6 @@ func (o *ScimGroupResource) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetMembers returns the Members field value if set, zero value otherwise.
-func (o *ScimGroupResource) GetMembers() ScimGroupResourceMembers {
-	if o == nil || isNil(o.Members) {
-		var ret ScimGroupResourceMembers
-		return ret
-	}
-	return *o.Members
-}
-
-// GetMembersOk returns a tuple with the Members field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimGroupResource) GetMembersOk() (*ScimGroupResourceMembers, bool) {
-	if o == nil || isNil(o.Members) {
-		return nil, false
-	}
-	return o.Members, true
-}
-
-// HasMembers returns a boolean if a field has been set.
-func (o *ScimGroupResource) HasMembers() bool {
-	if o != nil && !isNil(o.Members) {
-		return true
-	}
-
-	return false
-}
-
-// SetMembers gets a reference to the given ScimGroupResourceMembers and assigns it to the Members field.
-func (o *ScimGroupResource) SetMembers(v ScimGroupResourceMembers) {
-	o.Members = &v
-}
-
 // GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetExternalId() string {
 	if o == nil || isNil(o.ExternalId) {
@@ -207,6 +111,70 @@ func (o *ScimGroupResource) HasExternalId() bool {
 // SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
 func (o *ScimGroupResource) SetExternalId(v string) {
 	o.ExternalId = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *ScimGroupResource) GetId() string {
+	if o == nil || isNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimGroupResource) GetIdOk() (*string, bool) {
+	if o == nil || isNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *ScimGroupResource) HasId() bool {
+	if o != nil && !isNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *ScimGroupResource) SetId(v string) {
+	o.Id = &v
+}
+
+// GetMembers returns the Members field value if set, zero value otherwise.
+func (o *ScimGroupResource) GetMembers() ScimGroupResourceMembers {
+	if o == nil || isNil(o.Members) {
+		var ret ScimGroupResourceMembers
+		return ret
+	}
+	return *o.Members
+}
+
+// GetMembersOk returns a tuple with the Members field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimGroupResource) GetMembersOk() (*ScimGroupResourceMembers, bool) {
+	if o == nil || isNil(o.Members) {
+		return nil, false
+	}
+	return o.Members, true
+}
+
+// HasMembers returns a boolean if a field has been set.
+func (o *ScimGroupResource) HasMembers() bool {
+	if o != nil && !isNil(o.Members) {
+		return true
+	}
+
+	return false
+}
+
+// SetMembers gets a reference to the given ScimGroupResourceMembers and assigns it to the Members field.
+func (o *ScimGroupResource) SetMembers(v ScimGroupResourceMembers) {
+	o.Members = &v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
@@ -241,6 +209,38 @@ func (o *ScimGroupResource) SetMeta(v ScimGroupResourceMeta) {
 	o.Meta = &v
 }
 
+// GetSchemas returns the Schemas field value if set, zero value otherwise.
+func (o *ScimGroupResource) GetSchemas() []string {
+	if o == nil || isNil(o.Schemas) {
+		var ret []string
+		return ret
+	}
+	return o.Schemas
+}
+
+// GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimGroupResource) GetSchemasOk() ([]string, bool) {
+	if o == nil || isNil(o.Schemas) {
+		return nil, false
+	}
+	return o.Schemas, true
+}
+
+// HasSchemas returns a boolean if a field has been set.
+func (o *ScimGroupResource) HasSchemas() bool {
+	if o != nil && !isNil(o.Schemas) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemas gets a reference to the given []string and assigns it to the Schemas field.
+func (o *ScimGroupResource) SetSchemas(v []string) {
+	o.Schemas = v
+}
+
 func (o ScimGroupResource) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -251,23 +251,23 @@ func (o ScimGroupResource) MarshalJSON() ([]byte, error) {
 
 func (o ScimGroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Schemas) {
-		toSerialize["schemas"] = o.Schemas
-	}
-	if !isNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
 	if !isNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
-	}
-	if !isNil(o.Members) {
-		toSerialize["members"] = o.Members
 	}
 	if !isNil(o.ExternalId) {
 		toSerialize["externalId"] = o.ExternalId
 	}
+	if !isNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !isNil(o.Members) {
+		toSerialize["members"] = o.Members
+	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
+	}
+	if !isNil(o.Schemas) {
+		toSerialize["schemas"] = o.Schemas
 	}
 	return toSerialize, nil
 }

@@ -20,10 +20,10 @@ var _ MappedNullable = &UpdateWorkspace404ResponseError{}
 
 // UpdateWorkspace404ResponseError struct for UpdateWorkspace404ResponseError
 type UpdateWorkspace404ResponseError struct {
-	// The error name.
-	Name *string `json:"name,omitempty"`
 	// The error message.
 	Message *string `json:"message,omitempty"`
+	// The error name.
+	Name *string `json:"name,omitempty"`
 }
 
 // NewUpdateWorkspace404ResponseError instantiates a new UpdateWorkspace404ResponseError object
@@ -41,38 +41,6 @@ func NewUpdateWorkspace404ResponseError() *UpdateWorkspace404ResponseError {
 func NewUpdateWorkspace404ResponseErrorWithDefaults() *UpdateWorkspace404ResponseError {
 	this := UpdateWorkspace404ResponseError{}
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdateWorkspace404ResponseError) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateWorkspace404ResponseError) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *UpdateWorkspace404ResponseError) HasName() bool {
-	if o != nil && !isNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdateWorkspace404ResponseError) SetName(v string) {
-	o.Name = &v
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
@@ -107,6 +75,38 @@ func (o *UpdateWorkspace404ResponseError) SetMessage(v string) {
 	o.Message = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateWorkspace404ResponseError) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateWorkspace404ResponseError) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateWorkspace404ResponseError) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateWorkspace404ResponseError) SetName(v string) {
+	o.Name = &v
+}
+
 func (o UpdateWorkspace404ResponseError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,11 +117,11 @@ func (o UpdateWorkspace404ResponseError) MarshalJSON() ([]byte, error) {
 
 func (o UpdateWorkspace404ResponseError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
 	if !isNil(o.Message) {
 		toSerialize["message"] = o.Message
+	}
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil
 }

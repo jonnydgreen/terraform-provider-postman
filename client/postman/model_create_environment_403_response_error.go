@@ -15,64 +15,99 @@ import (
 	"encoding/json"
 )
 
-// checks if the SingleWorkspace401Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SingleWorkspace401Response{}
+// checks if the CreateEnvironment403ResponseError type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateEnvironment403ResponseError{}
 
-// SingleWorkspace401Response struct for SingleWorkspace401Response
-type SingleWorkspace401Response struct {
-	Error *SingleWorkspace401ResponseError `json:"error,omitempty"`
+// CreateEnvironment403ResponseError struct for CreateEnvironment403ResponseError
+type CreateEnvironment403ResponseError struct {
+	// The error message
+	Message *string `json:"message,omitempty"`
+	// The error name.
+	Name *string `json:"name,omitempty"`
 }
 
-// NewSingleWorkspace401Response instantiates a new SingleWorkspace401Response object
+// NewCreateEnvironment403ResponseError instantiates a new CreateEnvironment403ResponseError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleWorkspace401Response() *SingleWorkspace401Response {
-	this := SingleWorkspace401Response{}
+func NewCreateEnvironment403ResponseError() *CreateEnvironment403ResponseError {
+	this := CreateEnvironment403ResponseError{}
 	return &this
 }
 
-// NewSingleWorkspace401ResponseWithDefaults instantiates a new SingleWorkspace401Response object
+// NewCreateEnvironment403ResponseErrorWithDefaults instantiates a new CreateEnvironment403ResponseError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSingleWorkspace401ResponseWithDefaults() *SingleWorkspace401Response {
-	this := SingleWorkspace401Response{}
+func NewCreateEnvironment403ResponseErrorWithDefaults() *CreateEnvironment403ResponseError {
+	this := CreateEnvironment403ResponseError{}
 	return &this
 }
 
-// GetError returns the Error field value if set, zero value otherwise.
-func (o *SingleWorkspace401Response) GetError() SingleWorkspace401ResponseError {
-	if o == nil || isNil(o.Error) {
-		var ret SingleWorkspace401ResponseError
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *CreateEnvironment403ResponseError) GetMessage() string {
+	if o == nil || isNil(o.Message) {
+		var ret string
 		return ret
 	}
-	return *o.Error
+	return *o.Message
 }
 
-// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace401Response) GetErrorOk() (*SingleWorkspace401ResponseError, bool) {
-	if o == nil || isNil(o.Error) {
+func (o *CreateEnvironment403ResponseError) GetMessageOk() (*string, bool) {
+	if o == nil || isNil(o.Message) {
 		return nil, false
 	}
-	return o.Error, true
+	return o.Message, true
 }
 
-// HasError returns a boolean if a field has been set.
-func (o *SingleWorkspace401Response) HasError() bool {
-	if o != nil && !isNil(o.Error) {
+// HasMessage returns a boolean if a field has been set.
+func (o *CreateEnvironment403ResponseError) HasMessage() bool {
+	if o != nil && !isNil(o.Message) {
 		return true
 	}
 
 	return false
 }
 
-// SetError gets a reference to the given SingleWorkspace401ResponseError and assigns it to the Error field.
-func (o *SingleWorkspace401Response) SetError(v SingleWorkspace401ResponseError) {
-	o.Error = &v
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *CreateEnvironment403ResponseError) SetMessage(v string) {
+	o.Message = &v
 }
 
-func (o SingleWorkspace401Response) MarshalJSON() ([]byte, error) {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CreateEnvironment403ResponseError) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateEnvironment403ResponseError) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CreateEnvironment403ResponseError) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CreateEnvironment403ResponseError) SetName(v string) {
+	o.Name = &v
+}
+
+func (o CreateEnvironment403ResponseError) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,46 +115,49 @@ func (o SingleWorkspace401Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SingleWorkspace401Response) ToMap() (map[string]interface{}, error) {
+func (o CreateEnvironment403ResponseError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Error) {
-		toSerialize["error"] = o.Error
+	if !isNil(o.Message) {
+		toSerialize["message"] = o.Message
+	}
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil
 }
 
-type NullableSingleWorkspace401Response struct {
-	value *SingleWorkspace401Response
+type NullableCreateEnvironment403ResponseError struct {
+	value *CreateEnvironment403ResponseError
 	isSet bool
 }
 
-func (v NullableSingleWorkspace401Response) Get() *SingleWorkspace401Response {
+func (v NullableCreateEnvironment403ResponseError) Get() *CreateEnvironment403ResponseError {
 	return v.value
 }
 
-func (v *NullableSingleWorkspace401Response) Set(val *SingleWorkspace401Response) {
+func (v *NullableCreateEnvironment403ResponseError) Set(val *CreateEnvironment403ResponseError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSingleWorkspace401Response) IsSet() bool {
+func (v NullableCreateEnvironment403ResponseError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSingleWorkspace401Response) Unset() {
+func (v *NullableCreateEnvironment403ResponseError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSingleWorkspace401Response(val *SingleWorkspace401Response) *NullableSingleWorkspace401Response {
-	return &NullableSingleWorkspace401Response{value: val, isSet: true}
+func NewNullableCreateEnvironment403ResponseError(val *CreateEnvironment403ResponseError) *NullableCreateEnvironment403ResponseError {
+	return &NullableCreateEnvironment403ResponseError{value: val, isSet: true}
 }
 
-func (v NullableSingleWorkspace401Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateEnvironment403ResponseError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSingleWorkspace401Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateEnvironment403ResponseError) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,12 +20,12 @@ var _ MappedNullable = &UpdateWorkspaceRequestWorkspace{}
 
 // UpdateWorkspaceRequestWorkspace struct for UpdateWorkspaceRequestWorkspace
 type UpdateWorkspaceRequestWorkspace struct {
+	// The workspace's description.
+	Description *string `json:"description,omitempty"`
 	// The workspace's name.
 	Name *string `json:"name,omitempty"`
 	// The type of workspace:  - `personal` — A personal workspace. - `team` — A team workspace. 
 	Type *string `json:"type,omitempty"`
-	// The workspace's description.
-	Description *string `json:"description,omitempty"`
 }
 
 // NewUpdateWorkspaceRequestWorkspace instantiates a new UpdateWorkspaceRequestWorkspace object
@@ -43,6 +43,38 @@ func NewUpdateWorkspaceRequestWorkspace() *UpdateWorkspaceRequestWorkspace {
 func NewUpdateWorkspaceRequestWorkspaceWithDefaults() *UpdateWorkspaceRequestWorkspace {
 	this := UpdateWorkspaceRequestWorkspace{}
 	return &this
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *UpdateWorkspaceRequestWorkspace) GetDescription() string {
+	if o == nil || isNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateWorkspaceRequestWorkspace) GetDescriptionOk() (*string, bool) {
+	if o == nil || isNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *UpdateWorkspaceRequestWorkspace) HasDescription() bool {
+	if o != nil && !isNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *UpdateWorkspaceRequestWorkspace) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -109,38 +141,6 @@ func (o *UpdateWorkspaceRequestWorkspace) SetType(v string) {
 	o.Type = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *UpdateWorkspaceRequestWorkspace) GetDescription() string {
-	if o == nil || isNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateWorkspaceRequestWorkspace) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *UpdateWorkspaceRequestWorkspace) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *UpdateWorkspaceRequestWorkspace) SetDescription(v string) {
-	o.Description = &v
-}
-
 func (o UpdateWorkspaceRequestWorkspace) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -151,14 +151,14 @@ func (o UpdateWorkspaceRequestWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o UpdateWorkspaceRequestWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
-	}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
 	}
 	return toSerialize, nil
 }

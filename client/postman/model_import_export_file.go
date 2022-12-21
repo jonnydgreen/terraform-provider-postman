@@ -21,20 +21,20 @@ var _ MappedNullable = &ImportExportFile{}
 
 // ImportExportFile struct for ImportExportFile
 type ImportExportFile struct {
-	// The `file` type value.
-	Type string `json:"type"`
 	// A file containing a valid user's export .zip file.
 	Input os.File `json:"input"`
+	// The `file` type value.
+	Type string `json:"type"`
 }
 
 // NewImportExportFile instantiates a new ImportExportFile object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImportExportFile(type_ string, input os.File) *ImportExportFile {
+func NewImportExportFile(input os.File, type_ string) *ImportExportFile {
 	this := ImportExportFile{}
-	this.Type = type_
 	this.Input = input
+	this.Type = type_
 	return &this
 }
 
@@ -44,30 +44,6 @@ func NewImportExportFile(type_ string, input os.File) *ImportExportFile {
 func NewImportExportFileWithDefaults() *ImportExportFile {
 	this := ImportExportFile{}
 	return &this
-}
-
-// GetType returns the Type field value
-func (o *ImportExportFile) GetType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value
-// and a boolean to check if the value has been set.
-func (o *ImportExportFile) GetTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Type, true
-}
-
-// SetType sets field value
-func (o *ImportExportFile) SetType(v string) {
-	o.Type = v
 }
 
 // GetInput returns the Input field value
@@ -94,6 +70,30 @@ func (o *ImportExportFile) SetInput(v os.File) {
 	o.Input = v
 }
 
+// GetType returns the Type field value
+func (o *ImportExportFile) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *ImportExportFile) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *ImportExportFile) SetType(v string) {
+	o.Type = v
+}
+
 func (o ImportExportFile) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -104,8 +104,8 @@ func (o ImportExportFile) MarshalJSON() ([]byte, error) {
 
 func (o ImportExportFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
 	toSerialize["input"] = o.Input
+	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }
 

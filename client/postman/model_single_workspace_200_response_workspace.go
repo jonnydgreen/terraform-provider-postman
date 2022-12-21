@@ -21,34 +21,34 @@ var _ MappedNullable = &SingleWorkspace200ResponseWorkspace{}
 
 // SingleWorkspace200ResponseWorkspace Information about the workspace.
 type SingleWorkspace200ResponseWorkspace struct {
-	// The workspace's ID.
-	Id *string `json:"id,omitempty"`
-	// The workspace's name.
-	Name *string `json:"name,omitempty"`
-	// The type of workspace.
-	Type *string `json:"type,omitempty"`
-	// The workspace's description.
-	Description *string `json:"description,omitempty"`
-	// The workspace's visibility. [Visibility](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/managing-workspaces/#changing-workspace-visibility) determines who can access the workspace:  - `only-me` — Applies to the **My Workspace** workspace. - `personal` — Only you can access the workspace. - `team` — All team members can access the workspace. - `private-team` — Only invited team members can access the workspace. - `public` — Everyone can access the workspace. 
-	Visibility *string `json:"visibility,omitempty"`
-	// The user ID of the user who created the workspace.
-	CreatedBy *string `json:"createdBy,omitempty"`
-	// The user ID of the user who last updated the workspace.
-	UpdatedBy *string `json:"updatedBy,omitempty"`
-	// The date and time at which the workspace was created.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// The date and time at which the workspace was last updated.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// The workspace's APIs.
+	Apis []SingleWorkspace200ResponseWorkspaceApisInner `json:"apis,omitempty"`
 	// The workspace's collections.
 	Collections []SingleWorkspace200ResponseWorkspaceCollectionsInner `json:"collections,omitempty"`
+	// The date and time at which the workspace was created.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// The user ID of the user who created the workspace.
+	CreatedBy *string `json:"createdBy,omitempty"`
+	// The workspace's description.
+	Description *string `json:"description,omitempty"`
 	// The workspace's environments.
 	Environments []SingleWorkspace200ResponseWorkspaceEnvironmentsInner `json:"environments,omitempty"`
+	// The workspace's ID.
+	Id *string `json:"id,omitempty"`
 	// The workspace's mock servers.
 	Mocks []SingleWorkspace200ResponseWorkspaceMocksInner `json:"mocks,omitempty"`
 	// The workspace's monitors.
 	Monitors []SingleWorkspace200ResponseWorkspaceMonitorsInner `json:"monitors,omitempty"`
-	// The workspace's APIs.
-	Apis []SingleWorkspace200ResponseWorkspaceApisInner `json:"apis,omitempty"`
+	// The workspace's name.
+	Name *string `json:"name,omitempty"`
+	// The type of workspace.
+	Type *string `json:"type,omitempty"`
+	// The date and time at which the workspace was last updated.
+	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// The user ID of the user who last updated the workspace.
+	UpdatedBy *string `json:"updatedBy,omitempty"`
+	// The workspace's visibility. [Visibility](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/managing-workspaces/#changing-workspace-visibility) determines who can access the workspace:  - `only-me` — Applies to the **My Workspace** workspace. - `personal` — Only you can access the workspace. - `team` — All team members can access the workspace. - `private-team` — Only invited team members can access the workspace. - `public` — Everyone can access the workspace. 
+	Visibility *string `json:"visibility,omitempty"`
 }
 
 // NewSingleWorkspace200ResponseWorkspace instantiates a new SingleWorkspace200ResponseWorkspace object
@@ -68,292 +68,36 @@ func NewSingleWorkspace200ResponseWorkspaceWithDefaults() *SingleWorkspace200Res
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetId() string {
-	if o == nil || isNil(o.Id) {
-		var ret string
+// GetApis returns the Apis field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetApis() []SingleWorkspace200ResponseWorkspaceApisInner {
+	if o == nil || isNil(o.Apis) {
+		var ret []SingleWorkspace200ResponseWorkspaceApisInner
 		return ret
 	}
-	return *o.Id
+	return o.Apis
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetApisOk returns a tuple with the Apis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+func (o *SingleWorkspace200ResponseWorkspace) GetApisOk() ([]SingleWorkspace200ResponseWorkspaceApisInner, bool) {
+	if o == nil || isNil(o.Apis) {
 		return nil, false
 	}
-	return o.Id, true
+	return o.Apis, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+// HasApis returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasApis() bool {
+	if o != nil && !isNil(o.Apis) {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *SingleWorkspace200ResponseWorkspace) SetId(v string) {
-	o.Id = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasName() bool {
-	if o != nil && !isNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SingleWorkspace200ResponseWorkspace) SetName(v string) {
-	o.Name = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetType() string {
-	if o == nil || isNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasType() bool {
-	if o != nil && !isNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *SingleWorkspace200ResponseWorkspace) SetType(v string) {
-	o.Type = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetDescription() string {
-	if o == nil || isNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *SingleWorkspace200ResponseWorkspace) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetVisibility returns the Visibility field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetVisibility() string {
-	if o == nil || isNil(o.Visibility) {
-		var ret string
-		return ret
-	}
-	return *o.Visibility
-}
-
-// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetVisibilityOk() (*string, bool) {
-	if o == nil || isNil(o.Visibility) {
-		return nil, false
-	}
-	return o.Visibility, true
-}
-
-// HasVisibility returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasVisibility() bool {
-	if o != nil && !isNil(o.Visibility) {
-		return true
-	}
-
-	return false
-}
-
-// SetVisibility gets a reference to the given string and assigns it to the Visibility field.
-func (o *SingleWorkspace200ResponseWorkspace) SetVisibility(v string) {
-	o.Visibility = &v
-}
-
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetCreatedBy() string {
-	if o == nil || isNil(o.CreatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetCreatedByOk() (*string, bool) {
-	if o == nil || isNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
-func (o *SingleWorkspace200ResponseWorkspace) SetCreatedBy(v string) {
-	o.CreatedBy = &v
-}
-
-// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedBy() string {
-	if o == nil || isNil(o.UpdatedBy) {
-		var ret string
-		return ret
-	}
-	return *o.UpdatedBy
-}
-
-// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedByOk() (*string, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
-		return nil, false
-	}
-	return o.UpdatedBy, true
-}
-
-// HasUpdatedBy returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedBy gets a reference to the given string and assigns it to the UpdatedBy field.
-func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedBy(v string) {
-	o.UpdatedBy = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *SingleWorkspace200ResponseWorkspace) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+// SetApis gets a reference to the given []SingleWorkspace200ResponseWorkspaceApisInner and assigns it to the Apis field.
+func (o *SingleWorkspace200ResponseWorkspace) SetApis(v []SingleWorkspace200ResponseWorkspaceApisInner) {
+	o.Apis = v
 }
 
 // GetCollections returns the Collections field value if set, zero value otherwise.
@@ -388,6 +132,102 @@ func (o *SingleWorkspace200ResponseWorkspace) SetCollections(v []SingleWorkspace
 	o.Collections = v
 }
 
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAt() time.Time {
+	if o == nil || isNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasCreatedAt() bool {
+	if o != nil && !isNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *SingleWorkspace200ResponseWorkspace) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetCreatedBy() string {
+	if o == nil || isNil(o.CreatedBy) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetCreatedByOk() (*string, bool) {
+	if o == nil || isNil(o.CreatedBy) {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasCreatedBy() bool {
+	if o != nil && !isNil(o.CreatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
+func (o *SingleWorkspace200ResponseWorkspace) SetCreatedBy(v string) {
+	o.CreatedBy = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetDescription() string {
+	if o == nil || isNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetDescriptionOk() (*string, bool) {
+	if o == nil || isNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasDescription() bool {
+	if o != nil && !isNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *SingleWorkspace200ResponseWorkspace) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetEnvironments returns the Environments field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetEnvironments() []SingleWorkspace200ResponseWorkspaceEnvironmentsInner {
 	if o == nil || isNil(o.Environments) {
@@ -418,6 +258,38 @@ func (o *SingleWorkspace200ResponseWorkspace) HasEnvironments() bool {
 // SetEnvironments gets a reference to the given []SingleWorkspace200ResponseWorkspaceEnvironmentsInner and assigns it to the Environments field.
 func (o *SingleWorkspace200ResponseWorkspace) SetEnvironments(v []SingleWorkspace200ResponseWorkspaceEnvironmentsInner) {
 	o.Environments = v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetId() string {
+	if o == nil || isNil(o.Id) {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
+	if o == nil || isNil(o.Id) {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasId() bool {
+	if o != nil && !isNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *SingleWorkspace200ResponseWorkspace) SetId(v string) {
+	o.Id = &v
 }
 
 // GetMocks returns the Mocks field value if set, zero value otherwise.
@@ -484,36 +356,164 @@ func (o *SingleWorkspace200ResponseWorkspace) SetMonitors(v []SingleWorkspace200
 	o.Monitors = v
 }
 
-// GetApis returns the Apis field value if set, zero value otherwise.
-func (o *SingleWorkspace200ResponseWorkspace) GetApis() []SingleWorkspace200ResponseWorkspaceApisInner {
-	if o == nil || isNil(o.Apis) {
-		var ret []SingleWorkspace200ResponseWorkspaceApisInner
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
 		return ret
 	}
-	return o.Apis
+	return *o.Name
 }
 
-// GetApisOk returns a tuple with the Apis field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace200ResponseWorkspace) GetApisOk() ([]SingleWorkspace200ResponseWorkspaceApisInner, bool) {
-	if o == nil || isNil(o.Apis) {
+func (o *SingleWorkspace200ResponseWorkspace) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
-	return o.Apis, true
+	return o.Name, true
 }
 
-// HasApis returns a boolean if a field has been set.
-func (o *SingleWorkspace200ResponseWorkspace) HasApis() bool {
-	if o != nil && !isNil(o.Apis) {
+// HasName returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasName() bool {
+	if o != nil && !isNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetApis gets a reference to the given []SingleWorkspace200ResponseWorkspaceApisInner and assigns it to the Apis field.
-func (o *SingleWorkspace200ResponseWorkspace) SetApis(v []SingleWorkspace200ResponseWorkspaceApisInner) {
-	o.Apis = v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *SingleWorkspace200ResponseWorkspace) SetName(v string) {
+	o.Name = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetType() string {
+	if o == nil || isNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetTypeOk() (*string, bool) {
+	if o == nil || isNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasType() bool {
+	if o != nil && !isNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *SingleWorkspace200ResponseWorkspace) SetType(v string) {
+	o.Type = &v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAt() time.Time {
+	if o == nil || isNil(o.UpdatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedAt() bool {
+	if o != nil && !isNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
+}
+
+// GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedBy() string {
+	if o == nil || isNil(o.UpdatedBy) {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedBy
+}
+
+// GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedByOk() (*string, bool) {
+	if o == nil || isNil(o.UpdatedBy) {
+		return nil, false
+	}
+	return o.UpdatedBy, true
+}
+
+// HasUpdatedBy returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedBy() bool {
+	if o != nil && !isNil(o.UpdatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedBy gets a reference to the given string and assigns it to the UpdatedBy field.
+func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedBy(v string) {
+	o.UpdatedBy = &v
+}
+
+// GetVisibility returns the Visibility field value if set, zero value otherwise.
+func (o *SingleWorkspace200ResponseWorkspace) GetVisibility() string {
+	if o == nil || isNil(o.Visibility) {
+		var ret string
+		return ret
+	}
+	return *o.Visibility
+}
+
+// GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SingleWorkspace200ResponseWorkspace) GetVisibilityOk() (*string, bool) {
+	if o == nil || isNil(o.Visibility) {
+		return nil, false
+	}
+	return o.Visibility, true
+}
+
+// HasVisibility returns a boolean if a field has been set.
+func (o *SingleWorkspace200ResponseWorkspace) HasVisibility() bool {
+	if o != nil && !isNil(o.Visibility) {
+		return true
+	}
+
+	return false
+}
+
+// SetVisibility gets a reference to the given string and assigns it to the Visibility field.
+func (o *SingleWorkspace200ResponseWorkspace) SetVisibility(v string) {
+	o.Visibility = &v
 }
 
 func (o SingleWorkspace200ResponseWorkspace) MarshalJSON() ([]byte, error) {
@@ -526,38 +526,26 @@ func (o SingleWorkspace200ResponseWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o SingleWorkspace200ResponseWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !isNil(o.Visibility) {
-		toSerialize["visibility"] = o.Visibility
-	}
-	if !isNil(o.CreatedBy) {
-		toSerialize["createdBy"] = o.CreatedBy
-	}
-	if !isNil(o.UpdatedBy) {
-		toSerialize["updatedBy"] = o.UpdatedBy
-	}
-	if !isNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !isNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
+	if !isNil(o.Apis) {
+		toSerialize["apis"] = o.Apis
 	}
 	if !isNil(o.Collections) {
 		toSerialize["collections"] = o.Collections
 	}
+	if !isNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !isNil(o.CreatedBy) {
+		toSerialize["createdBy"] = o.CreatedBy
+	}
+	if !isNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !isNil(o.Environments) {
 		toSerialize["environments"] = o.Environments
+	}
+	if !isNil(o.Id) {
+		toSerialize["id"] = o.Id
 	}
 	if !isNil(o.Mocks) {
 		toSerialize["mocks"] = o.Mocks
@@ -565,8 +553,20 @@ func (o SingleWorkspace200ResponseWorkspace) ToMap() (map[string]interface{}, er
 	if !isNil(o.Monitors) {
 		toSerialize["monitors"] = o.Monitors
 	}
-	if !isNil(o.Apis) {
-		toSerialize["apis"] = o.Apis
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !isNil(o.Type) {
+		toSerialize["type"] = o.Type
+	}
+	if !isNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if !isNil(o.UpdatedBy) {
+		toSerialize["updatedBy"] = o.UpdatedBy
+	}
+	if !isNil(o.Visibility) {
+		toSerialize["visibility"] = o.Visibility
 	}
 	return toSerialize, nil
 }

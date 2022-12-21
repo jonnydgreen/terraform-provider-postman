@@ -21,12 +21,12 @@ var _ MappedNullable = &ScimGroupResourceMeta{}
 
 // ScimGroupResourceMeta The response's non-standard meta information.
 type ScimGroupResourceMeta struct {
-	// The resource type.
-	ResourceType *string `json:"resourceType,omitempty"`
 	// The date and time at which the group was created.
 	Created *time.Time `json:"created,omitempty"`
 	// The date and time at which the group was last modified.
 	LastModified *time.Time `json:"lastModified,omitempty"`
+	// The resource type.
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 // NewScimGroupResourceMeta instantiates a new ScimGroupResourceMeta object
@@ -44,38 +44,6 @@ func NewScimGroupResourceMeta() *ScimGroupResourceMeta {
 func NewScimGroupResourceMetaWithDefaults() *ScimGroupResourceMeta {
 	this := ScimGroupResourceMeta{}
 	return &this
-}
-
-// GetResourceType returns the ResourceType field value if set, zero value otherwise.
-func (o *ScimGroupResourceMeta) GetResourceType() string {
-	if o == nil || isNil(o.ResourceType) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceType
-}
-
-// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimGroupResourceMeta) GetResourceTypeOk() (*string, bool) {
-	if o == nil || isNil(o.ResourceType) {
-		return nil, false
-	}
-	return o.ResourceType, true
-}
-
-// HasResourceType returns a boolean if a field has been set.
-func (o *ScimGroupResourceMeta) HasResourceType() bool {
-	if o != nil && !isNil(o.ResourceType) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceType gets a reference to the given string and assigns it to the ResourceType field.
-func (o *ScimGroupResourceMeta) SetResourceType(v string) {
-	o.ResourceType = &v
 }
 
 // GetCreated returns the Created field value if set, zero value otherwise.
@@ -142,6 +110,38 @@ func (o *ScimGroupResourceMeta) SetLastModified(v time.Time) {
 	o.LastModified = &v
 }
 
+// GetResourceType returns the ResourceType field value if set, zero value otherwise.
+func (o *ScimGroupResourceMeta) GetResourceType() string {
+	if o == nil || isNil(o.ResourceType) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceType
+}
+
+// GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimGroupResourceMeta) GetResourceTypeOk() (*string, bool) {
+	if o == nil || isNil(o.ResourceType) {
+		return nil, false
+	}
+	return o.ResourceType, true
+}
+
+// HasResourceType returns a boolean if a field has been set.
+func (o *ScimGroupResourceMeta) HasResourceType() bool {
+	if o != nil && !isNil(o.ResourceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceType gets a reference to the given string and assigns it to the ResourceType field.
+func (o *ScimGroupResourceMeta) SetResourceType(v string) {
+	o.ResourceType = &v
+}
+
 func (o ScimGroupResourceMeta) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -152,14 +152,14 @@ func (o ScimGroupResourceMeta) MarshalJSON() ([]byte, error) {
 
 func (o ScimGroupResourceMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.ResourceType) {
-		toSerialize["resourceType"] = o.ResourceType
-	}
 	if !isNil(o.Created) {
 		toSerialize["created"] = o.Created
 	}
 	if !isNil(o.LastModified) {
 		toSerialize["lastModified"] = o.LastModified
+	}
+	if !isNil(o.ResourceType) {
+		toSerialize["resourceType"] = o.ResourceType
 	}
 	return toSerialize, nil
 }

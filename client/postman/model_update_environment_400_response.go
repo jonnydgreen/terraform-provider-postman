@@ -15,99 +15,64 @@ import (
 	"encoding/json"
 )
 
-// checks if the SingleWorkspace404ResponseError type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SingleWorkspace404ResponseError{}
+// checks if the UpdateEnvironment400Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateEnvironment400Response{}
 
-// SingleWorkspace404ResponseError struct for SingleWorkspace404ResponseError
-type SingleWorkspace404ResponseError struct {
-	// The error name.
-	Name *string `json:"name,omitempty"`
-	// The error message.
-	Message *string `json:"message,omitempty"`
+// UpdateEnvironment400Response struct for UpdateEnvironment400Response
+type UpdateEnvironment400Response struct {
+	Error *UpdateEnvironment400ResponseError `json:"error,omitempty"`
 }
 
-// NewSingleWorkspace404ResponseError instantiates a new SingleWorkspace404ResponseError object
+// NewUpdateEnvironment400Response instantiates a new UpdateEnvironment400Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleWorkspace404ResponseError() *SingleWorkspace404ResponseError {
-	this := SingleWorkspace404ResponseError{}
+func NewUpdateEnvironment400Response() *UpdateEnvironment400Response {
+	this := UpdateEnvironment400Response{}
 	return &this
 }
 
-// NewSingleWorkspace404ResponseErrorWithDefaults instantiates a new SingleWorkspace404ResponseError object
+// NewUpdateEnvironment400ResponseWithDefaults instantiates a new UpdateEnvironment400Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSingleWorkspace404ResponseErrorWithDefaults() *SingleWorkspace404ResponseError {
-	this := SingleWorkspace404ResponseError{}
+func NewUpdateEnvironment400ResponseWithDefaults() *UpdateEnvironment400Response {
+	this := UpdateEnvironment400Response{}
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *SingleWorkspace404ResponseError) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
+// GetError returns the Error field value if set, zero value otherwise.
+func (o *UpdateEnvironment400Response) GetError() UpdateEnvironment400ResponseError {
+	if o == nil || isNil(o.Error) {
+		var ret UpdateEnvironment400ResponseError
 		return ret
 	}
-	return *o.Name
+	return *o.Error
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace404ResponseError) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+func (o *UpdateEnvironment400Response) GetErrorOk() (*UpdateEnvironment400ResponseError, bool) {
+	if o == nil || isNil(o.Error) {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Error, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SingleWorkspace404ResponseError) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+// HasError returns a boolean if a field has been set.
+func (o *UpdateEnvironment400Response) HasError() bool {
+	if o != nil && !isNil(o.Error) {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SingleWorkspace404ResponseError) SetName(v string) {
-	o.Name = &v
+// SetError gets a reference to the given UpdateEnvironment400ResponseError and assigns it to the Error field.
+func (o *UpdateEnvironment400Response) SetError(v UpdateEnvironment400ResponseError) {
+	o.Error = &v
 }
 
-// GetMessage returns the Message field value if set, zero value otherwise.
-func (o *SingleWorkspace404ResponseError) GetMessage() string {
-	if o == nil || isNil(o.Message) {
-		var ret string
-		return ret
-	}
-	return *o.Message
-}
-
-// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SingleWorkspace404ResponseError) GetMessageOk() (*string, bool) {
-	if o == nil || isNil(o.Message) {
-		return nil, false
-	}
-	return o.Message, true
-}
-
-// HasMessage returns a boolean if a field has been set.
-func (o *SingleWorkspace404ResponseError) HasMessage() bool {
-	if o != nil && !isNil(o.Message) {
-		return true
-	}
-
-	return false
-}
-
-// SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *SingleWorkspace404ResponseError) SetMessage(v string) {
-	o.Message = &v
-}
-
-func (o SingleWorkspace404ResponseError) MarshalJSON() ([]byte, error) {
+func (o UpdateEnvironment400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,49 +80,46 @@ func (o SingleWorkspace404ResponseError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SingleWorkspace404ResponseError) ToMap() (map[string]interface{}, error) {
+func (o UpdateEnvironment400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Message) {
-		toSerialize["message"] = o.Message
+	if !isNil(o.Error) {
+		toSerialize["error"] = o.Error
 	}
 	return toSerialize, nil
 }
 
-type NullableSingleWorkspace404ResponseError struct {
-	value *SingleWorkspace404ResponseError
+type NullableUpdateEnvironment400Response struct {
+	value *UpdateEnvironment400Response
 	isSet bool
 }
 
-func (v NullableSingleWorkspace404ResponseError) Get() *SingleWorkspace404ResponseError {
+func (v NullableUpdateEnvironment400Response) Get() *UpdateEnvironment400Response {
 	return v.value
 }
 
-func (v *NullableSingleWorkspace404ResponseError) Set(val *SingleWorkspace404ResponseError) {
+func (v *NullableUpdateEnvironment400Response) Set(val *UpdateEnvironment400Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSingleWorkspace404ResponseError) IsSet() bool {
+func (v NullableUpdateEnvironment400Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSingleWorkspace404ResponseError) Unset() {
+func (v *NullableUpdateEnvironment400Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSingleWorkspace404ResponseError(val *SingleWorkspace404ResponseError) *NullableSingleWorkspace404ResponseError {
-	return &NullableSingleWorkspace404ResponseError{value: val, isSet: true}
+func NewNullableUpdateEnvironment400Response(val *UpdateEnvironment400Response) *NullableUpdateEnvironment400Response {
+	return &NullableUpdateEnvironment400Response{value: val, isSet: true}
 }
 
-func (v NullableSingleWorkspace404ResponseError) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateEnvironment400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSingleWorkspace404ResponseError) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateEnvironment400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

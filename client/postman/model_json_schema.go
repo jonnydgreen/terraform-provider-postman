@@ -20,10 +20,10 @@ var _ MappedNullable = &JsonSchema{}
 
 // JsonSchema struct for JsonSchema
 type JsonSchema struct {
-	// The OpenAPI definition type.
-	Type *string `json:"type,omitempty"`
 	// An object that contains a valid JSON OpenAPI definition. For more information, read the [OpenAPI documentation](https://swagger.io/docs/specification/basic-structure/).
 	Input map[string]interface{} `json:"input,omitempty"`
+	// The OpenAPI definition type.
+	Type *string `json:"type,omitempty"`
 }
 
 // NewJsonSchema instantiates a new JsonSchema object
@@ -41,38 +41,6 @@ func NewJsonSchema() *JsonSchema {
 func NewJsonSchemaWithDefaults() *JsonSchema {
 	this := JsonSchema{}
 	return &this
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *JsonSchema) GetType() string {
-	if o == nil || isNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JsonSchema) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *JsonSchema) HasType() bool {
-	if o != nil && !isNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *JsonSchema) SetType(v string) {
-	o.Type = &v
 }
 
 // GetInput returns the Input field value if set, zero value otherwise.
@@ -107,6 +75,38 @@ func (o *JsonSchema) SetInput(v map[string]interface{}) {
 	o.Input = v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *JsonSchema) GetType() string {
+	if o == nil || isNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *JsonSchema) GetTypeOk() (*string, bool) {
+	if o == nil || isNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *JsonSchema) HasType() bool {
+	if o != nil && !isNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *JsonSchema) SetType(v string) {
+	o.Type = &v
+}
+
 func (o JsonSchema) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,11 +117,11 @@ func (o JsonSchema) MarshalJSON() ([]byte, error) {
 
 func (o JsonSchema) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
 	if !isNil(o.Input) {
 		toSerialize["input"] = o.Input
+	}
+	if !isNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }

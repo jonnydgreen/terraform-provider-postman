@@ -20,10 +20,10 @@ var _ MappedNullable = &CreatePANFolderFolder{}
 
 // CreatePANFolderFolder struct for CreatePANFolderFolder
 type CreatePANFolderFolder struct {
-	// The folder's name.
-	Name string `json:"name"`
 	// The folder's description.
 	Description *string `json:"description,omitempty"`
+	// The folder's name.
+	Name string `json:"name"`
 	// The folder's parent folder ID. This value defaults to `0`.
 	ParentFolderId *int32 `json:"parentFolderId,omitempty"`
 }
@@ -48,30 +48,6 @@ func NewCreatePANFolderFolderWithDefaults() *CreatePANFolderFolder {
 	var parentFolderId int32 = 0
 	this.ParentFolderId = &parentFolderId
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *CreatePANFolderFolder) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *CreatePANFolderFolder) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *CreatePANFolderFolder) SetName(v string) {
-	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -104,6 +80,30 @@ func (o *CreatePANFolderFolder) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *CreatePANFolderFolder) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetName returns the Name field value
+func (o *CreatePANFolderFolder) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *CreatePANFolderFolder) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *CreatePANFolderFolder) SetName(v string) {
+	o.Name = v
 }
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
@@ -148,10 +148,10 @@ func (o CreatePANFolderFolder) MarshalJSON() ([]byte, error) {
 
 func (o CreatePANFolderFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["name"] = o.Name
 	if !isNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}

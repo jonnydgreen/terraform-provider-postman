@@ -40,3 +40,7 @@ your provider.
 ## Developing the Provider
 
 See the [contributing guide](./CONTRIBUTING.md) for more details.
+
+## Issues with Postman API definition
+
+- Workspace query string for all requests is not `workspaceId` but `workspace`.

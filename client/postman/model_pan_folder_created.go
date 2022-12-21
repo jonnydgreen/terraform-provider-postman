@@ -21,24 +21,24 @@ var _ MappedNullable = &PANFolderCreated{}
 
 // PANFolderCreated Information about the Private API Network folder.
 type PANFolderCreated struct {
+	// The date and time at which the element was created.
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// The user who created the folder.
+	CreatedBy *int32 `json:"createdBy,omitempty"`
+	// The folder's description.
+	Description *string `json:"description,omitempty"`
 	// The folder's ID.
 	Id *int32 `json:"id,omitempty"`
+	// The folder's name.
+	Name *string `json:"name,omitempty"`
 	// The parent folder ID.
 	ParentFolderId *int32 `json:"parentFolderId,omitempty"`
+	// The folder's type. This is always the `folder` value.
+	Type *string `json:"type,omitempty"`
 	// The date and time at which the folder was updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// The user who updated the folder.
 	UpdatedBy *int32 `json:"updatedBy,omitempty"`
-	// The user who created the folder.
-	CreatedBy *int32 `json:"createdBy,omitempty"`
-	// The date and time at which the element was created.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// The folder's name.
-	Name *string `json:"name,omitempty"`
-	// The folder's description.
-	Description *string `json:"description,omitempty"`
-	// The folder's type. This is always the `folder` value.
-	Type *string `json:"type,omitempty"`
 }
 
 // NewPANFolderCreated instantiates a new PANFolderCreated object
@@ -56,6 +56,102 @@ func NewPANFolderCreated() *PANFolderCreated {
 func NewPANFolderCreatedWithDefaults() *PANFolderCreated {
 	this := PANFolderCreated{}
 	return &this
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *PANFolderCreated) GetCreatedAt() time.Time {
+	if o == nil || isNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANFolderCreated) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *PANFolderCreated) HasCreatedAt() bool {
+	if o != nil && !isNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *PANFolderCreated) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *PANFolderCreated) GetCreatedBy() int32 {
+	if o == nil || isNil(o.CreatedBy) {
+		var ret int32
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANFolderCreated) GetCreatedByOk() (*int32, bool) {
+	if o == nil || isNil(o.CreatedBy) {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *PANFolderCreated) HasCreatedBy() bool {
+	if o != nil && !isNil(o.CreatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given int32 and assigns it to the CreatedBy field.
+func (o *PANFolderCreated) SetCreatedBy(v int32) {
+	o.CreatedBy = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *PANFolderCreated) GetDescription() string {
+	if o == nil || isNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANFolderCreated) GetDescriptionOk() (*string, bool) {
+	if o == nil || isNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *PANFolderCreated) HasDescription() bool {
+	if o != nil && !isNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *PANFolderCreated) SetDescription(v string) {
+	o.Description = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -90,6 +186,38 @@ func (o *PANFolderCreated) SetId(v int32) {
 	o.Id = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PANFolderCreated) GetName() string {
+	if o == nil || isNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANFolderCreated) GetNameOk() (*string, bool) {
+	if o == nil || isNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PANFolderCreated) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PANFolderCreated) SetName(v string) {
+	o.Name = &v
+}
+
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetParentFolderId() int32 {
 	if o == nil || isNil(o.ParentFolderId) {
@@ -120,6 +248,38 @@ func (o *PANFolderCreated) HasParentFolderId() bool {
 // SetParentFolderId gets a reference to the given int32 and assigns it to the ParentFolderId field.
 func (o *PANFolderCreated) SetParentFolderId(v int32) {
 	o.ParentFolderId = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PANFolderCreated) GetType() string {
+	if o == nil || isNil(o.Type) {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PANFolderCreated) GetTypeOk() (*string, bool) {
+	if o == nil || isNil(o.Type) {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PANFolderCreated) HasType() bool {
+	if o != nil && !isNil(o.Type) {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PANFolderCreated) SetType(v string) {
+	o.Type = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -186,166 +346,6 @@ func (o *PANFolderCreated) SetUpdatedBy(v int32) {
 	o.UpdatedBy = &v
 }
 
-// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
-func (o *PANFolderCreated) GetCreatedBy() int32 {
-	if o == nil || isNil(o.CreatedBy) {
-		var ret int32
-		return ret
-	}
-	return *o.CreatedBy
-}
-
-// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANFolderCreated) GetCreatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.CreatedBy) {
-		return nil, false
-	}
-	return o.CreatedBy, true
-}
-
-// HasCreatedBy returns a boolean if a field has been set.
-func (o *PANFolderCreated) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedBy gets a reference to the given int32 and assigns it to the CreatedBy field.
-func (o *PANFolderCreated) SetCreatedBy(v int32) {
-	o.CreatedBy = &v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *PANFolderCreated) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANFolderCreated) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *PANFolderCreated) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *PANFolderCreated) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *PANFolderCreated) GetName() string {
-	if o == nil || isNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANFolderCreated) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *PANFolderCreated) HasName() bool {
-	if o != nil && !isNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *PANFolderCreated) SetName(v string) {
-	o.Name = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *PANFolderCreated) GetDescription() string {
-	if o == nil || isNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANFolderCreated) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *PANFolderCreated) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *PANFolderCreated) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *PANFolderCreated) GetType() string {
-	if o == nil || isNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PANFolderCreated) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *PANFolderCreated) HasType() bool {
-	if o != nil && !isNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *PANFolderCreated) SetType(v string) {
-	o.Type = &v
-}
-
 func (o PANFolderCreated) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -356,32 +356,32 @@ func (o PANFolderCreated) MarshalJSON() ([]byte, error) {
 
 func (o PANFolderCreated) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !isNil(o.CreatedBy) {
+		toSerialize["createdBy"] = o.CreatedBy
+	}
+	if !isNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !isNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !isNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
+	}
+	if !isNil(o.Type) {
+		toSerialize["type"] = o.Type
 	}
 	if !isNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	if !isNil(o.UpdatedBy) {
 		toSerialize["updatedBy"] = o.UpdatedBy
-	}
-	if !isNil(o.CreatedBy) {
-		toSerialize["createdBy"] = o.CreatedBy
-	}
-	if !isNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !isNil(o.Type) {
-		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil
 }

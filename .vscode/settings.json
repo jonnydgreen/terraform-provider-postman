@@ -3,6 +3,7 @@
     "demoapp",
     "diag",
     "goreleaser",
+    "openapi",
     "securityprovider",
     "tfplugindocs"
   ],

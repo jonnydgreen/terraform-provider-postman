@@ -22,8 +22,6 @@ var _ MappedNullable = &UpdatePANWorkspaceWorkspace{}
 type UpdatePANWorkspaceWorkspace struct {
 	// The workspace's new parent folder ID.
 	ParentFolderId *int32 `json:"parentFolderId,omitempty"`
-	// The workspace's updated summary.
-	Summary *string `json:"summary,omitempty"`
 }
 
 // NewUpdatePANWorkspaceWorkspace instantiates a new UpdatePANWorkspaceWorkspace object
@@ -75,38 +73,6 @@ func (o *UpdatePANWorkspaceWorkspace) SetParentFolderId(v int32) {
 	o.ParentFolderId = &v
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
-func (o *UpdatePANWorkspaceWorkspace) GetSummary() string {
-	if o == nil || isNil(o.Summary) {
-		var ret string
-		return ret
-	}
-	return *o.Summary
-}
-
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePANWorkspaceWorkspace) GetSummaryOk() (*string, bool) {
-	if o == nil || isNil(o.Summary) {
-		return nil, false
-	}
-	return o.Summary, true
-}
-
-// HasSummary returns a boolean if a field has been set.
-func (o *UpdatePANWorkspaceWorkspace) HasSummary() bool {
-	if o != nil && !isNil(o.Summary) {
-		return true
-	}
-
-	return false
-}
-
-// SetSummary gets a reference to the given string and assigns it to the Summary field.
-func (o *UpdatePANWorkspaceWorkspace) SetSummary(v string) {
-	o.Summary = &v
-}
-
 func (o UpdatePANWorkspaceWorkspace) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -119,9 +85,6 @@ func (o UpdatePANWorkspaceWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
-	}
-	if !isNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
 	}
 	return toSerialize, nil
 }

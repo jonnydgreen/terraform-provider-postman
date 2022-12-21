@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the SingleWorkspace500Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SingleWorkspace500Response{}
+// checks if the CreateEnvironment400Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateEnvironment400Response{}
 
-// SingleWorkspace500Response struct for SingleWorkspace500Response
-type SingleWorkspace500Response struct {
-	Error *SingleWorkspace500ResponseError `json:"error,omitempty"`
+// CreateEnvironment400Response struct for CreateEnvironment400Response
+type CreateEnvironment400Response struct {
+	Error *CreateEnvironment400ResponseError `json:"error,omitempty"`
 }
 
-// NewSingleWorkspace500Response instantiates a new SingleWorkspace500Response object
+// NewCreateEnvironment400Response instantiates a new CreateEnvironment400Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSingleWorkspace500Response() *SingleWorkspace500Response {
-	this := SingleWorkspace500Response{}
+func NewCreateEnvironment400Response() *CreateEnvironment400Response {
+	this := CreateEnvironment400Response{}
 	return &this
 }
 
-// NewSingleWorkspace500ResponseWithDefaults instantiates a new SingleWorkspace500Response object
+// NewCreateEnvironment400ResponseWithDefaults instantiates a new CreateEnvironment400Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSingleWorkspace500ResponseWithDefaults() *SingleWorkspace500Response {
-	this := SingleWorkspace500Response{}
+func NewCreateEnvironment400ResponseWithDefaults() *CreateEnvironment400Response {
+	this := CreateEnvironment400Response{}
 	return &this
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *SingleWorkspace500Response) GetError() SingleWorkspace500ResponseError {
+func (o *CreateEnvironment400Response) GetError() CreateEnvironment400ResponseError {
 	if o == nil || isNil(o.Error) {
-		var ret SingleWorkspace500ResponseError
+		var ret CreateEnvironment400ResponseError
 		return ret
 	}
 	return *o.Error
@@ -51,7 +51,7 @@ func (o *SingleWorkspace500Response) GetError() SingleWorkspace500ResponseError 
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleWorkspace500Response) GetErrorOk() (*SingleWorkspace500ResponseError, bool) {
+func (o *CreateEnvironment400Response) GetErrorOk() (*CreateEnvironment400ResponseError, bool) {
 	if o == nil || isNil(o.Error) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *SingleWorkspace500Response) GetErrorOk() (*SingleWorkspace500ResponseEr
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *SingleWorkspace500Response) HasError() bool {
+func (o *CreateEnvironment400Response) HasError() bool {
 	if o != nil && !isNil(o.Error) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *SingleWorkspace500Response) HasError() bool {
 	return false
 }
 
-// SetError gets a reference to the given SingleWorkspace500ResponseError and assigns it to the Error field.
-func (o *SingleWorkspace500Response) SetError(v SingleWorkspace500ResponseError) {
+// SetError gets a reference to the given CreateEnvironment400ResponseError and assigns it to the Error field.
+func (o *CreateEnvironment400Response) SetError(v CreateEnvironment400ResponseError) {
 	o.Error = &v
 }
 
-func (o SingleWorkspace500Response) MarshalJSON() ([]byte, error) {
+func (o CreateEnvironment400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o SingleWorkspace500Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SingleWorkspace500Response) ToMap() (map[string]interface{}, error) {
+func (o CreateEnvironment400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Error) {
 		toSerialize["error"] = o.Error
@@ -88,38 +88,38 @@ func (o SingleWorkspace500Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableSingleWorkspace500Response struct {
-	value *SingleWorkspace500Response
+type NullableCreateEnvironment400Response struct {
+	value *CreateEnvironment400Response
 	isSet bool
 }
 
-func (v NullableSingleWorkspace500Response) Get() *SingleWorkspace500Response {
+func (v NullableCreateEnvironment400Response) Get() *CreateEnvironment400Response {
 	return v.value
 }
 
-func (v *NullableSingleWorkspace500Response) Set(val *SingleWorkspace500Response) {
+func (v *NullableCreateEnvironment400Response) Set(val *CreateEnvironment400Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSingleWorkspace500Response) IsSet() bool {
+func (v NullableCreateEnvironment400Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSingleWorkspace500Response) Unset() {
+func (v *NullableCreateEnvironment400Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSingleWorkspace500Response(val *SingleWorkspace500Response) *NullableSingleWorkspace500Response {
-	return &NullableSingleWorkspace500Response{value: val, isSet: true}
+func NewNullableCreateEnvironment400Response(val *CreateEnvironment400Response) *NullableCreateEnvironment400Response {
+	return &NullableCreateEnvironment400Response{value: val, isSet: true}
 }
 
-func (v NullableSingleWorkspace500Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateEnvironment400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSingleWorkspace500Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateEnvironment400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

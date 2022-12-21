@@ -70,6 +70,8 @@ gen-docs:
 
 .PHONY: gen-client
 gen-client:
+	go run cmd/sanitise-openapi-spec/main.go
+	rm -rf ${CLIENT_PATH}
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
 		-i /local/openapi.yaml \
 		-g go \
@@ -85,10 +87,6 @@ gen-client:
 	rm -rf ${CLIENT_PATH}/.travis.yml
 	rm -rf ${CLIENT_PATH}/.openapi-generator-ignore
 	rm -rf ${CLIENT_PATH}/git_push.sh
-# TODO: find best tool
-# rm -f ${CLIENT_PATH}/postman-sdk.gen.go
-# go install github.com/deepmap/oapi-codegen/cmd/oapi-codegen@latest
-# ${GOBIN}/oapi-codegen -package ${PACKAGE_NAME} openapi.yaml > ${CLIENT_PATH}/postman-sdk.gen.go
 
 .PHONY: pre-commit
 pre-commit:

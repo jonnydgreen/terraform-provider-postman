@@ -21,9 +21,9 @@ var _ MappedNullable = &ScimGroupResourceMembers{}
 // ScimGroupResourceMembers Information about the group's members.
 type ScimGroupResourceMembers struct {
 	// 
-	Value *string `json:"value,omitempty"`
-	// 
 	Display *string `json:"display,omitempty"`
+	// 
+	Value *string `json:"value,omitempty"`
 }
 
 // NewScimGroupResourceMembers instantiates a new ScimGroupResourceMembers object
@@ -41,38 +41,6 @@ func NewScimGroupResourceMembers() *ScimGroupResourceMembers {
 func NewScimGroupResourceMembersWithDefaults() *ScimGroupResourceMembers {
 	this := ScimGroupResourceMembers{}
 	return &this
-}
-
-// GetValue returns the Value field value if set, zero value otherwise.
-func (o *ScimGroupResourceMembers) GetValue() string {
-	if o == nil || isNil(o.Value) {
-		var ret string
-		return ret
-	}
-	return *o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ScimGroupResourceMembers) GetValueOk() (*string, bool) {
-	if o == nil || isNil(o.Value) {
-		return nil, false
-	}
-	return o.Value, true
-}
-
-// HasValue returns a boolean if a field has been set.
-func (o *ScimGroupResourceMembers) HasValue() bool {
-	if o != nil && !isNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *ScimGroupResourceMembers) SetValue(v string) {
-	o.Value = &v
 }
 
 // GetDisplay returns the Display field value if set, zero value otherwise.
@@ -107,6 +75,38 @@ func (o *ScimGroupResourceMembers) SetDisplay(v string) {
 	o.Display = &v
 }
 
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *ScimGroupResourceMembers) GetValue() string {
+	if o == nil || isNil(o.Value) {
+		var ret string
+		return ret
+	}
+	return *o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScimGroupResourceMembers) GetValueOk() (*string, bool) {
+	if o == nil || isNil(o.Value) {
+		return nil, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *ScimGroupResourceMembers) HasValue() bool {
+	if o != nil && !isNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given string and assigns it to the Value field.
+func (o *ScimGroupResourceMembers) SetValue(v string) {
+	o.Value = &v
+}
+
 func (o ScimGroupResourceMembers) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -117,11 +117,11 @@ func (o ScimGroupResourceMembers) MarshalJSON() ([]byte, error) {
 
 func (o ScimGroupResourceMembers) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
 	if !isNil(o.Display) {
 		toSerialize["display"] = o.Display
+	}
+	if !isNil(o.Value) {
+		toSerialize["value"] = o.Value
 	}
 	return toSerialize, nil
 }
