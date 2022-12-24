@@ -47,6 +47,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    environment: pre-release
     strategy:
       fail-fast: false
       matrix:
@@ -83,11 +84,6 @@ jobs:
         timeout-minutes: 10
         env:
           TF_ACC: "1"
-
-          # Set whatever additional acceptance test env variables here. You can
-          # optionally use data from your repository secrets using the
-          # following syntax:
-          # SOME_VAR: ${{ secrets.SOME_VAR }}
-
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
           go test -v -cover ./postman/

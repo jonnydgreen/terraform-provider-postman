@@ -22,7 +22,6 @@ func resourceWorkspace() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "The workspace's name.",
 				Required:    true,
-				ForceNew:    true,
 			},
 			"type": {
 				Type:        schema.TypeString,
@@ -274,6 +273,38 @@ func resourceWorkspaceCreate(ctx context.Context, d *schema.ResourceData, m inte
 }
 
 func resourceWorkspaceUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+
+	c := m.(*postman.APIClient)
+
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
+	workspaceID := d.Id()
+	workspaceName := d.Get("name").(string)
+	workspaceType := d.Get("type").(string)
+	workspaceDescription := d.Get("description").(string)
+	updateWorkspaceRequest := postman.UpdateWorkspaceRequest{
+		Workspace: &postman.UpdateWorkspaceRequestWorkspace{
+			Name:        &workspaceName,
+			Type:        &workspaceType,
+			Description: &workspaceDescription,
+		},
+	}
+	response, _, err := c.WorkspacesApi.UpdateWorkspace(ctx, workspaceID).UpdateWorkspaceRequest(updateWorkspaceRequest).Execute()
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	responseWorkspace, isWorkspaceDefined := response.GetWorkspaceOk()
+	if responseWorkspace == nil || isWorkspaceDefined != true {
+		diags = append(diags, diag.Diagnostic{
+			Severity: diag.Error,
+			Summary:  "Unable to find workspace",
+			Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", workspaceID),
+		})
+		return diags
+	}
+
 	return resourceWorkspaceRead(ctx, d, m)
 }
 
@@ -299,6 +330,8 @@ func resourceWorkspaceDelete(ctx context.Context, d *schema.ResourceData, m inte
 
 	return diags
 }
+
+// Maps
 
 func setWorkspaceResourceData(d *schema.ResourceData, responseWorkspace *postman.SingleWorkspace200ResponseWorkspace) error {
 	if err := d.Set("id", responseWorkspace.Id); err != nil {

@@ -9,6 +9,7 @@ GOBIN=$(shell pwd)/bin
 CLIENT_PATH=client/postman
 PACKAGE_NAME=postman
 CLEAN=true
+TESTARGS?=""
 
 define local_test_clean
   if [ "$(1)" == "true" ]; then \
@@ -70,6 +71,11 @@ test:
 .PHONY: testacc
 testacc: 
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+
+.PHONY: cover
+cover: 
+	TF_ACC=1 go test $(TEST) -v -coverprofile coverage.out -cover ./postman  -timeout 120m;
+	go tool cover -html=coverage.out;
 
 .PHONY: format
 format:

@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
-func TestAccPostmanWorkspace__basic(t *testing.T) {
-	// TODO
-	// rName := sdkacctest.RandomWithPrefix(acctest.ResourcePrefix)
+func TestAccWorkspace__basic(t *testing.T) {
 	resourceName := "postman_workspace.default"
+	name := acctest.RandomWithPrefix("tf-test")
 	context := map[string]interface{}{
-		"random_suffix": randString(t, 10),
-		"type":          "personal",
+		"name": name,
+		"type": "personal",
 	}
 
 	resource.ParallelTest(t, resource.TestCase{
@@ -25,7 +25,7 @@ func TestAccPostmanWorkspace__basic(t *testing.T) {
 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPostmanWorkspace__basic(context),
+				Config: testAccWorkspace__basic(context),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
@@ -39,12 +39,17 @@ func TestAccPostmanWorkspace__basic(t *testing.T) {
 	})
 }
 
-func TestAccPostmanWorkspace_Disappears_basic(t *testing.T) {
+func TestAccWorkspace__name(t *testing.T) {
+	nameBefore := acctest.RandomWithPrefix("tf-test-before")
+	nameAfter := acctest.RandomWithPrefix("tf-test-before")
 	resourceName := "postman_workspace.default"
-
-	context := map[string]interface{}{
-		"random_suffix": randString(t, 10),
-		"type":          "personal",
+	contextBefore := map[string]interface{}{
+		"name": nameBefore,
+		"type": "personal",
+	}
+	contextAfter := map[string]interface{}{
+		"name": nameAfter,
+		"type": "personal",
 	}
 
 	resource.ParallelTest(t, resource.TestCase{
@@ -54,7 +59,83 @@ func TestAccPostmanWorkspace_Disappears_basic(t *testing.T) {
 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccPostmanWorkspace__basic(context),
+				Config: testAccWorkspace__basic(contextBefore),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccWorkspace__basic(contextAfter),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+		},
+	})
+}
+
+func TestAccWorkspace__description(t *testing.T) {
+	name := acctest.RandomWithPrefix("tf-test")
+	resourceName := "postman_workspace.description"
+	contextBefore := map[string]interface{}{
+		"name":        name,
+		"type":        "personal",
+		"description": "Description before",
+	}
+	contextAfter := map[string]interface{}{
+		"name":        name,
+		"type":        "personal",
+		"description": "Description after",
+	}
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:          testAccPreCheck(t),
+		ErrorCheck:        testAccErrorCheck(t),
+		ProviderFactories: providerFactories,
+		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccWorkspace__description(contextBefore),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			{
+				Config: testAccWorkspace__description(contextAfter),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+		},
+	})
+}
+
+func TestAccWorkspace__disappears_basic(t *testing.T) {
+	name := acctest.RandomWithPrefix("tf-test")
+	resourceName := "postman_workspace.default"
+	context := map[string]interface{}{
+		"name": name,
+		"type": "personal",
+	}
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:          testAccPreCheck(t),
+		ErrorCheck:        testAccErrorCheck(t),
+		ProviderFactories: providerFactories,
+		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccWorkspace__basic(context),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckWorkspaceExists(t, resourceName),
 					testAccCheckWorkspaceDisappears(t, resourceName),
@@ -65,18 +146,27 @@ func TestAccPostmanWorkspace_Disappears_basic(t *testing.T) {
 	})
 }
 
-func testAccPostmanWorkspace__basic(context map[string]interface{}) string {
+func testAccWorkspace__basic(context map[string]interface{}) string {
 	return Nprintf(`
 resource "postman_workspace" "default" {
-  name = "tf-test-%{random_suffix}"
+  name = "%{name}"
   type = "%{type}"
+}
+`, context)
+}
+
+func testAccWorkspace__description(context map[string]interface{}) string {
+	return Nprintf(`
+resource "postman_workspace" "description" {
+  name        = "%{name}"
+  type        = "%{type}"
+	description = "%{description}"
 }
 `, context)
 }
 
 func testAccCheckWorkspaceExists(t *testing.T, resourceName string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		// TODO: util func
 		rs, ok := s.RootModule().Resources[resourceName]
 		if !ok {
 			return fmt.Errorf("Resource not found: %s", resourceName)
@@ -143,7 +233,3 @@ func testAccCheckWorkspaceDisappears(t *testing.T, resourceName string) resource
 		return nil
 	}
 }
-
-// TODO
-//  - Per Attribute
-//  - rName := sdkacctest.RandomWithPrefix(acctest.ResourcePrefix)
