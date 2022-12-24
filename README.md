@@ -44,3 +44,16 @@ See the [contributing guide](./CONTRIBUTING.md) for more details.
 ## Issues with Postman API definition
 
 - Workspace query string for all requests is not `workspaceId` but `workspace`.
+- Environment values has double nested array in both request and responses
+
+## TODO
+
+### Acceptance tests ideas
+
+- Manual Dispatch
+- On main only
+- Or both of the above
+
+### Detailed instructions for contributing
+
+<!-- TODO -->

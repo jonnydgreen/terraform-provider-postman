@@ -3592,30 +3592,28 @@ paths:
                                             type: array
                                             description: Information about the environment's variables.
                                             items:
-                                                type: array
-                                                items:
-                                                    type: object
-                                                    properties:
-                                                        enabled:
-                                                            type: boolean
-                                                            description: If true, the variable is enabled.
-                                                            example: true
-                                                        key:
-                                                            type: string
-                                                            description: The variable's name.
-                                                            example: apiKey
-                                                        value:
-                                                            type: string
-                                                            description: The variable's value.
-                                                            example: PMAK-1234-5678-0987-6543
-                                                        type:
-                                                            type: string
-                                                            description: The variable type.
-                                                            enum:
-                                                                - secret
-                                                                - default
-                                                                - any
-                                                            example: secret
+                                                type: object
+                                                properties:
+                                                    enabled:
+                                                        type: boolean
+                                                        description: If true, the variable is enabled.
+                                                        example: true
+                                                    key:
+                                                        type: string
+                                                        description: The variable's name.
+                                                        example: apiKey
+                                                    value:
+                                                        type: string
+                                                        description: The variable's value.
+                                                        example: PMAK-1234-5678-0987-6543
+                                                    type:
+                                                        type: string
+                                                        description: The variable type.
+                                                        enum:
+                                                            - secret
+                                                            - default
+                                                            - any
+                                                        example: secret
                         example:
                             environment:
                                 name: Test Environment
@@ -3740,30 +3738,28 @@ paths:
                                                 type: array
                                                 description: Information about the environment's variables.
                                                 items:
-                                                    type: array
-                                                    items:
-                                                        type: object
-                                                        properties:
-                                                            enabled:
-                                                                type: boolean
-                                                                description: If true, the variable is enabled.
-                                                                example: true
-                                                            key:
-                                                                type: string
-                                                                description: The variable's name.
-                                                                example: apiKey
-                                                            value:
-                                                                type: string
-                                                                description: The variable's value.
-                                                                example: PMAK-1234-5678-0987-6543
-                                                            type:
-                                                                type: string
-                                                                description: The variable type.
-                                                                enum:
-                                                                    - secret
-                                                                    - default
-                                                                    - any
-                                                                example: secret
+                                                    type: object
+                                                    properties:
+                                                        enabled:
+                                                            type: boolean
+                                                            description: If true, the variable is enabled.
+                                                            example: true
+                                                        key:
+                                                            type: string
+                                                            description: The variable's name.
+                                                            example: apiKey
+                                                        value:
+                                                            type: string
+                                                            description: The variable's value.
+                                                            example: PMAK-1234-5678-0987-6543
+                                                        type:
+                                                            type: string
+                                                            description: The variable type.
+                                                            enum:
+                                                                - secret
+                                                                - default
+                                                                - any
+                                                            example: secret
                                             isPublic:
                                                 type: boolean
                                                 description: If true, the environment is public.

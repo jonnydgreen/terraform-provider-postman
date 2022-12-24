@@ -8,6 +8,14 @@ OS_ARCH=darwin_amd64
 GOBIN=$(shell pwd)/bin
 CLIENT_PATH=client/postman
 PACKAGE_NAME=postman
+CLEAN=true
+
+define local_test_clean
+  if [ "$(1)" == "true" ]; then \
+		cd examples/testing && \
+		rm -rf terraform.tfstate*; \
+	fi
+endef
 
 .PHONY: default
 default: install
@@ -40,14 +48,23 @@ docs: install-docs
 	${GOBIN}/tfplugindocs generate
 	${GOBIN}/tfplugindocs generate
 
+.PHONY: gen
+gen: 
+	go generate ./...
+
+.PHONY: vendor
+vendor:
+	go mod tidy
+	go mod vendor
+
 .PHONY: install
-install: build
+install: vendor client gen build docs
 	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
 
 .PHONY: test
 test: 
-	go test -i $(TEST) || exit 1
+	go test $(TEST) || exit 1
 	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
 
 .PHONY: testacc
@@ -58,18 +75,16 @@ testacc:
 format:
 	go fmt ./...
 
+.PHONY: local-test-clean
+local-test-clean:
+	$(call local_test_clean,$(CLEAN))
+
 .PHONY: local-test
-local-test:
-	cd examples/testing && \
-	rm -rf .terraform .terraform.lock.hcl terraform.tfstate* && \
-	terraform init && terraform apply --auto-approve
+local-test: local-test-clean
+	cd examples/testing && rm -rf .terraform .terraform.lock.hcl && terraform init && terraform apply --auto-approve
 
-.PHONY: gen-docs
-gen-docs:
-	go generate ./...
-
-.PHONY: gen-client
-gen-client:
+.PHONY: client
+client:
 	go run cmd/sanitise-openapi-spec/main.go
 	rm -rf ${CLIENT_PATH}
 	docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
@@ -88,8 +103,13 @@ gen-client:
 	rm -rf ${CLIENT_PATH}/.openapi-generator-ignore
 	rm -rf ${CLIENT_PATH}/git_push.sh
 
+.PHONY: vet
+vet:
+	go vet ./...
+
 .PHONY: pre-commit
 pre-commit:
 	make
+	make vet
 	make test
-	make gen-docs && git add docs
+	make docs && git add docs

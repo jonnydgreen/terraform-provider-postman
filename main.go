@@ -35,7 +35,7 @@ func main() {
 	opts := &plugin.ServeOpts{
 		Debug:        debugMode,
 		ProviderAddr: "registry.terraform.io/jonnydgreen/postman",
-		ProviderFunc: postman.New(version),
+		ProviderFunc: postman.Provider(version),
 	}
 
 	plugin.Serve(opts)

@@ -1,9 +1,12 @@
 {
   "cSpell.words": [
+    "acctest",
     "demoapp",
     "diag",
     "goreleaser",
+    "Nprintf",
     "openapi",
+    "Passthrough",
     "securityprovider",
     "tfplugindocs"
   ],

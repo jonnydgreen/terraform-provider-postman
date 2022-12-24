@@ -5,7 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	postmanSDK "github.com/jonnydgreen/terraform-provider-postman/client/postman"
+	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
 func init() {
@@ -24,7 +24,7 @@ func init() {
 	// }
 }
 
-func New(version string) func() *schema.Provider {
+func Provider(version string) func() *schema.Provider {
 	return func() *schema.Provider {
 		p := &schema.Provider{
 			Schema: map[string]*schema.Schema{
@@ -32,6 +32,7 @@ func New(version string) func() *schema.Provider {
 					Type:        schema.TypeString,
 					Optional:    true,
 					DefaultFunc: schema.EnvDefaultFunc("POSTMAN_API_KEY", nil),
+					Sensitive:   true,
 				},
 			},
 			DataSourcesMap: map[string]*schema.Resource{
@@ -74,7 +75,7 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 			diags = append(diags, diag.Diagnostic{
 				Severity: diag.Error,
 				Summary:  "Unable to create Postman API client",
-				Detail:   "No API Key specified for Postman API client. Please provider via environment variable (POSTMAN_API_KEY) or Provider variable (api_key).",
+				Detail:   "No API Key specified for Postman API client. Please provide via environment variable (POSTMAN_API_KEY) or Provider variable (api_key).",
 			})
 			return nil, diags
 		}
@@ -91,10 +92,10 @@ func configure(version string, p *schema.Provider) func(context.Context, *schema
 		// 	return nil, diags
 		// }
 
-		configuration := postmanSDK.NewConfiguration()
+		configuration := postman.NewConfiguration()
 		// TODO: This works for now
 		configuration.AddDefaultHeader("x-api-key", apiKey)
-		apiClient := postmanSDK.NewAPIClient(configuration)
+		apiClient := postman.NewAPIClient(configuration)
 		return apiClient, diags
 	}
 }

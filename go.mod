@@ -7,7 +7,11 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.1
 )
 
-require github.com/stretchr/testify v1.8.1 // indirect
+require (
+	github.com/apparentlymart/go-cidr v1.1.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/stretchr/testify v1.8.1 // indirect
+)
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
@@ -21,7 +25,6 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/hashicorp-demoapp/hashicups-client-go v0.1.0
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect

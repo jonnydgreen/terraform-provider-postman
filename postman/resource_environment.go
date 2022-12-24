@@ -6,7 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	postmanSDK "github.com/jonnydgreen/terraform-provider-postman/client/postman"
+	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
 func resourceEnvironment() *schema.Resource {
@@ -49,6 +49,7 @@ func resourceEnvironment() *schema.Resource {
 							Type:        schema.TypeString,
 							Description: "The variable's value.",
 							Optional:    true,
+							Sensitive:   true,
 						},
 						"enabled": {
 							Type:        schema.TypeBool,
@@ -67,12 +68,13 @@ func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, m in
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	c := m.(*postmanSDK.APIClient)
+	c := m.(*postman.APIClient)
 
 	name := d.Get("name").(string)
-	input := postmanSDK.CreateEnvironmentRequest{
-		Environment: &postmanSDK.CreateEnvironmentRequestEnvironment{
-			Name: name,
+	input := postman.CreateEnvironmentRequest{
+		Environment: &postman.CreateEnvironmentRequestEnvironment{
+			Name:   name,
+			Values: mapToEnvironmentValueItemsResponse(d.Get("values")),
 		},
 	}
 
@@ -100,7 +102,7 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, m inte
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	c := m.(*postmanSDK.APIClient)
+	c := m.(*postman.APIClient)
 
 	environmentID := d.Id()
 
@@ -137,12 +139,51 @@ func resourceEnvironmentDelete(ctx context.Context, d *schema.ResourceData, m in
 	return diags
 }
 
-func setEnvironmentResourceData(d *schema.ResourceData, responseEnvironment *postmanSDK.SingleEnvironment200ResponseEnvironment) error {
-	if err := d.Set("id", responseEnvironment.Id); err != nil {
-		return fmt.Errorf("Error setting id: %s", err)
-	}
+func setEnvironmentResourceData(d *schema.ResourceData, responseEnvironment *postman.SingleEnvironment200ResponseEnvironment) error {
 	if err := d.Set("name", responseEnvironment.Name); err != nil {
 		return fmt.Errorf("Error setting name: %s", err)
 	}
+	if err := d.Set("values", mapToProviderEnvironmentValueItems(&responseEnvironment.Values)); err != nil {
+		return fmt.Errorf("Error setting name: %s", err)
+	}
 	return nil
+}
+
+func mapToProviderEnvironmentValueItems(valueItems *[]postman.CreateEnvironmentRequestEnvironmentValuesInner) []interface{} {
+	if valueItems != nil {
+		vis := make([]interface{}, len(*valueItems), len(*valueItems))
+		for i, valueItem := range *valueItems {
+			vi := make(map[string]interface{})
+			vi["key"] = valueItem.Key
+			vi["value"] = valueItem.Value
+			vi["type"] = valueItem.Type
+			vi["enabled"] = valueItem.Enabled
+			vis[i] = vi
+		}
+		return vis
+	}
+	return make([]interface{}, 0)
+}
+
+func mapToEnvironmentValueItemsResponse(rawValueItems interface{}) []postman.CreateEnvironmentRequestEnvironmentValuesInner {
+	if rawValueItems != nil {
+		valueItems := rawValueItems.([]interface{})
+		vis := make([]postman.CreateEnvironmentRequestEnvironmentValuesInner, len(valueItems), len(valueItems))
+		for idx, valueItem := range valueItems {
+			i := valueItem.(map[string]interface{})
+			key := i["key"].(string)
+			valueType := i["type"].(string)
+			value := i["value"].(string)
+			enabled := i["enabled"].(bool)
+			vi := postman.CreateEnvironmentRequestEnvironmentValuesInner{
+				Key:     &key,
+				Type:    &valueType,
+				Value:   &value,
+				Enabled: &enabled,
+			}
+			vis[idx] = vi
+		}
+		return vis
+	}
+	return make([]postman.CreateEnvironmentRequestEnvironmentValuesInner, 0)
 }

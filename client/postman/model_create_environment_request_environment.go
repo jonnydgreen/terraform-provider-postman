@@ -23,7 +23,7 @@ type CreateEnvironmentRequestEnvironment struct {
 	// The environment's name.
 	Name string `json:"name"`
 	// Information about the environment's variables.
-	Values [][]CreateEnvironmentRequestEnvironmentValuesInnerInner `json:"values,omitempty"`
+	Values []CreateEnvironmentRequestEnvironmentValuesInner `json:"values,omitempty"`
 }
 
 // NewCreateEnvironmentRequestEnvironment instantiates a new CreateEnvironmentRequestEnvironment object
@@ -69,9 +69,9 @@ func (o *CreateEnvironmentRequestEnvironment) SetName(v string) {
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *CreateEnvironmentRequestEnvironment) GetValues() [][]CreateEnvironmentRequestEnvironmentValuesInnerInner {
+func (o *CreateEnvironmentRequestEnvironment) GetValues() []CreateEnvironmentRequestEnvironmentValuesInner {
 	if o == nil || isNil(o.Values) {
-		var ret [][]CreateEnvironmentRequestEnvironmentValuesInnerInner
+		var ret []CreateEnvironmentRequestEnvironmentValuesInner
 		return ret
 	}
 	return o.Values
@@ -79,7 +79,7 @@ func (o *CreateEnvironmentRequestEnvironment) GetValues() [][]CreateEnvironmentR
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateEnvironmentRequestEnvironment) GetValuesOk() ([][]CreateEnvironmentRequestEnvironmentValuesInnerInner, bool) {
+func (o *CreateEnvironmentRequestEnvironment) GetValuesOk() ([]CreateEnvironmentRequestEnvironmentValuesInner, bool) {
 	if o == nil || isNil(o.Values) {
 		return nil, false
 	}
@@ -95,8 +95,8 @@ func (o *CreateEnvironmentRequestEnvironment) HasValues() bool {
 	return false
 }
 
-// SetValues gets a reference to the given [][]CreateEnvironmentRequestEnvironmentValuesInnerInner and assigns it to the Values field.
-func (o *CreateEnvironmentRequestEnvironment) SetValues(v [][]CreateEnvironmentRequestEnvironmentValuesInnerInner) {
+// SetValues gets a reference to the given []CreateEnvironmentRequestEnvironmentValuesInner and assigns it to the Values field.
+func (o *CreateEnvironmentRequestEnvironment) SetValues(v []CreateEnvironmentRequestEnvironmentValuesInner) {
 	o.Values = v
 }
 

@@ -3,18 +3,15 @@ package postman
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	postmanSDK "github.com/jonnydgreen/terraform-provider-postman/client/postman"
+	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
 func resourceWorkspace() *schema.Resource {
 	return &schema.Resource{
-		CreateContext: resourceWorkspaceCreate,
-		ReadContext:   resourceWorkspaceRead,
-		UpdateContext: resourceWorkspaceUpdate,
-		DeleteContext: resourceWorkspaceDelete,
 		Schema: map[string]*schema.Schema{
 			"id": {
 				Type:        schema.TypeString,
@@ -183,41 +180,32 @@ func resourceWorkspace() *schema.Resource {
 				},
 			},
 		},
-	}
-}
-
-func resourceWorkspaceCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*postmanSDK.APIClient)
-
-	workspaceName := d.Get("name").(string)
-	workspaceType := d.Get("type").(string)
-	workspaceDescription := d.Get("description").(string)
-	input := postmanSDK.CreateWorkspaceRequest{
-		Workspace: &postmanSDK.CreateWorkspaceRequestWorkspace{
-			Name:        workspaceName,
-			Type:        workspaceType,
-			Description: &workspaceDescription,
+		ReadContext:   resourceWorkspaceRead,
+		CreateContext: resourceWorkspaceCreate,
+		UpdateContext: resourceWorkspaceUpdate,
+		DeleteContext: resourceWorkspaceDelete,
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
 		},
 	}
-
-	response, _, err := c.WorkspacesApi.CreateWorkspace(ctx).CreateWorkspaceRequest(input).Execute()
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	workspaceID := *response.Workspace.Id
-	d.SetId(workspaceID)
-	return refreshWorkspace(ctx, d, m, workspaceID)
 }
 
-func refreshWorkspace(ctx context.Context, d *schema.ResourceData, m interface{}, workspaceID string) diag.Diagnostics {
+func resourceWorkspaceRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	workspaceID := d.Get("id").(string)
+	d.SetId(workspaceID)
+
+	c := m.(*postman.APIClient)
+
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	c := m.(*postmanSDK.APIClient)
-
-	response, _, err := c.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
+	response, raw, err := c.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
 	if err != nil {
+		if raw.StatusCode == 404 {
+			log.Printf("[DEBUG] %s for: %s, removing from state file", err, d.Id())
+			d.SetId("")
+			return diags
+		}
 		return diag.FromErr(err)
 	}
 
@@ -238,10 +226,51 @@ func refreshWorkspace(ctx context.Context, d *schema.ResourceData, m interface{}
 	return diags
 }
 
-func resourceWorkspaceRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	workspaceID := d.Get("id").(string)
+func resourceWorkspaceCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*postman.APIClient)
+
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
+	workspaceName := d.Get("name").(string)
+	workspaceType := d.Get("type").(string)
+	workspaceDescription := d.Get("description").(string)
+	input := postman.CreateWorkspaceRequest{
+		Workspace: &postman.CreateWorkspaceRequestWorkspace{
+			Name:        workspaceName,
+			Type:        workspaceType,
+			Description: &workspaceDescription,
+		},
+	}
+
+	response, _, err := c.WorkspacesApi.CreateWorkspace(ctx).CreateWorkspaceRequest(input).Execute()
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	workspaceID := *response.Workspace.Id
 	d.SetId(workspaceID)
-	return refreshWorkspace(ctx, d, m, workspaceID)
+
+	singleWorkspaceResponse, _, err := c.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	responseWorkspace, isWorkspaceDefined := singleWorkspaceResponse.GetWorkspaceOk()
+	if responseWorkspace == nil || isWorkspaceDefined != true {
+		diags = append(diags, diag.Diagnostic{
+			Severity: diag.Error,
+			Summary:  "Unable to find workspace",
+			Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", workspaceID),
+		})
+		return diags
+	}
+
+	err = setWorkspaceResourceData(d, responseWorkspace)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+	return diags
 }
 
 func resourceWorkspaceUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
@@ -249,13 +278,29 @@ func resourceWorkspaceUpdate(ctx context.Context, d *schema.ResourceData, m inte
 }
 
 func resourceWorkspaceDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*postman.APIClient)
+
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
+
+	workspaceID := d.Id()
+
+	// If the resource doesn't exist, leave as is and delegate to Terraform
+	_, response, err := c.WorkspacesApi.SingleWorkspace(context.Background(), workspaceID).Execute()
+	if response.StatusCode == 404 && err != nil {
+		return diags
+	}
+
+	// Otherwise, delete as normal
+	_, _, err = c.WorkspacesApi.DeleteWorkspace(ctx, workspaceID).Execute()
+	if err != nil {
+		return diag.FromErr(err)
+	}
 
 	return diags
 }
 
-func setWorkspaceResourceData(d *schema.ResourceData, responseWorkspace *postmanSDK.SingleWorkspace200ResponseWorkspace) error {
+func setWorkspaceResourceData(d *schema.ResourceData, responseWorkspace *postman.SingleWorkspace200ResponseWorkspace) error {
 	if err := d.Set("id", responseWorkspace.Id); err != nil {
 		return fmt.Errorf("Error setting id: %s", err)
 	}
@@ -301,7 +346,7 @@ func setWorkspaceResourceData(d *schema.ResourceData, responseWorkspace *postman
 	return nil
 }
 
-func flattenCollectionItemsData(collectionItems *[]postmanSDK.SingleWorkspace200ResponseWorkspaceCollectionsInner) []interface{} {
+func flattenCollectionItemsData(collectionItems *[]postman.SingleWorkspace200ResponseWorkspaceCollectionsInner) []interface{} {
 	if collectionItems != nil {
 		cis := make([]interface{}, len(*collectionItems), len(*collectionItems))
 		for i, collectionItem := range *collectionItems {
@@ -316,7 +361,7 @@ func flattenCollectionItemsData(collectionItems *[]postmanSDK.SingleWorkspace200
 	return make([]interface{}, 0)
 }
 
-func flattenEnvironmentItemsData(environmentItems *[]postmanSDK.SingleWorkspace200ResponseWorkspaceEnvironmentsInner) []interface{} {
+func flattenEnvironmentItemsData(environmentItems *[]postman.SingleWorkspace200ResponseWorkspaceEnvironmentsInner) []interface{} {
 	if environmentItems != nil {
 		eis := make([]interface{}, len(*environmentItems), len(*environmentItems))
 		for i, environmentItem := range *environmentItems {
@@ -331,7 +376,7 @@ func flattenEnvironmentItemsData(environmentItems *[]postmanSDK.SingleWorkspace2
 	return make([]interface{}, 0)
 }
 
-func flattenMockItemsData(mockItems *[]postmanSDK.SingleWorkspace200ResponseWorkspaceMocksInner) []interface{} {
+func flattenMockItemsData(mockItems *[]postman.SingleWorkspace200ResponseWorkspaceMocksInner) []interface{} {
 	if mockItems != nil {
 		mis := make([]interface{}, len(*mockItems), len(*mockItems))
 		for i, mockItem := range *mockItems {
@@ -346,7 +391,7 @@ func flattenMockItemsData(mockItems *[]postmanSDK.SingleWorkspace200ResponseWork
 	return make([]interface{}, 0)
 }
 
-func flattenMonitorItemsData(monitorItems *[]postmanSDK.SingleWorkspace200ResponseWorkspaceMonitorsInner) []interface{} {
+func flattenMonitorItemsData(monitorItems *[]postman.SingleWorkspace200ResponseWorkspaceMonitorsInner) []interface{} {
 	if monitorItems != nil {
 		mis := make([]interface{}, len(*monitorItems), len(*monitorItems))
 		for i, monitorItem := range *monitorItems {
@@ -361,7 +406,7 @@ func flattenMonitorItemsData(monitorItems *[]postmanSDK.SingleWorkspace200Respon
 	return make([]interface{}, 0)
 }
 
-func flattenApiItemsData(apiItems *[]postmanSDK.SingleWorkspace200ResponseWorkspaceApisInner) []interface{} {
+func flattenApiItemsData(apiItems *[]postman.SingleWorkspace200ResponseWorkspaceApisInner) []interface{} {
 	if apiItems != nil {
 		ais := make([]interface{}, len(*apiItems), len(*apiItems))
 		for i, apiItem := range *apiItems {

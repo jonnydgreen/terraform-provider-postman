@@ -39,6 +39,6 @@ Optional:
 
 - `enabled` (Boolean) If true, the variable is enabled.
 - `type` (String) The variable type.
-- `value` (String) The variable's value.
+- `value` (String, Sensitive) The variable's value.
 
 

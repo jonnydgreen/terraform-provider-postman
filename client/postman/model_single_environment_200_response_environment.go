@@ -34,7 +34,7 @@ type SingleEnvironment200ResponseEnvironment struct {
 	// The date and time at which the environment was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// Information about the environment's variables.
-	Values [][]CreateEnvironmentRequestEnvironmentValuesInnerInner `json:"values,omitempty"`
+	Values []CreateEnvironmentRequestEnvironmentValuesInner `json:"values,omitempty"`
 }
 
 // NewSingleEnvironment200ResponseEnvironment instantiates a new SingleEnvironment200ResponseEnvironment object
@@ -247,9 +247,9 @@ func (o *SingleEnvironment200ResponseEnvironment) SetUpdatedAt(v time.Time) {
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *SingleEnvironment200ResponseEnvironment) GetValues() [][]CreateEnvironmentRequestEnvironmentValuesInnerInner {
+func (o *SingleEnvironment200ResponseEnvironment) GetValues() []CreateEnvironmentRequestEnvironmentValuesInner {
 	if o == nil || isNil(o.Values) {
-		var ret [][]CreateEnvironmentRequestEnvironmentValuesInnerInner
+		var ret []CreateEnvironmentRequestEnvironmentValuesInner
 		return ret
 	}
 	return o.Values
@@ -257,7 +257,7 @@ func (o *SingleEnvironment200ResponseEnvironment) GetValues() [][]CreateEnvironm
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SingleEnvironment200ResponseEnvironment) GetValuesOk() ([][]CreateEnvironmentRequestEnvironmentValuesInnerInner, bool) {
+func (o *SingleEnvironment200ResponseEnvironment) GetValuesOk() ([]CreateEnvironmentRequestEnvironmentValuesInner, bool) {
 	if o == nil || isNil(o.Values) {
 		return nil, false
 	}
@@ -273,8 +273,8 @@ func (o *SingleEnvironment200ResponseEnvironment) HasValues() bool {
 	return false
 }
 
-// SetValues gets a reference to the given [][]CreateEnvironmentRequestEnvironmentValuesInnerInner and assigns it to the Values field.
-func (o *SingleEnvironment200ResponseEnvironment) SetValues(v [][]CreateEnvironmentRequestEnvironmentValuesInnerInner) {
+// SetValues gets a reference to the given []CreateEnvironmentRequestEnvironmentValuesInner and assigns it to the Values field.
+func (o *SingleEnvironment200ResponseEnvironment) SetValues(v []CreateEnvironmentRequestEnvironmentValuesInner) {
 	o.Values = v
 }
 
