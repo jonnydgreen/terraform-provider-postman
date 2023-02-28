@@ -3,453 +3,748 @@ package postman
 import (
 	"context"
 	"fmt"
-	"log"
+	"time"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
-func resourceWorkspace() *schema.Resource {
-	return &schema.Resource{
-		Schema: map[string]*schema.Schema{
-			"id": {
-				Type:        schema.TypeString,
+// Ensure the implementation satisfies the expected interfaces.
+var (
+	_ resource.Resource                = &workspaceResource{}
+	_ resource.ResourceWithConfigure   = &workspaceResource{}
+	_ resource.ResourceWithImportState = &workspaceResource{}
+)
+
+// NewWorkspaceResource is a helper function to simplify the provider implementation.
+func NewWorkspaceResource() resource.Resource {
+	return &workspaceResource{}
+}
+
+// workspaceResource is the resource implementation.
+type workspaceResource struct {
+	client *postman.APIClient
+}
+
+// Metadata returns the resource type name.
+func (r *workspaceResource) Metadata(_ context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_workspace"
+}
+
+func workspaceSchema() schema.Schema {
+	return schema.Schema{
+		Attributes: map[string]schema.Attribute{
+			"id": schema.StringAttribute{
 				Description: "The workspace's ID.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"name": {
-				Type:        schema.TypeString,
+			"name": schema.StringAttribute{
 				Description: "The workspace's name.",
 				Required:    true,
 			},
-			"type": {
-				Type:        schema.TypeString,
+			"type": schema.StringAttribute{
 				Description: "The type of workspace. One of: personal|team",
 				Required:    true,
 			},
-			"description": {
-				Type:        schema.TypeString,
+			"description": schema.StringAttribute{
 				Description: "The workspace's description.",
 				Optional:    true,
 			},
-			"visibility": {
-				Type:        schema.TypeString,
+			"visibility": schema.StringAttribute{
 				Description: "The workspace's visibility. [Visibility](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/managing-workspaces/#changing-workspace-visibility) determines who can access the workspace.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"created_by": {
-				Type:        schema.TypeString,
+			"created_by": schema.StringAttribute{
 				Description: "The user ID of the user who created the workspace.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"updated_by": {
-				Type:        schema.TypeString,
+			"updated_by": schema.StringAttribute{
 				Description: "The user ID of the user who last updated the workspace.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"created_at": {
-				Type:        schema.TypeString,
+			"created_at": schema.StringAttribute{
 				Description: "The date and time at which the workspace was created.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"updated_at": {
-				Type:        schema.TypeString,
+			"updated_at": schema.StringAttribute{
 				Description: "The date and time at which the workspace was last updated.",
 				Computed:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
 			},
-			"collections": {
-				Type:        schema.TypeList,
-				Description: "The workspace's collections.",
+			"collections": schema.ListNestedAttribute{
+				Description: "The workspace's Collections.",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Description: "",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.UseStateForUnknown(),
+				},
+				NestedObject: schema.NestedAttributeObject{
+					PlanModifiers: []planmodifier.Object{
+						objectplanmodifier.UseStateForUnknown(),
+					},
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							Description: "The ID of the workspace Collection.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"name": {
-							Type:        schema.TypeString,
-							Description: "",
+						"name": schema.StringAttribute{
+							Description: "The name of the workspace Collection.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"uid": {
-							Type:        schema.TypeString,
-							Description: "",
+						"uid": schema.StringAttribute{
+							Description: "The UID of the workspace Collection.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
 			},
-			"environments": {
-				Type:        schema.TypeList,
-				Description: "The workspace's collections.",
+			"environments": schema.ListNestedAttribute{
+				Description: "The Workspace's Environments.",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Description: "",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.UseStateForUnknown(),
+				},
+				NestedObject: schema.NestedAttributeObject{
+					PlanModifiers: []planmodifier.Object{
+						objectplanmodifier.UseStateForUnknown(),
+					},
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							Description: "The ID of the Workspace Environment.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"name": {
-							Type:        schema.TypeString,
-							Description: "",
+						"name": schema.StringAttribute{
+							Description: "The name of the Workspace Environment.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"uid": {
-							Type:        schema.TypeString,
-							Description: "",
+						"uid": schema.StringAttribute{
+							Description: "The UID of the Workspace Environment.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
 			},
-			"mocks": {
-				Type:        schema.TypeList,
-				Description: "The workspace's collections.",
+			"mocks": schema.ListNestedAttribute{
+				Description: "The Workspace's Mocks.",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Description: "",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.UseStateForUnknown(),
+				},
+				NestedObject: schema.NestedAttributeObject{
+					PlanModifiers: []planmodifier.Object{
+						objectplanmodifier.UseStateForUnknown(),
+					},
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							Description: "The ID of the Workspace Mock.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"name": {
-							Type:        schema.TypeString,
-							Description: "",
+						"name": schema.StringAttribute{
+							Description: "The name of the Workspace Mock.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"uid": {
-							Type:        schema.TypeString,
-							Description: "",
+						"uid": schema.StringAttribute{
+							Description: "The UID of the Workspace Mock.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
 			},
-			"monitors": {
-				Type:        schema.TypeList,
-				Description: "The workspace's collections.",
+			"monitors": schema.ListNestedAttribute{
+				Description: "The Workspace's Monitors.",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Description: "",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.UseStateForUnknown(),
+				},
+				NestedObject: schema.NestedAttributeObject{
+					PlanModifiers: []planmodifier.Object{
+						objectplanmodifier.UseStateForUnknown(),
+					},
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							Description: "The ID of the Workspace Monitor.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"name": {
-							Type:        schema.TypeString,
-							Description: "",
+						"name": schema.StringAttribute{
+							Description: "The name of the Workspace Monitor.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"uid": {
-							Type:        schema.TypeString,
-							Description: "",
+						"uid": schema.StringAttribute{
+							Description: "The UID of the Workspace Monitor.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
 			},
-			"apis": {
-				Type:        schema.TypeList,
-				Description: "The workspace's collections.",
+			"apis": schema.ListNestedAttribute{
+				Description: "The Workspace's APIs.",
 				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"id": {
-							Type:        schema.TypeString,
-							Description: "",
+				PlanModifiers: []planmodifier.List{
+					listplanmodifier.UseStateForUnknown(),
+				},
+				NestedObject: schema.NestedAttributeObject{
+					PlanModifiers: []planmodifier.Object{
+						objectplanmodifier.UseStateForUnknown(),
+					},
+					Attributes: map[string]schema.Attribute{
+						"id": schema.StringAttribute{
+							Description: "The ID of the Workspace API.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"name": {
-							Type:        schema.TypeString,
-							Description: "",
+						"name": schema.StringAttribute{
+							Description: "The name of the Workspace API.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
-						"uid": {
-							Type:        schema.TypeString,
-							Description: "",
+						"uid": schema.StringAttribute{
+							Description: "The UID of the Workspace API.",
 							Computed:    true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
 			},
-		},
-		ReadContext:   resourceWorkspaceRead,
-		CreateContext: resourceWorkspaceCreate,
-		UpdateContext: resourceWorkspaceUpdate,
-		DeleteContext: resourceWorkspaceDelete,
-		Importer: &schema.ResourceImporter{
-			StateContext: schema.ImportStatePassthroughContext,
 		},
 	}
 }
 
-func resourceWorkspaceRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	workspaceID := d.Get("id").(string)
-	d.SetId(workspaceID)
-
-	c := m.(*postman.APIClient)
-
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	response, raw, err := c.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
-	if err != nil {
-		if raw.StatusCode == 404 {
-			log.Printf("[DEBUG] %s for: %s, removing from state file", err, d.Id())
-			d.SetId("")
-			return diags
-		}
-		return diag.FromErr(err)
-	}
-
-	responseWorkspace, isWorkspaceDefined := response.GetWorkspaceOk()
-	if responseWorkspace == nil || isWorkspaceDefined != true {
-		diags = append(diags, diag.Diagnostic{
-			Severity: diag.Error,
-			Summary:  "Unable to find workspace",
-			Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", workspaceID),
-		})
-		return diags
-	}
-
-	err = setWorkspaceResourceData(d, responseWorkspace)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-	return diags
+// Schema defines the schema for the resource.
+func (r *workspaceResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
+	resp.Schema = workspaceSchema()
 }
 
-func resourceWorkspaceCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*postman.APIClient)
+// workspaceResourceModel maps the resource schema data.
+type workspaceResourceModel struct {
+	ID           types.String `tfsdk:"id"`
+	Name         types.String `tfsdk:"name"`
+	Type         types.String `tfsdk:"type"`
+	Description  types.String `tfsdk:"description"`
+	Visibility   types.String `tfsdk:"visibility"`
+	CreatedBy    types.String `tfsdk:"created_by"`
+	UpdatedBy    types.String `tfsdk:"updated_by"`
+	CreatedAt    types.String `tfsdk:"created_at"`
+	UpdatedAt    types.String `tfsdk:"updated_at"`
+	Collections  types.List   `tfsdk:"collections"`
+	Environments types.List   `tfsdk:"environments"`
+	Mocks        types.List   `tfsdk:"mocks"`
+	Monitors     types.List   `tfsdk:"monitors"`
+	Apis         types.List   `tfsdk:"apis"`
+}
 
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
+// workspaceCollectionModel maps Workspace Collection data.
+type workspaceCollectionModel struct {
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	UID  types.String `tfsdk:"uid"`
+}
 
-	workspaceName := d.Get("name").(string)
-	workspaceType := d.Get("type").(string)
-	workspaceDescription := d.Get("description").(string)
-	input := postman.CreateWorkspaceRequest{
-		Workspace: &postman.CreateWorkspaceRequestWorkspace{
-			Name:        workspaceName,
-			Type:        workspaceType,
-			Description: &workspaceDescription,
-		},
+// workspaceEnvironmentModel maps Workspace Environment data.
+type workspaceEnvironmentModel struct {
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	UID  types.String `tfsdk:"uid"`
+}
+
+// workspaceMockModel maps Workspace Mock data.
+type workspaceMockModel struct {
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	UID  types.String `tfsdk:"uid"`
+}
+
+// workspaceMonitorModel maps Workspace Monitor data.
+type workspaceMonitorModel struct {
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	UID  types.String `tfsdk:"uid"`
+}
+
+// workspaceApiModel maps Workspace Api data.
+type workspaceApiModel struct {
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	UID  types.String `tfsdk:"uid"`
+}
+
+// Configure adds the provider configured client to the resource.
+func (r *workspaceResource) Configure(_ context.Context, req resource.ConfigureRequest, _ *resource.ConfigureResponse) {
+	if req.ProviderData == nil {
+		return
 	}
 
-	response, _, err := c.WorkspacesApi.CreateWorkspace(ctx).CreateWorkspaceRequest(input).Execute()
+	r.client = req.ProviderData.(*postman.APIClient)
+}
+
+// Create creates the resource and sets the initial Terraform state.
+func (r *workspaceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	// Retrieve values from plan
+	var plan workspaceResourceModel
+	diags := req.Plan.Get(ctx, &plan)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Generate API request body from plan
+	workspaceName, err := expandWorkspaceName(plan.Name)
 	if err != nil {
-		return diag.FromErr(err)
+		resp.Diagnostics.AddError("Error parsing workspace name", err.Error())
+		return
+	}
+	workspaceType, err := expandWorkspaceType(plan.Type)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace type", err.Error())
+		return
+	}
+	workspaceDescription, err := expandWorkspaceDescription(plan.Description)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace description", err.Error())
+		return
+	}
+	workspace := postman.NewCreateWorkspaceRequestWorkspace(workspaceName, workspaceType)
+	if workspaceDescription != nil {
+		workspace.SetDescription(*workspaceDescription)
 	}
 
+	// Create new workspace
+	input := postman.NewCreateWorkspaceRequest()
+	input.SetWorkspace(*workspace)
+	response, _, err := r.client.WorkspacesApi.CreateWorkspace(ctx).CreateWorkspaceRequest(*input).Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error creating workspace", "Could not create workspace, unexpected error: "+err.Error())
+		return
+	}
+
+	// Populate Computed attribute values
 	workspaceID := *response.Workspace.Id
-	d.SetId(workspaceID)
-
-	singleWorkspaceResponse, _, err := c.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
+	plan.ID = flattenWorkspaceID(workspaceID)
+	singleWorkspaceResponse, _, err := r.client.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
 	if err != nil {
-		return diag.FromErr(err)
+		resp.Diagnostics.AddError("Error creating workspace", "Error finding created workspace, unexpected error: "+err.Error())
+		return
 	}
-
 	responseWorkspace, isWorkspaceDefined := singleWorkspaceResponse.GetWorkspaceOk()
 	if responseWorkspace == nil || isWorkspaceDefined != true {
-		diags = append(diags, diag.Diagnostic{
-			Severity: diag.Error,
-			Summary:  "Unable to find workspace",
-			Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", workspaceID),
-		})
-		return diags
+		resp.Diagnostics.AddError("Error creating workspace", "Created workspace does not exist")
+		return
 	}
 
-	err = setWorkspaceResourceData(d, responseWorkspace)
-	if err != nil {
-		return diag.FromErr(err)
+	// Map response body to schema and populate Computed attribute values
+	plan.Collections, diags = flattenWorkspaceCollections(ctx, responseWorkspace.Collections)
+	resp.Diagnostics.Append(diags...)
+	plan.Environments, diags = flattenWorkspaceEnvironments(ctx, responseWorkspace.Environments)
+	resp.Diagnostics.Append(diags...)
+	plan.Mocks, diags = flattenWorkspaceMocks(ctx, responseWorkspace.Mocks)
+	resp.Diagnostics.Append(diags...)
+	plan.Monitors, diags = flattenWorkspaceMonitors(ctx, responseWorkspace.Monitors)
+	resp.Diagnostics.Append(diags...)
+	plan.Apis, diags = flattenWorkspaceApis(ctx, responseWorkspace.Apis)
+	resp.Diagnostics.Append(diags...)
+	plan.CreatedAt = flattenWorkspaceCreatedAt(responseWorkspace.CreatedAt)
+	plan.CreatedBy = flattenWorkspaceCreatedBy(responseWorkspace.CreatedBy)
+	plan.UpdatedAt = flattenWorkspaceUpdatedAt(responseWorkspace.UpdatedAt)
+	plan.UpdatedBy = flattenWorkspaceUpdatedBy(responseWorkspace.UpdatedBy)
+	plan.Visibility = flattenWorkspaceVisibility(responseWorkspace.Visibility)
+
+	// Set state to fully populated data
+	diags = resp.State.Set(ctx, plan)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
-	return diags
 }
 
-func resourceWorkspaceUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-
-	c := m.(*postman.APIClient)
-
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	workspaceID := d.Id()
-	workspaceName := d.Get("name").(string)
-	workspaceType := d.Get("type").(string)
-	workspaceDescription := d.Get("description").(string)
-	updateWorkspaceRequest := postman.UpdateWorkspaceRequest{
-		Workspace: &postman.UpdateWorkspaceRequestWorkspace{
-			Name:        &workspaceName,
-			Type:        &workspaceType,
-			Description: &workspaceDescription,
-		},
+// Read refreshes the Terraform state with the latest data.
+func (r *workspaceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	// Get current state
+	var state workspaceResourceModel
+	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
-	response, _, err := c.WorkspacesApi.UpdateWorkspace(ctx, workspaceID).UpdateWorkspaceRequest(updateWorkspaceRequest).Execute()
+
+	// Get refreshed workspace value from Postman
+	workspaceID, err := expandWorkspaceID(state.ID)
 	if err != nil {
-		return diag.FromErr(err)
+		resp.Diagnostics.AddError("Error parsing workspace ID", err.Error())
+		return
+	}
+	response, raw, err := r.client.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
+	if err != nil {
+		if raw.StatusCode == 404 {
+			tflog.Debug(ctx, fmt.Sprintf("[DEBUG] %s for: %s, removing from state file", err, workspaceID))
+			resp.Diagnostics.AddError("Error parsing workspace ID", err.Error())
+			state.ID = flattenWorkspaceID("")
+			return
+		}
+		resp.Diagnostics.AddError("Error reading workspace", "Could not read workspace, unexpected error: "+err.Error())
+		return
 	}
 
-	responseWorkspace, isWorkspaceDefined := response.GetWorkspaceOk()
+	// Overwrite with refreshed state
+	state.Collections, diags = flattenWorkspaceCollections(ctx, response.Workspace.Collections)
+	resp.Diagnostics.Append(diags...)
+	state.Environments, diags = flattenWorkspaceEnvironments(ctx, response.Workspace.Environments)
+	resp.Diagnostics.Append(diags...)
+	state.Mocks, diags = flattenWorkspaceMocks(ctx, response.Workspace.Mocks)
+	resp.Diagnostics.Append(diags...)
+	state.Monitors, diags = flattenWorkspaceMonitors(ctx, response.Workspace.Monitors)
+	resp.Diagnostics.Append(diags...)
+	state.Apis, diags = flattenWorkspaceApis(ctx, response.Workspace.Apis)
+	resp.Diagnostics.Append(diags...)
+	state.CreatedAt = flattenWorkspaceCreatedAt(response.Workspace.CreatedAt)
+	state.CreatedBy = flattenWorkspaceCreatedBy(response.Workspace.CreatedBy)
+	state.UpdatedAt = flattenWorkspaceUpdatedAt(response.Workspace.UpdatedAt)
+	state.UpdatedBy = flattenWorkspaceUpdatedBy(response.Workspace.UpdatedBy)
+	state.Visibility = flattenWorkspaceVisibility(response.Workspace.Visibility)
+
+	// Set refreshed state
+	diags = resp.State.Set(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+}
+
+// Update updates the resource and sets the updated Terraform state on success.
+func (r *workspaceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	// Retrieve values from plan
+	var plan workspaceResourceModel
+	diags := req.Plan.Get(ctx, &plan)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// Generate API request body from plan
+	workspaceID, err := expandWorkspaceID(plan.ID)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace ID", err.Error())
+		return
+	}
+	workspaceName, err := expandWorkspaceName(plan.Name)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace name", err.Error())
+		return
+	}
+	workspaceType, err := expandWorkspaceType(plan.Type)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace type", err.Error())
+		return
+	}
+	workspaceDescription, err := expandWorkspaceDescription(plan.Description)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace description", err.Error())
+		return
+	}
+	workspace := postman.NewUpdateWorkspaceRequestWorkspace()
+	workspace.SetName(workspaceName)
+	workspace.SetType(workspaceType)
+	if workspaceDescription != nil {
+		workspace.SetDescription(*workspaceDescription)
+	} else {
+		workspace.SetDescription("")
+	}
+	updateWorkspaceRequest := postman.NewUpdateWorkspaceRequest()
+	updateWorkspaceRequest.SetWorkspace(*workspace)
+	_, _, err = r.client.WorkspacesApi.UpdateWorkspace(ctx, workspaceID).UpdateWorkspaceRequest(*updateWorkspaceRequest).Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error updating workspace", "Could not update workspace, unexpected error: "+err.Error())
+		return
+	}
+
+	singleWorkspaceResponse, _, err := r.client.WorkspacesApi.SingleWorkspace(ctx, workspaceID).Execute()
+	if err != nil {
+		resp.Diagnostics.AddError("Error updating workspace", "Error finding updated workspace, unexpected error: "+err.Error())
+		return
+	}
+	responseWorkspace, isWorkspaceDefined := singleWorkspaceResponse.GetWorkspaceOk()
 	if responseWorkspace == nil || isWorkspaceDefined != true {
-		diags = append(diags, diag.Diagnostic{
-			Severity: diag.Error,
-			Summary:  "Unable to find workspace",
-			Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", workspaceID),
-		})
-		return diags
+		resp.Diagnostics.AddError("Error updating workspace", "Updated workspace does not exist")
+		return
 	}
 
-	return resourceWorkspaceRead(ctx, d, m)
+	// Map response body to schema and populate Computed attribute values
+	plan.Collections, diags = flattenWorkspaceCollections(ctx, responseWorkspace.Collections)
+	resp.Diagnostics.Append(diags...)
+	plan.Environments, diags = flattenWorkspaceEnvironments(ctx, responseWorkspace.Environments)
+	resp.Diagnostics.Append(diags...)
+	plan.Mocks, diags = flattenWorkspaceMocks(ctx, responseWorkspace.Mocks)
+	resp.Diagnostics.Append(diags...)
+	plan.Monitors, diags = flattenWorkspaceMonitors(ctx, responseWorkspace.Monitors)
+	resp.Diagnostics.Append(diags...)
+	plan.Apis, diags = flattenWorkspaceApis(ctx, responseWorkspace.Apis)
+	resp.Diagnostics.Append(diags...)
+	plan.CreatedAt = flattenWorkspaceCreatedAt(responseWorkspace.CreatedAt)
+	plan.CreatedBy = flattenWorkspaceCreatedBy(responseWorkspace.CreatedBy)
+	plan.UpdatedAt = flattenWorkspaceUpdatedAt(responseWorkspace.UpdatedAt)
+	plan.UpdatedBy = flattenWorkspaceUpdatedBy(responseWorkspace.UpdatedBy)
+	plan.Visibility = flattenWorkspaceVisibility(responseWorkspace.Visibility)
+
+	// Set refreshed state
+	diags = resp.State.Set(ctx, &plan)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 }
 
-func resourceWorkspaceDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	c := m.(*postman.APIClient)
+// Delete deletes the resource and removes the Terraform state on success.
+func (r *workspaceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	// Retrieve values from state
+	var state workspaceResourceModel
+	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	workspaceID := d.Id()
+	// Get workspace data from state
+	workspaceID, err := expandWorkspaceID(state.ID)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing workspace ID", err.Error())
+		return
+	}
 
 	// If the resource doesn't exist, leave as is and delegate to Terraform
-	_, response, err := c.WorkspacesApi.SingleWorkspace(context.Background(), workspaceID).Execute()
+	_, response, err := r.client.WorkspacesApi.SingleWorkspace(context.Background(), workspaceID).Execute()
 	if response.StatusCode == 404 && err != nil {
-		return diags
+		tflog.Debug(ctx, fmt.Sprintf("[DEBUG] %s for: %s, workspace already exists, removing from state file", err, workspaceID))
+		return
 	}
 
-	// Otherwise, delete as normal
-	_, _, err = c.WorkspacesApi.DeleteWorkspace(ctx, workspaceID).Execute()
+	// Delete existing workspace
+	_, _, err = r.client.WorkspacesApi.DeleteWorkspace(ctx, workspaceID).Execute()
 	if err != nil {
-		return diag.FromErr(err)
+		resp.Diagnostics.AddError("Error deleting workspace", "Could not delete workspace, unexpected error: "+err.Error())
+		return
 	}
+}
 
-	return diags
+func (r *workspaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	// Retrieve import ID and save to id attribute
+	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
+
 }
 
 // Maps
-
-func setWorkspaceResourceData(d *schema.ResourceData, responseWorkspace *postman.SingleWorkspace200ResponseWorkspace) error {
-	if err := d.Set("id", responseWorkspace.Id); err != nil {
-		return fmt.Errorf("Error setting id: %s", err)
-	}
-	if err := d.Set("name", responseWorkspace.Name); err != nil {
-		return fmt.Errorf("Error setting name: %s", err)
-	}
-	if err := d.Set("type", responseWorkspace.Type); err != nil {
-		return fmt.Errorf("Error setting type: %s", err)
-	}
-	if err := d.Set("description", responseWorkspace.Description); err != nil {
-		return fmt.Errorf("Error setting description: %s", err)
-	}
-	if err := d.Set("visibility", responseWorkspace.Visibility); err != nil {
-		return fmt.Errorf("Error setting visibility: %s", err)
-	}
-	if err := d.Set("created_by", responseWorkspace.CreatedBy); err != nil {
-		return fmt.Errorf("Error setting created_by: %s", err)
-	}
-	if err := d.Set("updated_by", responseWorkspace.UpdatedBy); err != nil {
-		return fmt.Errorf("Error setting updated_by: %s", err)
-	}
-	if err := d.Set("created_at", responseWorkspace.CreatedAt.String()); err != nil {
-		return fmt.Errorf("Error setting created_at: %s", err)
-	}
-	if err := d.Set("updated_at", responseWorkspace.UpdatedAt.String()); err != nil {
-		return fmt.Errorf("Error setting updated_at: %s", err)
-	}
-	if err := d.Set("collections", flattenCollectionItemsData(&responseWorkspace.Collections)); err != nil {
-		return fmt.Errorf("Error setting collections: %s", err)
-	}
-	if err := d.Set("environments", flattenEnvironmentItemsData(&responseWorkspace.Environments)); err != nil {
-		return fmt.Errorf("Error setting environments: %s", err)
-	}
-	if err := d.Set("mocks", flattenMockItemsData(&responseWorkspace.Mocks)); err != nil {
-		return fmt.Errorf("Error setting mocks: %s", err)
-	}
-	if err := d.Set("monitors", flattenMonitorItemsData(&responseWorkspace.Monitors)); err != nil {
-		return fmt.Errorf("Error setting monitors: %s", err)
-	}
-	if err := d.Set("apis", flattenApiItemsData(&responseWorkspace.Apis)); err != nil {
-		return fmt.Errorf("Error setting apis: %s", err)
-	}
-	return nil
-}
-
-func flattenCollectionItemsData(collectionItems *[]postman.SingleWorkspace200ResponseWorkspaceCollectionsInner) []interface{} {
+func flattenWorkspaceCollections(ctx context.Context, collectionItems []postman.SingleWorkspace200ResponseWorkspaceCollectionsInner) (types.List, diag.Diagnostics) {
+	attrTypes := workspaceSchema().Attributes["collections"].GetType().(types.ListType).ElemType.(types.ObjectType).AttrTypes
 	if collectionItems != nil {
-		cis := make([]interface{}, len(*collectionItems), len(*collectionItems))
-		for i, collectionItem := range *collectionItems {
-			ci := make(map[string]interface{})
-			ci["id"] = collectionItem.Id
-			ci["name"] = collectionItem.Name
-			ci["uid"] = collectionItem.Uid
+		cis := make([]workspaceCollectionModel, len(collectionItems), len(collectionItems))
+		for i, collectionItem := range collectionItems {
+			ci := workspaceCollectionModel{
+				ID:   types.StringValue(*collectionItem.Id),
+				Name: types.StringValue(*collectionItem.Name),
+				UID:  types.StringValue(*collectionItem.Uid),
+			}
 			cis[i] = ci
 		}
-		return cis
+		return types.ListValueFrom(ctx, types.ObjectType{AttrTypes: attrTypes}, cis)
 	}
-	return make([]interface{}, 0)
+	return types.ListValueFrom(ctx, types.ObjectType{
+		AttrTypes: attrTypes,
+	}, make([]workspaceCollectionModel, 0))
 }
 
-func flattenEnvironmentItemsData(environmentItems *[]postman.SingleWorkspace200ResponseWorkspaceEnvironmentsInner) []interface{} {
+func flattenWorkspaceEnvironments(ctx context.Context, environmentItems []postman.SingleWorkspace200ResponseWorkspaceEnvironmentsInner) (types.List, diag.Diagnostics) {
+	attrTypes := workspaceSchema().Attributes["environments"].GetType().(types.ListType).ElemType.(types.ObjectType).AttrTypes
 	if environmentItems != nil {
-		eis := make([]interface{}, len(*environmentItems), len(*environmentItems))
-		for i, environmentItem := range *environmentItems {
-			ei := make(map[string]interface{})
-			ei["id"] = environmentItem.Id
-			ei["name"] = environmentItem.Name
-			ei["uid"] = environmentItem.Uid
+		eis := make([]workspaceEnvironmentModel, len(environmentItems), len(environmentItems))
+		for i, environmentItem := range environmentItems {
+			ei := workspaceEnvironmentModel{
+				ID:   types.StringValue(*environmentItem.Id),
+				Name: types.StringValue(*environmentItem.Name),
+				UID:  types.StringValue(*environmentItem.Uid),
+			}
 			eis[i] = ei
 		}
-		return eis
+		return types.ListValueFrom(ctx, types.ObjectType{AttrTypes: attrTypes}, eis)
 	}
-	return make([]interface{}, 0)
+	return types.ListValueFrom(ctx, types.ObjectType{
+		AttrTypes: attrTypes,
+	}, make([]workspaceEnvironmentModel, 0))
 }
 
-func flattenMockItemsData(mockItems *[]postman.SingleWorkspace200ResponseWorkspaceMocksInner) []interface{} {
+func flattenWorkspaceMocks(ctx context.Context, mockItems []postman.SingleWorkspace200ResponseWorkspaceMocksInner) (types.List, diag.Diagnostics) {
+	attrTypes := workspaceSchema().Attributes["mocks"].GetType().(types.ListType).ElemType.(types.ObjectType).AttrTypes
 	if mockItems != nil {
-		mis := make([]interface{}, len(*mockItems), len(*mockItems))
-		for i, mockItem := range *mockItems {
-			mi := make(map[string]interface{})
-			mi["id"] = mockItem.Id
-			mi["name"] = mockItem.Name
-			mi["uid"] = mockItem.Uid
+		mis := make([]workspaceMockModel, len(mockItems), len(mockItems))
+		for i, mockItem := range mockItems {
+			mi := workspaceMockModel{
+				ID:   types.StringValue(*mockItem.Id),
+				Name: types.StringValue(*mockItem.Name),
+				UID:  types.StringValue(*mockItem.Uid),
+			}
 			mis[i] = mi
 		}
-		return mis
+		return types.ListValueFrom(ctx, types.ObjectType{AttrTypes: attrTypes}, mis)
 	}
-	return make([]interface{}, 0)
+	return types.ListValueFrom(ctx, types.ObjectType{
+		AttrTypes: attrTypes,
+	}, make([]workspaceMockModel, 0))
 }
 
-func flattenMonitorItemsData(monitorItems *[]postman.SingleWorkspace200ResponseWorkspaceMonitorsInner) []interface{} {
+func flattenWorkspaceMonitors(ctx context.Context, monitorItems []postman.SingleWorkspace200ResponseWorkspaceMonitorsInner) (types.List, diag.Diagnostics) {
+	attrTypes := workspaceSchema().Attributes["monitors"].GetType().(types.ListType).ElemType.(types.ObjectType).AttrTypes
 	if monitorItems != nil {
-		mis := make([]interface{}, len(*monitorItems), len(*monitorItems))
-		for i, monitorItem := range *monitorItems {
-			mi := make(map[string]interface{})
-			mi["id"] = monitorItem.Id
-			mi["name"] = monitorItem.Name
-			mi["uid"] = monitorItem.Uid
+		mis := make([]workspaceMonitorModel, len(monitorItems), len(monitorItems))
+		for i, monitorItem := range monitorItems {
+			mi := workspaceMonitorModel{
+				ID:   types.StringValue(*monitorItem.Id),
+				Name: types.StringValue(*monitorItem.Name),
+				UID:  types.StringValue(*monitorItem.Uid),
+			}
 			mis[i] = mi
 		}
-		return mis
+		return types.ListValueFrom(ctx, types.ObjectType{AttrTypes: attrTypes}, mis)
 	}
-	return make([]interface{}, 0)
+	return types.ListValueFrom(ctx, types.ObjectType{
+		AttrTypes: attrTypes,
+	}, make([]workspaceMonitorModel, 0))
 }
 
-func flattenApiItemsData(apiItems *[]postman.SingleWorkspace200ResponseWorkspaceApisInner) []interface{} {
+func flattenWorkspaceApis(ctx context.Context, apiItems []postman.SingleWorkspace200ResponseWorkspaceApisInner) (types.List, diag.Diagnostics) {
+	attrTypes := workspaceSchema().Attributes["apis"].GetType().(types.ListType).ElemType.(types.ObjectType).AttrTypes
 	if apiItems != nil {
-		ais := make([]interface{}, len(*apiItems), len(*apiItems))
-		for i, apiItem := range *apiItems {
-			ai := make(map[string]interface{})
-			ai["id"] = apiItem.Id
-			ai["name"] = apiItem.Name
-			ai["uid"] = apiItem.Uid
-			ais[i] = ai
+		mis := make([]workspaceApiModel, len(apiItems), len(apiItems))
+		for i, apiItem := range apiItems {
+			mi := workspaceApiModel{
+				ID:   types.StringValue(*apiItem.Id),
+				Name: types.StringValue(*apiItem.Name),
+				UID:  types.StringValue(*apiItem.Uid),
+			}
+			mis[i] = mi
 		}
-		return ais
+		return types.ListValueFrom(ctx, types.ObjectType{AttrTypes: attrTypes}, mis)
 	}
-	return make([]interface{}, 0)
+	return types.ListValueFrom(ctx, types.ObjectType{
+		AttrTypes: attrTypes,
+	}, make([]workspaceApiModel, 0))
+}
+
+func expandWorkspaceID(v basetypes.StringValue) (string, error) {
+	return v.ValueString(), nil
+}
+
+func flattenWorkspaceID(v string) basetypes.StringValue {
+	return types.StringValue(v)
+}
+
+func expandWorkspaceName(v basetypes.StringValue) (string, error) {
+	return v.ValueString(), nil
+}
+
+func flattenWorkspaceName(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func expandWorkspaceType(v basetypes.StringValue) (string, error) {
+	return v.ValueString(), nil
+}
+
+func flattenWorkspaceType(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func expandWorkspaceDescription(v basetypes.StringValue) (*string, error) {
+	if v.IsNull() {
+		return nil, nil
+	}
+	workspaceDescription := v.ValueString()
+	return &workspaceDescription, nil
+}
+
+func flattenWorkspaceDescription(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func flattenWorkspaceVisibility(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func flattenWorkspaceCreatedBy(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func flattenWorkspaceUpdatedBy(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func flattenWorkspaceCreatedAt(v *time.Time) basetypes.StringValue {
+	return types.StringValue((*v).String())
+}
+
+func flattenWorkspaceUpdatedAt(v *time.Time) basetypes.StringValue {
+	return types.StringValue((*v).String())
 }

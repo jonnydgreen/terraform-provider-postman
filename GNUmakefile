@@ -60,8 +60,7 @@ vendor:
 
 .PHONY: install
 install: vendor client gen build docs
-	mkdir -p ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
-	mv ${BINARY} ~/.terraform.d/plugins/${HOSTNAME}/${NAMESPACE}/${NAME}/${VERSION}/${OS_ARCH}
+	go install .
 
 .PHONY: test
 test: 

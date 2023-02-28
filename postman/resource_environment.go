@@ -3,6 +3,7 @@ package postman
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -16,11 +17,15 @@ func resourceEnvironment() *schema.Resource {
 		UpdateContext: resourceEnvironmentUpdate,
 		DeleteContext: resourceEnvironmentDelete,
 		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Description: "The environment's ID.",
+				Computed:    true,
+			},
 			"name": {
 				Type:        schema.TypeString,
 				Description: "The environment's name.",
 				Required:    true,
-				ForceNew:    true,
 			},
 			"workspace": {
 				Type:        schema.TypeString,
@@ -64,50 +69,23 @@ func resourceEnvironment() *schema.Resource {
 	}
 }
 
-func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
-	// Warning or errors can be collected in a slice type
-	var diags diag.Diagnostics
-
-	c := m.(*postman.APIClient)
-
-	name := d.Get("name").(string)
-	input := postman.CreateEnvironmentRequest{
-		Environment: &postman.CreateEnvironmentRequestEnvironment{
-			Name:   name,
-			Values: mapToEnvironmentValueItemsResponse(d.Get("values")),
-		},
-	}
-
-	createEnvironment := c.EnvironmentsApi.CreateEnvironment(ctx)
-	workspaceID := d.Get("workspace")
-	if workspaceID != nil {
-		diags = append(diags, diag.Diagnostic{
-			Severity: diag.Warning,
-			Summary:  "Create for workspace",
-			Detail:   fmt.Sprintf("Create for workspace %s", workspaceID),
-		})
-		createEnvironment = createEnvironment.Workspace(workspaceID.(string))
-	}
-	response, _, err := createEnvironment.CreateEnvironmentRequest(input).Execute()
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	d.SetId(*response.Environment.Id)
-
-	return diags
-}
-
 func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
+	// TODO: is this the correct way to do this?
+	environmentID := d.Get("id").(string)
+	d.SetId(environmentID)
+
 	c := m.(*postman.APIClient)
 
-	environmentID := d.Id()
-
-	response, _, err := c.EnvironmentsApi.SingleEnvironment(ctx, environmentID).Execute()
+	response, raw, err := c.EnvironmentsApi.SingleEnvironment(ctx, environmentID).Execute()
 	if err != nil {
+		if raw.StatusCode == 404 {
+			log.Printf("[DEBUG] %s for: %s, removing from state file", err, d.Id())
+			d.SetId("")
+			return diags
+		}
 		return diag.FromErr(err)
 	}
 
@@ -128,7 +106,72 @@ func resourceEnvironmentRead(ctx context.Context, d *schema.ResourceData, m inte
 	return diags
 }
 
+func resourceEnvironmentCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
+	c := m.(*postman.APIClient)
+
+	environmentName := d.Get("name").(string)
+	input := postman.CreateEnvironmentRequest{
+		Environment: &postman.CreateEnvironmentRequestEnvironment{
+			Name:   environmentName,
+			Values: mapToEnvironmentValueItemsResponse(d.Get("values")),
+		},
+	}
+
+	createEnvironment := c.EnvironmentsApi.CreateEnvironment(ctx)
+	workspaceID := d.Get("workspace")
+	if workspaceID != nil {
+		diags = append(diags, diag.Diagnostic{
+			Severity: diag.Warning,
+			Summary:  "Create for workspace",
+			Detail:   fmt.Sprintf("Create for workspace %s", workspaceID),
+		})
+		createEnvironment = createEnvironment.Workspace(workspaceID.(string))
+	}
+	response, _, err := createEnvironment.CreateEnvironmentRequest(input).Execute()
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	environmentID := *response.Environment.Id
+	d.SetId(environmentID)
+
+	return diags
+}
+
 func resourceEnvironmentUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	// // Warning or errors can be collected in a slice type
+	// var diags diag.Diagnostics
+
+	// c := m.(*postman.APIClient)
+
+	// environmentID := d.Id()
+	// environmentName := d.Get("name").(string)
+
+	// updateWorkspaceRequest := postman.UpdateWorkspaceRequest{
+	// 	Workspace: &postman.UpdateWorkspaceRequestWorkspace{
+	// 		Name:        &environmentName,
+	// 		Type:        &workspaceType,
+	// 		Description: &workspaceDescription,
+	// 	},
+	// }
+	// response, _, err := c.WorkspacesApi.UpdateWorkspace(ctx, environmentID).UpdateWorkspaceRequest(updateWorkspaceRequest).Execute()
+	// if err != nil {
+	// 	return diag.FromErr(err)
+	// }
+
+	// responseWorkspace, isWorkspaceDefined := response.GetWorkspaceOk()
+	// if responseWorkspace == nil || isWorkspaceDefined != true {
+	// 	diags = append(diags, diag.Diagnostic{
+	// 		Severity: diag.Error,
+	// 		Summary:  "Unable to find workspace",
+	// 		Detail:   fmt.Sprintf("No workspace with ID %s found in Postman API response.", environmentID),
+	// 	})
+	// 	return diags
+	// }
+
 	return resourceEnvironmentRead(ctx, d, m)
 }
 

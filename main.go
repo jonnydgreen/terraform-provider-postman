@@ -1,9 +1,10 @@
 package main
 
 import (
+	"context"
 	"flag"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/jonnydgreen/terraform-provider-postman/postman"
 )
 
@@ -32,11 +33,8 @@ func main() {
 	flag.BoolVar(&debugMode, "debug", false, "set to true to run the provider with support for debuggers like delve")
 	flag.Parse()
 
-	opts := &plugin.ServeOpts{
-		Debug:        debugMode,
-		ProviderAddr: "registry.terraform.io/jonnydgreen/postman",
-		ProviderFunc: postman.Provider(version),
-	}
-
-	plugin.Serve(opts)
+	providerserver.Serve(context.Background(), postman.Provider(version), providerserver.ServeOpts{
+		Address: "registry.terraform.io/jonnydgreen/postman",
+		Debug:   debugMode,
+	})
 }
