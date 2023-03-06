@@ -13,36 +13,22 @@ import (
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
-func init() {
-	// Set descriptions to support markdown syntax, this will be used in document generation
-	// and the language server.
-	// schema.DescriptionKind = schema.StringMarkdown
-
-	// Customize the content of descriptions when output. For example you can add defaults on
-	// to the exported descriptions if present.
-	// schema.SchemaDescriptionBuilder = func(s *schema.Schema) string {
-	// 	desc := s.Description
-	// 	if s.Default != nil {
-	// 		desc += fmt.Sprintf(" Defaults to `%v`.", s.Default)
-	// 	}
-	// 	return strings.TrimSpace(desc)
-	// }
-}
-
 // Ensure the implementation satisfies the expected interfaces
 var (
 	_ provider.Provider = &postmanProvider{}
 )
 
 // New is a helper function to simplify provider server and testing implementation.
-func Provider(version string) func() provider.Provider {
+func New(version string) func() provider.Provider {
 	return func() provider.Provider {
 		return &postmanProvider{}
 	}
 }
 
+// TODO: add api_key to model
 // postmanProvider is the provider implementation.
-type postmanProvider struct{}
+type postmanProvider struct {
+}
 
 // Metadata returns the provider type name.
 func (p *postmanProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -123,7 +109,9 @@ func (p *postmanProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 // DataSources defines the data sources implemented in the provider.
 func (p *postmanProvider) DataSources(_ context.Context) []func() datasource.DataSource {
-	return nil
+	return []func() datasource.DataSource{
+		NewWorkspaceDataSource,
+	}
 }
 
 // Resources defines the resources implemented in the provider.

@@ -45,7 +45,7 @@ func NewJsonStringifiedWithDefaults() *JsonStringified {
 
 // GetInput returns the Input field value if set, zero value otherwise.
 func (o *JsonStringified) GetInput() string {
-	if o == nil || isNil(o.Input) {
+	if o == nil || IsNil(o.Input) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *JsonStringified) GetInput() string {
 // GetInputOk returns a tuple with the Input field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *JsonStringified) GetInputOk() (*string, bool) {
-	if o == nil || isNil(o.Input) {
+	if o == nil || IsNil(o.Input) {
 		return nil, false
 	}
 	return o.Input, true
@@ -63,7 +63,7 @@ func (o *JsonStringified) GetInputOk() (*string, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *JsonStringified) HasInput() bool {
-	if o != nil && !isNil(o.Input) {
+	if o != nil && !IsNil(o.Input) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *JsonStringified) SetInput(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *JsonStringified) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *JsonStringified) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *JsonStringified) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -95,7 +95,7 @@ func (o *JsonStringified) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *JsonStringified) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o JsonStringified) MarshalJSON() ([]byte, error) {
 
 func (o JsonStringified) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Input) {
+	if !IsNil(o.Input) {
 		toSerialize["input"] = o.Input
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil

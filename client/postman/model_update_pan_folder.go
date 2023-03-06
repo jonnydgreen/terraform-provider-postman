@@ -42,7 +42,7 @@ func NewUpdatePANFolderWithDefaults() *UpdatePANFolder {
 
 // GetFolder returns the Folder field value if set, zero value otherwise.
 func (o *UpdatePANFolder) GetFolder() UpdatePANFolderFolder {
-	if o == nil || isNil(o.Folder) {
+	if o == nil || IsNil(o.Folder) {
 		var ret UpdatePANFolderFolder
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *UpdatePANFolder) GetFolder() UpdatePANFolderFolder {
 // GetFolderOk returns a tuple with the Folder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANFolder) GetFolderOk() (*UpdatePANFolderFolder, bool) {
-	if o == nil || isNil(o.Folder) {
+	if o == nil || IsNil(o.Folder) {
 		return nil, false
 	}
 	return o.Folder, true
@@ -60,7 +60,7 @@ func (o *UpdatePANFolder) GetFolderOk() (*UpdatePANFolderFolder, bool) {
 
 // HasFolder returns a boolean if a field has been set.
 func (o *UpdatePANFolder) HasFolder() bool {
-	if o != nil && !isNil(o.Folder) {
+	if o != nil && !IsNil(o.Folder) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o UpdatePANFolder) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Folder) {
+	if !IsNil(o.Folder) {
 		toSerialize["folder"] = o.Folder
 	}
 	return toSerialize, nil

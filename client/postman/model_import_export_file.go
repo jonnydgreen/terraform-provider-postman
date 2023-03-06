@@ -22,7 +22,7 @@ var _ MappedNullable = &ImportExportFile{}
 // ImportExportFile struct for ImportExportFile
 type ImportExportFile struct {
 	// A file containing a valid user's export .zip file.
-	Input os.File `json:"input"`
+	Input *os.File `json:"input"`
 	// The `file` type value.
 	Type string `json:"type"`
 }
@@ -31,7 +31,7 @@ type ImportExportFile struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImportExportFile(input os.File, type_ string) *ImportExportFile {
+func NewImportExportFile(input *os.File, type_ string) *ImportExportFile {
 	this := ImportExportFile{}
 	this.Input = input
 	this.Type = type_
@@ -47,9 +47,9 @@ func NewImportExportFileWithDefaults() *ImportExportFile {
 }
 
 // GetInput returns the Input field value
-func (o *ImportExportFile) GetInput() os.File {
+func (o *ImportExportFile) GetInput() *os.File {
 	if o == nil {
-		var ret os.File
+		var ret *os.File
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *ImportExportFile) GetInput() os.File {
 
 // GetInputOk returns a tuple with the Input field value
 // and a boolean to check if the value has been set.
-func (o *ImportExportFile) GetInputOk() (*os.File, bool) {
+func (o *ImportExportFile) GetInputOk() (**os.File, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *ImportExportFile) GetInputOk() (*os.File, bool) {
 }
 
 // SetInput sets field value
-func (o *ImportExportFile) SetInput(v os.File) {
+func (o *ImportExportFile) SetInput(v *os.File) {
 	o.Input = v
 }
 

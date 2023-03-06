@@ -80,9 +80,6 @@ func workspaceSchema() schema.Schema {
 			"updated_by": schema.StringAttribute{
 				Description: "The user ID of the user who last updated the workspace.",
 				Computed:    true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"created_at": schema.StringAttribute{
 				Description: "The date and time at which the workspace was created.",
@@ -94,9 +91,6 @@ func workspaceSchema() schema.Schema {
 			"updated_at": schema.StringAttribute{
 				Description: "The date and time at which the workspace was last updated.",
 				Computed:    true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
 			},
 			"collections": schema.ListNestedAttribute{
 				Description: "The workspace's Collections.",
@@ -399,6 +393,7 @@ func (r *workspaceResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	// Map response body to schema and populate Computed attribute values
+	plan.Description = flattenWorkspaceDescription(responseWorkspace.Description)
 	plan.Collections, diags = flattenWorkspaceCollections(ctx, responseWorkspace.Collections)
 	resp.Diagnostics.Append(diags...)
 	plan.Environments, diags = flattenWorkspaceEnvironments(ctx, responseWorkspace.Environments)
@@ -452,6 +447,9 @@ func (r *workspaceResource) Read(ctx context.Context, req resource.ReadRequest, 
 	}
 
 	// Overwrite with refreshed state
+	state.Name = flattenWorkspaceName(response.Workspace.Name)
+	state.Type = flattenWorkspaceType(response.Workspace.Type)
+	state.Description = flattenWorkspaceDescription(response.Workspace.Description)
 	state.Collections, diags = flattenWorkspaceCollections(ctx, response.Workspace.Collections)
 	resp.Diagnostics.Append(diags...)
 	state.Environments, diags = flattenWorkspaceEnvironments(ctx, response.Workspace.Environments)
@@ -535,6 +533,7 @@ func (r *workspaceResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Map response body to schema and populate Computed attribute values
+	plan.Description = flattenWorkspaceDescription(responseWorkspace.Description)
 	plan.Collections, diags = flattenWorkspaceCollections(ctx, responseWorkspace.Collections)
 	resp.Diagnostics.Append(diags...)
 	plan.Environments, diags = flattenWorkspaceEnvironments(ctx, responseWorkspace.Environments)
@@ -594,7 +593,6 @@ func (r *workspaceResource) Delete(ctx context.Context, req resource.DeleteReque
 func (r *workspaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// Retrieve import ID and save to id attribute
 	resource.ImportStatePassthroughID(ctx, path.Root("id"), req, resp)
-
 }
 
 // Maps
@@ -726,7 +724,14 @@ func expandWorkspaceDescription(v basetypes.StringValue) (*string, error) {
 }
 
 func flattenWorkspaceDescription(v *string) basetypes.StringValue {
-	return types.StringValue(*v)
+	if v == nil {
+		return types.StringNull()
+	}
+	stringValue := *v
+	if stringValue == "" {
+		return types.StringNull()
+	}
+	return types.StringValue(stringValue)
 }
 
 func flattenWorkspaceVisibility(v *string) basetypes.StringValue {
@@ -742,9 +747,9 @@ func flattenWorkspaceUpdatedBy(v *string) basetypes.StringValue {
 }
 
 func flattenWorkspaceCreatedAt(v *time.Time) basetypes.StringValue {
-	return types.StringValue((*v).String())
+	return types.StringValue((*v).Format(time.RFC3339))
 }
 
 func flattenWorkspaceUpdatedAt(v *time.Time) basetypes.StringValue {
-	return types.StringValue((*v).String())
+	return types.StringValue((*v).Format(time.RFC3339))
 }

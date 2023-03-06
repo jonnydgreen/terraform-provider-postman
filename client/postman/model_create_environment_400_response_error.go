@@ -44,7 +44,7 @@ func NewCreateEnvironment400ResponseErrorWithDefaults() *CreateEnvironment400Res
 
 // GetDetails returns the Details field value if set, zero value otherwise.
 func (o *CreateEnvironment400ResponseError) GetDetails() []string {
-	if o == nil || isNil(o.Details) {
+	if o == nil || IsNil(o.Details) {
 		var ret []string
 		return ret
 	}
@@ -54,7 +54,7 @@ func (o *CreateEnvironment400ResponseError) GetDetails() []string {
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironment400ResponseError) GetDetailsOk() ([]string, bool) {
-	if o == nil || isNil(o.Details) {
+	if o == nil || IsNil(o.Details) {
 		return nil, false
 	}
 	return o.Details, true
@@ -62,7 +62,7 @@ func (o *CreateEnvironment400ResponseError) GetDetailsOk() ([]string, bool) {
 
 // HasDetails returns a boolean if a field has been set.
 func (o *CreateEnvironment400ResponseError) HasDetails() bool {
-	if o != nil && !isNil(o.Details) {
+	if o != nil && !IsNil(o.Details) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *CreateEnvironment400ResponseError) SetDetails(v []string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *CreateEnvironment400ResponseError) GetMessage() string {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -86,7 +86,7 @@ func (o *CreateEnvironment400ResponseError) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironment400ResponseError) GetMessageOk() (*string, bool) {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -94,7 +94,7 @@ func (o *CreateEnvironment400ResponseError) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *CreateEnvironment400ResponseError) HasMessage() bool {
-	if o != nil && !isNil(o.Message) {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *CreateEnvironment400ResponseError) SetMessage(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateEnvironment400ResponseError) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -118,7 +118,7 @@ func (o *CreateEnvironment400ResponseError) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironment400ResponseError) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -126,7 +126,7 @@ func (o *CreateEnvironment400ResponseError) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateEnvironment400ResponseError) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -148,13 +148,13 @@ func (o CreateEnvironment400ResponseError) MarshalJSON() ([]byte, error) {
 
 func (o CreateEnvironment400ResponseError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Details) {
+	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
-	if !isNil(o.Message) {
+	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil

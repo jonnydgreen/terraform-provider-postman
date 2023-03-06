@@ -52,7 +52,7 @@ func NewCreatePANFolderFolderWithDefaults() *CreatePANFolderFolder {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreatePANFolderFolder) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -62,7 +62,7 @@ func (o *CreatePANFolderFolder) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreatePANFolderFolder) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -70,7 +70,7 @@ func (o *CreatePANFolderFolder) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreatePANFolderFolder) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *CreatePANFolderFolder) SetName(v string) {
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *CreatePANFolderFolder) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -118,7 +118,7 @@ func (o *CreatePANFolderFolder) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreatePANFolderFolder) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -126,7 +126,7 @@ func (o *CreatePANFolderFolder) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *CreatePANFolderFolder) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -148,11 +148,11 @@ func (o CreatePANFolderFolder) MarshalJSON() ([]byte, error) {
 
 func (o CreatePANFolderFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["name"] = o.Name
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
 	return toSerialize, nil

@@ -42,7 +42,7 @@ func NewCreatePANCollectionWithDefaults() *CreatePANCollection {
 
 // GetCollection returns the Collection field value if set, zero value otherwise.
 func (o *CreatePANCollection) GetCollection() CreatePANCollectionCollection {
-	if o == nil || isNil(o.Collection) {
+	if o == nil || IsNil(o.Collection) {
 		var ret CreatePANCollectionCollection
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *CreatePANCollection) GetCollection() CreatePANCollectionCollection {
 // GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreatePANCollection) GetCollectionOk() (*CreatePANCollectionCollection, bool) {
-	if o == nil || isNil(o.Collection) {
+	if o == nil || IsNil(o.Collection) {
 		return nil, false
 	}
 	return o.Collection, true
@@ -60,7 +60,7 @@ func (o *CreatePANCollection) GetCollectionOk() (*CreatePANCollectionCollection,
 
 // HasCollection returns a boolean if a field has been set.
 func (o *CreatePANCollection) HasCollection() bool {
-	if o != nil && !isNil(o.Collection) {
+	if o != nil && !IsNil(o.Collection) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o CreatePANCollection) MarshalJSON() ([]byte, error) {
 
 func (o CreatePANCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Collection) {
+	if !IsNil(o.Collection) {
 		toSerialize["collection"] = o.Collection
 	}
 	return toSerialize, nil

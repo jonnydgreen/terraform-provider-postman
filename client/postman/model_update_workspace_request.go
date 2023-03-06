@@ -42,7 +42,7 @@ func NewUpdateWorkspaceRequestWithDefaults() *UpdateWorkspaceRequest {
 
 // GetWorkspace returns the Workspace field value if set, zero value otherwise.
 func (o *UpdateWorkspaceRequest) GetWorkspace() UpdateWorkspaceRequestWorkspace {
-	if o == nil || isNil(o.Workspace) {
+	if o == nil || IsNil(o.Workspace) {
 		var ret UpdateWorkspaceRequestWorkspace
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *UpdateWorkspaceRequest) GetWorkspace() UpdateWorkspaceRequestWorkspace 
 // GetWorkspaceOk returns a tuple with the Workspace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWorkspaceRequest) GetWorkspaceOk() (*UpdateWorkspaceRequestWorkspace, bool) {
-	if o == nil || isNil(o.Workspace) {
+	if o == nil || IsNil(o.Workspace) {
 		return nil, false
 	}
 	return o.Workspace, true
@@ -60,7 +60,7 @@ func (o *UpdateWorkspaceRequest) GetWorkspaceOk() (*UpdateWorkspaceRequestWorksp
 
 // HasWorkspace returns a boolean if a field has been set.
 func (o *UpdateWorkspaceRequest) HasWorkspace() bool {
-	if o != nil && !isNil(o.Workspace) {
+	if o != nil && !IsNil(o.Workspace) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o UpdateWorkspaceRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateWorkspaceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Workspace) {
+	if !IsNil(o.Workspace) {
 		toSerialize["workspace"] = o.Workspace
 	}
 	return toSerialize, nil

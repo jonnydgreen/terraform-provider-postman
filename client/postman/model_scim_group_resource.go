@@ -51,7 +51,7 @@ func NewScimGroupResourceWithDefaults() *ScimGroupResource {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetDisplayName() string {
-	if o == nil || isNil(o.DisplayName) {
+	if o == nil || IsNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -61,7 +61,7 @@ func (o *ScimGroupResource) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetDisplayNameOk() (*string, bool) {
-	if o == nil || isNil(o.DisplayName) {
+	if o == nil || IsNil(o.DisplayName) {
 		return nil, false
 	}
 	return o.DisplayName, true
@@ -69,7 +69,7 @@ func (o *ScimGroupResource) GetDisplayNameOk() (*string, bool) {
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasDisplayName() bool {
-	if o != nil && !isNil(o.DisplayName) {
+	if o != nil && !IsNil(o.DisplayName) {
 		return true
 	}
 
@@ -83,7 +83,7 @@ func (o *ScimGroupResource) SetDisplayName(v string) {
 
 // GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetExternalId() string {
-	if o == nil || isNil(o.ExternalId) {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *ScimGroupResource) GetExternalId() string {
 // GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetExternalIdOk() (*string, bool) {
-	if o == nil || isNil(o.ExternalId) {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
 	return o.ExternalId, true
@@ -101,7 +101,7 @@ func (o *ScimGroupResource) GetExternalIdOk() (*string, bool) {
 
 // HasExternalId returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasExternalId() bool {
-	if o != nil && !isNil(o.ExternalId) {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
@@ -115,7 +115,7 @@ func (o *ScimGroupResource) SetExternalId(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -125,7 +125,7 @@ func (o *ScimGroupResource) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -133,7 +133,7 @@ func (o *ScimGroupResource) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -147,7 +147,7 @@ func (o *ScimGroupResource) SetId(v string) {
 
 // GetMembers returns the Members field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetMembers() ScimGroupResourceMembers {
-	if o == nil || isNil(o.Members) {
+	if o == nil || IsNil(o.Members) {
 		var ret ScimGroupResourceMembers
 		return ret
 	}
@@ -157,7 +157,7 @@ func (o *ScimGroupResource) GetMembers() ScimGroupResourceMembers {
 // GetMembersOk returns a tuple with the Members field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetMembersOk() (*ScimGroupResourceMembers, bool) {
-	if o == nil || isNil(o.Members) {
+	if o == nil || IsNil(o.Members) {
 		return nil, false
 	}
 	return o.Members, true
@@ -165,7 +165,7 @@ func (o *ScimGroupResource) GetMembersOk() (*ScimGroupResourceMembers, bool) {
 
 // HasMembers returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasMembers() bool {
-	if o != nil && !isNil(o.Members) {
+	if o != nil && !IsNil(o.Members) {
 		return true
 	}
 
@@ -179,7 +179,7 @@ func (o *ScimGroupResource) SetMembers(v ScimGroupResourceMembers) {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetMeta() ScimGroupResourceMeta {
-	if o == nil || isNil(o.Meta) {
+	if o == nil || IsNil(o.Meta) {
 		var ret ScimGroupResourceMeta
 		return ret
 	}
@@ -189,7 +189,7 @@ func (o *ScimGroupResource) GetMeta() ScimGroupResourceMeta {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetMetaOk() (*ScimGroupResourceMeta, bool) {
-	if o == nil || isNil(o.Meta) {
+	if o == nil || IsNil(o.Meta) {
 		return nil, false
 	}
 	return o.Meta, true
@@ -197,7 +197,7 @@ func (o *ScimGroupResource) GetMetaOk() (*ScimGroupResourceMeta, bool) {
 
 // HasMeta returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasMeta() bool {
-	if o != nil && !isNil(o.Meta) {
+	if o != nil && !IsNil(o.Meta) {
 		return true
 	}
 
@@ -211,7 +211,7 @@ func (o *ScimGroupResource) SetMeta(v ScimGroupResourceMeta) {
 
 // GetSchemas returns the Schemas field value if set, zero value otherwise.
 func (o *ScimGroupResource) GetSchemas() []string {
-	if o == nil || isNil(o.Schemas) {
+	if o == nil || IsNil(o.Schemas) {
 		var ret []string
 		return ret
 	}
@@ -221,7 +221,7 @@ func (o *ScimGroupResource) GetSchemas() []string {
 // GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResource) GetSchemasOk() ([]string, bool) {
-	if o == nil || isNil(o.Schemas) {
+	if o == nil || IsNil(o.Schemas) {
 		return nil, false
 	}
 	return o.Schemas, true
@@ -229,7 +229,7 @@ func (o *ScimGroupResource) GetSchemasOk() ([]string, bool) {
 
 // HasSchemas returns a boolean if a field has been set.
 func (o *ScimGroupResource) HasSchemas() bool {
-	if o != nil && !isNil(o.Schemas) {
+	if o != nil && !IsNil(o.Schemas) {
 		return true
 	}
 
@@ -251,22 +251,22 @@ func (o ScimGroupResource) MarshalJSON() ([]byte, error) {
 
 func (o ScimGroupResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.DisplayName) {
+	if !IsNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if !isNil(o.ExternalId) {
+	if !IsNil(o.ExternalId) {
 		toSerialize["externalId"] = o.ExternalId
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Members) {
+	if !IsNil(o.Members) {
 		toSerialize["members"] = o.Members
 	}
-	if !isNil(o.Meta) {
+	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if !isNil(o.Schemas) {
+	if !IsNil(o.Schemas) {
 		toSerialize["schemas"] = o.Schemas
 	}
 	return toSerialize, nil

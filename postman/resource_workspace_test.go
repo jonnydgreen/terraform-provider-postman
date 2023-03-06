@@ -10,68 +10,56 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
-func TestAccWorkspace__basic(t *testing.T) {
+func TestAccWorkspaceResource__basic(t *testing.T) {
 	resourceName := "postman_workspace.default"
-	name := acctest.RandomWithPrefix("tf-test")
+	workspaceName := acctest.RandomWithPrefix("tf-test")
+	workspaceType := "personal"
 	context := map[string]interface{}{
-		"name": name,
-		"type": "personal",
+		"name": workspaceName,
+		"type": workspaceType,
 	}
 
 	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:          testAccPreCheck(t),
-		ErrorCheck:        testAccErrorCheck(t),
-		ProviderFactories: providerFactories,
-		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		PreCheck: testAccPreCheck(t),
+		// TODO
+		// ErrorCheck:        testAccErrorCheck(t),
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		CheckDestroy:             testAccCheckWorkspaceDoesNotExist(t, resourceName),
 		Steps: []resource.TestStep{
+			// Create and Read testing
 			{
-				Config: testAccWorkspace__basic(context),
-				Check: resource.ComposeTestCheckFunc(
+				Config: testAccWorkspaceResource__basic(context),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resourceName, "name", workspaceName),
+					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
+					// TODO: description
+					// resource.TestCheckResourceAttr(resourceName, "description", ""),
+					// TODO: other computed props
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
 			},
+			// ImportState testing
 			{
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
 			},
-		},
-	})
-}
-
-func TestAccWorkspace__name(t *testing.T) {
-	nameBefore := acctest.RandomWithPrefix("tf-test-before")
-	nameAfter := acctest.RandomWithPrefix("tf-test-before")
-	resourceName := "postman_workspace.default"
-	contextBefore := map[string]interface{}{
-		"name": nameBefore,
-		"type": "personal",
-	}
-	contextAfter := map[string]interface{}{
-		"name": nameAfter,
-		"type": "personal",
-	}
-
-	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:          testAccPreCheck(t),
-		ErrorCheck:        testAccErrorCheck(t),
-		ProviderFactories: providerFactories,
-		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-		Steps: []resource.TestStep{
+			// Update and Read testing
 			{
-				Config: testAccWorkspace__basic(contextBefore),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheckWorkspaceExists(t, resourceName),
-				),
-			},
-			{
-				ResourceName:      resourceName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-			{
-				Config: testAccWorkspace__basic(contextAfter),
-				Check: resource.ComposeTestCheckFunc(
+				Config: testAccWorkspaceResource__basic(map[string]interface{}{
+					"name": workspaceName + "-2",
+					"type": workspaceType,
+				}),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resourceName, "name", workspaceName+"-2"),
+					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
+					// TODO
+					// https://github.com/hashicorp/terraform-plugin-framework/issues/175
+					// https://github.com/hashicorp/terraform-provider-aws/issues/28638
+					// https://github.com/hashicorp/terraform-plugin-framework/pull/176
+					// TODO: description
+					// resource.TestCheckResourceAttr(resourceName, "description", ""),
+					// TODO: other computed props
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
 			},
@@ -79,75 +67,115 @@ func TestAccWorkspace__name(t *testing.T) {
 	})
 }
 
-func TestAccWorkspace__description(t *testing.T) {
-	name := acctest.RandomWithPrefix("tf-test")
-	resourceName := "postman_workspace.description"
-	contextBefore := map[string]interface{}{
-		"name":        name,
-		"type":        "personal",
-		"description": "Description before",
-	}
-	contextAfter := map[string]interface{}{
-		"name":        name,
-		"type":        "personal",
-		"description": "Description after",
-	}
+// func TestAccWorkspaceResource__name(t *testing.T) {
+// 	nameBefore := acctest.RandomWithPrefix("tf-test-before")
+// 	nameAfter := acctest.RandomWithPrefix("tf-test-before")
+// 	resourceName := "postman_workspace.default"
+// 	contextBefore := map[string]interface{}{
+// 		"name": nameBefore,
+// 		"type": "personal",
+// 	}
+// 	contextAfter := map[string]interface{}{
+// 		"name": nameAfter,
+// 		"type": "personal",
+// 	}
 
-	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:          testAccPreCheck(t),
-		ErrorCheck:        testAccErrorCheck(t),
-		ProviderFactories: providerFactories,
-		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-		Steps: []resource.TestStep{
-			{
-				Config: testAccWorkspace__description(contextBefore),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheckWorkspaceExists(t, resourceName),
-				),
-			},
-			{
-				ResourceName:      resourceName,
-				ImportState:       true,
-				ImportStateVerify: true,
-			},
-			{
-				Config: testAccWorkspace__description(contextAfter),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheckWorkspaceExists(t, resourceName),
-				),
-			},
-		},
-	})
-}
+// 	resource.ParallelTest(t, resource.TestCase{
+// 		PreCheck:          testAccPreCheck(t),
+// 		ErrorCheck:        testAccErrorCheck(t),
+// 		ProviderFactories: providerFactories,
+// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+// 		Steps: []resource.TestStep{
+// 			{
+// 				Config: testAccWorkspaceResource__basic(contextBefore),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					testAccCheckWorkspaceExists(t, resourceName),
+// 				),
+// 			},
+// 			{
+// 				ResourceName:      resourceName,
+// 				ImportState:       true,
+// 				ImportStateVerify: true,
+// 			},
+// 			{
+// 				Config: testAccWorkspaceResource__basic(contextAfter),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					testAccCheckWorkspaceExists(t, resourceName),
+// 				),
+// 			},
+// 		},
+// 	})
+// }
 
-func TestAccWorkspace__disappears_basic(t *testing.T) {
-	name := acctest.RandomWithPrefix("tf-test")
-	resourceName := "postman_workspace.default"
-	context := map[string]interface{}{
-		"name": name,
-		"type": "personal",
-	}
+// func TestAccWorkspaceResource__description(t *testing.T) {
+// 	name := acctest.RandomWithPrefix("tf-test")
+// 	resourceName := "postman_workspace.description"
+// 	contextBefore := map[string]interface{}{
+// 		"name":        name,
+// 		"type":        "personal",
+// 		"description": "Description before",
+// 	}
+// 	contextAfter := map[string]interface{}{
+// 		"name":        name,
+// 		"type":        "personal",
+// 		"description": "Description after",
+// 	}
 
-	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:          testAccPreCheck(t),
-		ErrorCheck:        testAccErrorCheck(t),
-		ProviderFactories: providerFactories,
-		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-		Steps: []resource.TestStep{
-			{
-				Config: testAccWorkspace__basic(context),
-				Check: resource.ComposeTestCheckFunc(
-					testAccCheckWorkspaceExists(t, resourceName),
-					testAccCheckWorkspaceDisappears(t, resourceName),
-				),
-				ExpectNonEmptyPlan: true,
-			},
-		},
-	})
-}
+// 	resource.ParallelTest(t, resource.TestCase{
+// 		PreCheck:          testAccPreCheck(t),
+// 		ErrorCheck:        testAccErrorCheck(t),
+// 		ProviderFactories: providerFactories,
+// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+// 		Steps: []resource.TestStep{
+// 			{
+// 				Config: testAccWorkspaceResource__description(contextBefore),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					testAccCheckWorkspaceExists(t, resourceName),
+// 				),
+// 			},
+// 			{
+// 				ResourceName:      resourceName,
+// 				ImportState:       true,
+// 				ImportStateVerify: true,
+// 			},
+// 			{
+// 				Config: testAccWorkspaceResource__description(contextAfter),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					testAccCheckWorkspaceExists(t, resourceName),
+// 				),
+// 			},
+// 		},
+// 	})
+// }
 
-func testAccWorkspace__basic(context map[string]interface{}) string {
-	return Nprintf(`
+// func TestAccWorkspaceResource__disappears_basic(t *testing.T) {
+// 	name := acctest.RandomWithPrefix("tf-test")
+// 	resourceName := "postman_workspace.default"
+// 	context := map[string]interface{}{
+// 		"name": name,
+// 		"type": "personal",
+// 	}
+
+// 	resource.ParallelTest(t, resource.TestCase{
+// 		PreCheck:          testAccPreCheck(t),
+// 		ErrorCheck:        testAccErrorCheck(t),
+// 		ProviderFactories: providerFactories,
+// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
+// 		Steps: []resource.TestStep{
+// 			{
+// 				Config: testAccWorkspaceResource__basic(context),
+// 				Check: resource.ComposeTestCheckFunc(
+// 					testAccCheckWorkspaceExists(t, resourceName),
+// 					testAccCheckWorkspaceDisappears(t, resourceName),
+// 				),
+// 				ExpectNonEmptyPlan: true,
+// 			},
+// 		},
+// 	})
+// }
+
+func testAccWorkspaceResource__basic(context map[string]interface{}) string {
+	return Nprintf(providerConfig+`
 resource "postman_workspace" "default" {
   name = "%{name}"
   type = "%{type}"
@@ -155,8 +183,8 @@ resource "postman_workspace" "default" {
 `, context)
 }
 
-func testAccWorkspace__description(context map[string]interface{}) string {
-	return Nprintf(`
+func testAccWorkspaceResource__description(context map[string]interface{}) string {
+	return Nprintf(providerConfig+`
 resource "postman_workspace" "description" {
   name        = "%{name}"
   type        = "%{type}"

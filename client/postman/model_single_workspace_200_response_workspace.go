@@ -70,7 +70,7 @@ func NewSingleWorkspace200ResponseWorkspaceWithDefaults() *SingleWorkspace200Res
 
 // GetApis returns the Apis field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetApis() []SingleWorkspace200ResponseWorkspaceApisInner {
-	if o == nil || isNil(o.Apis) {
+	if o == nil || IsNil(o.Apis) {
 		var ret []SingleWorkspace200ResponseWorkspaceApisInner
 		return ret
 	}
@@ -80,7 +80,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetApis() []SingleWorkspace200Resp
 // GetApisOk returns a tuple with the Apis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetApisOk() ([]SingleWorkspace200ResponseWorkspaceApisInner, bool) {
-	if o == nil || isNil(o.Apis) {
+	if o == nil || IsNil(o.Apis) {
 		return nil, false
 	}
 	return o.Apis, true
@@ -88,7 +88,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetApisOk() ([]SingleWorkspace200R
 
 // HasApis returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasApis() bool {
-	if o != nil && !isNil(o.Apis) {
+	if o != nil && !IsNil(o.Apis) {
 		return true
 	}
 
@@ -102,7 +102,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetApis(v []SingleWorkspace200Resp
 
 // GetCollections returns the Collections field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetCollections() []SingleWorkspace200ResponseWorkspaceCollectionsInner {
-	if o == nil || isNil(o.Collections) {
+	if o == nil || IsNil(o.Collections) {
 		var ret []SingleWorkspace200ResponseWorkspaceCollectionsInner
 		return ret
 	}
@@ -112,7 +112,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCollections() []SingleWorkspace
 // GetCollectionsOk returns a tuple with the Collections field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetCollectionsOk() ([]SingleWorkspace200ResponseWorkspaceCollectionsInner, bool) {
-	if o == nil || isNil(o.Collections) {
+	if o == nil || IsNil(o.Collections) {
 		return nil, false
 	}
 	return o.Collections, true
@@ -120,7 +120,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCollectionsOk() ([]SingleWorksp
 
 // HasCollections returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasCollections() bool {
-	if o != nil && !isNil(o.Collections) {
+	if o != nil && !IsNil(o.Collections) {
 		return true
 	}
 
@@ -134,7 +134,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetCollections(v []SingleWorkspace
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -144,7 +144,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -152,7 +152,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCreatedAtOk() (*time.Time, bool
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -166,7 +166,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetCreatedAt(v time.Time) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetCreatedBy() string {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret string
 		return ret
 	}
@@ -176,7 +176,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCreatedBy() string {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetCreatedByOk() (*string, bool) {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -184,7 +184,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetCreatedByOk() (*string, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -198,7 +198,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetCreatedBy(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -208,7 +208,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -216,7 +216,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetDescriptionOk() (*string, bool)
 
 // HasDescription returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -230,7 +230,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetDescription(v string) {
 
 // GetEnvironments returns the Environments field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetEnvironments() []SingleWorkspace200ResponseWorkspaceEnvironmentsInner {
-	if o == nil || isNil(o.Environments) {
+	if o == nil || IsNil(o.Environments) {
 		var ret []SingleWorkspace200ResponseWorkspaceEnvironmentsInner
 		return ret
 	}
@@ -240,7 +240,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetEnvironments() []SingleWorkspac
 // GetEnvironmentsOk returns a tuple with the Environments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetEnvironmentsOk() ([]SingleWorkspace200ResponseWorkspaceEnvironmentsInner, bool) {
-	if o == nil || isNil(o.Environments) {
+	if o == nil || IsNil(o.Environments) {
 		return nil, false
 	}
 	return o.Environments, true
@@ -248,7 +248,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetEnvironmentsOk() ([]SingleWorks
 
 // HasEnvironments returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasEnvironments() bool {
-	if o != nil && !isNil(o.Environments) {
+	if o != nil && !IsNil(o.Environments) {
 		return true
 	}
 
@@ -262,7 +262,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetEnvironments(v []SingleWorkspac
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -272,7 +272,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -280,7 +280,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -294,7 +294,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetId(v string) {
 
 // GetMocks returns the Mocks field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetMocks() []SingleWorkspace200ResponseWorkspaceMocksInner {
-	if o == nil || isNil(o.Mocks) {
+	if o == nil || IsNil(o.Mocks) {
 		var ret []SingleWorkspace200ResponseWorkspaceMocksInner
 		return ret
 	}
@@ -304,7 +304,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetMocks() []SingleWorkspace200Res
 // GetMocksOk returns a tuple with the Mocks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetMocksOk() ([]SingleWorkspace200ResponseWorkspaceMocksInner, bool) {
-	if o == nil || isNil(o.Mocks) {
+	if o == nil || IsNil(o.Mocks) {
 		return nil, false
 	}
 	return o.Mocks, true
@@ -312,7 +312,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetMocksOk() ([]SingleWorkspace200
 
 // HasMocks returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasMocks() bool {
-	if o != nil && !isNil(o.Mocks) {
+	if o != nil && !IsNil(o.Mocks) {
 		return true
 	}
 
@@ -326,7 +326,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetMocks(v []SingleWorkspace200Res
 
 // GetMonitors returns the Monitors field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetMonitors() []SingleWorkspace200ResponseWorkspaceMonitorsInner {
-	if o == nil || isNil(o.Monitors) {
+	if o == nil || IsNil(o.Monitors) {
 		var ret []SingleWorkspace200ResponseWorkspaceMonitorsInner
 		return ret
 	}
@@ -336,7 +336,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetMonitors() []SingleWorkspace200
 // GetMonitorsOk returns a tuple with the Monitors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetMonitorsOk() ([]SingleWorkspace200ResponseWorkspaceMonitorsInner, bool) {
-	if o == nil || isNil(o.Monitors) {
+	if o == nil || IsNil(o.Monitors) {
 		return nil, false
 	}
 	return o.Monitors, true
@@ -344,7 +344,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetMonitorsOk() ([]SingleWorkspace
 
 // HasMonitors returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasMonitors() bool {
-	if o != nil && !isNil(o.Monitors) {
+	if o != nil && !IsNil(o.Monitors) {
 		return true
 	}
 
@@ -358,7 +358,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetMonitors(v []SingleWorkspace200
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -368,7 +368,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -376,7 +376,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -390,7 +390,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -400,7 +400,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -408,7 +408,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -422,7 +422,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetType(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -432,7 +432,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -440,7 +440,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedAtOk() (*time.Time, bool
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -454,7 +454,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedAt(v time.Time) {
 
 // GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedBy() string {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		var ret string
 		return ret
 	}
@@ -464,7 +464,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedBy() string {
 // GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedByOk() (*string, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		return nil, false
 	}
 	return o.UpdatedBy, true
@@ -472,7 +472,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetUpdatedByOk() (*string, bool) {
 
 // HasUpdatedBy returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
+	if o != nil && !IsNil(o.UpdatedBy) {
 		return true
 	}
 
@@ -486,7 +486,7 @@ func (o *SingleWorkspace200ResponseWorkspace) SetUpdatedBy(v string) {
 
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspace) GetVisibility() string {
-	if o == nil || isNil(o.Visibility) {
+	if o == nil || IsNil(o.Visibility) {
 		var ret string
 		return ret
 	}
@@ -496,7 +496,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetVisibility() string {
 // GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspace) GetVisibilityOk() (*string, bool) {
-	if o == nil || isNil(o.Visibility) {
+	if o == nil || IsNil(o.Visibility) {
 		return nil, false
 	}
 	return o.Visibility, true
@@ -504,7 +504,7 @@ func (o *SingleWorkspace200ResponseWorkspace) GetVisibilityOk() (*string, bool) 
 
 // HasVisibility returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspace) HasVisibility() bool {
-	if o != nil && !isNil(o.Visibility) {
+	if o != nil && !IsNil(o.Visibility) {
 		return true
 	}
 
@@ -526,46 +526,46 @@ func (o SingleWorkspace200ResponseWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o SingleWorkspace200ResponseWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Apis) {
+	if !IsNil(o.Apis) {
 		toSerialize["apis"] = o.Apis
 	}
-	if !isNil(o.Collections) {
+	if !IsNil(o.Collections) {
 		toSerialize["collections"] = o.Collections
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.CreatedBy) {
+	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Environments) {
+	if !IsNil(o.Environments) {
 		toSerialize["environments"] = o.Environments
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Mocks) {
+	if !IsNil(o.Mocks) {
 		toSerialize["mocks"] = o.Mocks
 	}
-	if !isNil(o.Monitors) {
+	if !IsNil(o.Monitors) {
 		toSerialize["monitors"] = o.Monitors
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !isNil(o.UpdatedBy) {
+	if !IsNil(o.UpdatedBy) {
 		toSerialize["updatedBy"] = o.UpdatedBy
 	}
-	if !isNil(o.Visibility) {
+	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
 	return toSerialize, nil

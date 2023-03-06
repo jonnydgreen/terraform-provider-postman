@@ -70,7 +70,7 @@ func (o *UpdateEnvironmentRequestEnvironment) SetName(v string) {
 
 // GetValues returns the Values field value if set, zero value otherwise.
 func (o *UpdateEnvironmentRequestEnvironment) GetValues() [][]CreateEnvironmentRequestEnvironmentValuesInner {
-	if o == nil || isNil(o.Values) {
+	if o == nil || IsNil(o.Values) {
 		var ret [][]CreateEnvironmentRequestEnvironmentValuesInner
 		return ret
 	}
@@ -80,7 +80,7 @@ func (o *UpdateEnvironmentRequestEnvironment) GetValues() [][]CreateEnvironmentR
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironmentRequestEnvironment) GetValuesOk() ([][]CreateEnvironmentRequestEnvironmentValuesInner, bool) {
-	if o == nil || isNil(o.Values) {
+	if o == nil || IsNil(o.Values) {
 		return nil, false
 	}
 	return o.Values, true
@@ -88,7 +88,7 @@ func (o *UpdateEnvironmentRequestEnvironment) GetValuesOk() ([][]CreateEnvironme
 
 // HasValues returns a boolean if a field has been set.
 func (o *UpdateEnvironmentRequestEnvironment) HasValues() bool {
-	if o != nil && !isNil(o.Values) {
+	if o != nil && !IsNil(o.Values) {
 		return true
 	}
 
@@ -111,7 +111,7 @@ func (o UpdateEnvironmentRequestEnvironment) MarshalJSON() ([]byte, error) {
 func (o UpdateEnvironmentRequestEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	if !isNil(o.Values) {
+	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
 	return toSerialize, nil

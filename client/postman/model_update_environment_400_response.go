@@ -42,7 +42,7 @@ func NewUpdateEnvironment400ResponseWithDefaults() *UpdateEnvironment400Response
 
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *UpdateEnvironment400Response) GetError() UpdateEnvironment400ResponseError {
-	if o == nil || isNil(o.Error) {
+	if o == nil || IsNil(o.Error) {
 		var ret UpdateEnvironment400ResponseError
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *UpdateEnvironment400Response) GetError() UpdateEnvironment400ResponseEr
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironment400Response) GetErrorOk() (*UpdateEnvironment400ResponseError, bool) {
-	if o == nil || isNil(o.Error) {
+	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
 	return o.Error, true
@@ -60,7 +60,7 @@ func (o *UpdateEnvironment400Response) GetErrorOk() (*UpdateEnvironment400Respon
 
 // HasError returns a boolean if a field has been set.
 func (o *UpdateEnvironment400Response) HasError() bool {
-	if o != nil && !isNil(o.Error) {
+	if o != nil && !IsNil(o.Error) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o UpdateEnvironment400Response) MarshalJSON() ([]byte, error) {
 
 func (o UpdateEnvironment400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Error) {
+	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
 	return toSerialize, nil

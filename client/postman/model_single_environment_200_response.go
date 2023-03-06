@@ -42,7 +42,7 @@ func NewSingleEnvironment200ResponseWithDefaults() *SingleEnvironment200Response
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *SingleEnvironment200Response) GetEnvironment() SingleEnvironment200ResponseEnvironment {
-	if o == nil || isNil(o.Environment) {
+	if o == nil || IsNil(o.Environment) {
 		var ret SingleEnvironment200ResponseEnvironment
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *SingleEnvironment200Response) GetEnvironment() SingleEnvironment200Resp
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleEnvironment200Response) GetEnvironmentOk() (*SingleEnvironment200ResponseEnvironment, bool) {
-	if o == nil || isNil(o.Environment) {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -60,7 +60,7 @@ func (o *SingleEnvironment200Response) GetEnvironmentOk() (*SingleEnvironment200
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *SingleEnvironment200Response) HasEnvironment() bool {
-	if o != nil && !isNil(o.Environment) {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o SingleEnvironment200Response) MarshalJSON() ([]byte, error) {
 
 func (o SingleEnvironment200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Environment) {
+	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
 	return toSerialize, nil

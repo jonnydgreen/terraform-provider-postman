@@ -48,7 +48,7 @@ func NewScimUserResourceMetaWithDefaults() *ScimUserResourceMeta {
 
 // GetCreated returns the Created field value if set, zero value otherwise.
 func (o *ScimUserResourceMeta) GetCreated() time.Time {
-	if o == nil || isNil(o.Created) {
+	if o == nil || IsNil(o.Created) {
 		var ret time.Time
 		return ret
 	}
@@ -58,7 +58,7 @@ func (o *ScimUserResourceMeta) GetCreated() time.Time {
 // GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResourceMeta) GetCreatedOk() (*time.Time, bool) {
-	if o == nil || isNil(o.Created) {
+	if o == nil || IsNil(o.Created) {
 		return nil, false
 	}
 	return o.Created, true
@@ -66,7 +66,7 @@ func (o *ScimUserResourceMeta) GetCreatedOk() (*time.Time, bool) {
 
 // HasCreated returns a boolean if a field has been set.
 func (o *ScimUserResourceMeta) HasCreated() bool {
-	if o != nil && !isNil(o.Created) {
+	if o != nil && !IsNil(o.Created) {
 		return true
 	}
 
@@ -80,7 +80,7 @@ func (o *ScimUserResourceMeta) SetCreated(v time.Time) {
 
 // GetLastModified returns the LastModified field value if set, zero value otherwise.
 func (o *ScimUserResourceMeta) GetLastModified() time.Time {
-	if o == nil || isNil(o.LastModified) {
+	if o == nil || IsNil(o.LastModified) {
 		var ret time.Time
 		return ret
 	}
@@ -90,7 +90,7 @@ func (o *ScimUserResourceMeta) GetLastModified() time.Time {
 // GetLastModifiedOk returns a tuple with the LastModified field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResourceMeta) GetLastModifiedOk() (*time.Time, bool) {
-	if o == nil || isNil(o.LastModified) {
+	if o == nil || IsNil(o.LastModified) {
 		return nil, false
 	}
 	return o.LastModified, true
@@ -98,7 +98,7 @@ func (o *ScimUserResourceMeta) GetLastModifiedOk() (*time.Time, bool) {
 
 // HasLastModified returns a boolean if a field has been set.
 func (o *ScimUserResourceMeta) HasLastModified() bool {
-	if o != nil && !isNil(o.LastModified) {
+	if o != nil && !IsNil(o.LastModified) {
 		return true
 	}
 
@@ -112,7 +112,7 @@ func (o *ScimUserResourceMeta) SetLastModified(v time.Time) {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *ScimUserResourceMeta) GetResourceType() string {
-	if o == nil || isNil(o.ResourceType) {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -122,7 +122,7 @@ func (o *ScimUserResourceMeta) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResourceMeta) GetResourceTypeOk() (*string, bool) {
-	if o == nil || isNil(o.ResourceType) {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -130,7 +130,7 @@ func (o *ScimUserResourceMeta) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *ScimUserResourceMeta) HasResourceType() bool {
-	if o != nil && !isNil(o.ResourceType) {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -152,13 +152,13 @@ func (o ScimUserResourceMeta) MarshalJSON() ([]byte, error) {
 
 func (o ScimUserResourceMeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Created) {
+	if !IsNil(o.Created) {
 		toSerialize["created"] = o.Created
 	}
-	if !isNil(o.LastModified) {
+	if !IsNil(o.LastModified) {
 		toSerialize["lastModified"] = o.LastModified
 	}
-	if !isNil(o.ResourceType) {
+	if !IsNil(o.ResourceType) {
 		toSerialize["resourceType"] = o.ResourceType
 	}
 	return toSerialize, nil

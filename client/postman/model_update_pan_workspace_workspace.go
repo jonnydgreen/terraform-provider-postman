@@ -43,7 +43,7 @@ func NewUpdatePANWorkspaceWorkspaceWithDefaults() *UpdatePANWorkspaceWorkspace {
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *UpdatePANWorkspaceWorkspace) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -53,7 +53,7 @@ func (o *UpdatePANWorkspaceWorkspace) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANWorkspaceWorkspace) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -61,7 +61,7 @@ func (o *UpdatePANWorkspaceWorkspace) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *UpdatePANWorkspaceWorkspace) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -83,7 +83,7 @@ func (o UpdatePANWorkspaceWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANWorkspaceWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
 	return toSerialize, nil

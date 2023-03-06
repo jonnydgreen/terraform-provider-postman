@@ -42,7 +42,7 @@ func NewUpdatePANApiWithDefaults() *UpdatePANApi {
 
 // GetApi returns the Api field value if set, zero value otherwise.
 func (o *UpdatePANApi) GetApi() UpdatePANApiApi {
-	if o == nil || isNil(o.Api) {
+	if o == nil || IsNil(o.Api) {
 		var ret UpdatePANApiApi
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *UpdatePANApi) GetApi() UpdatePANApiApi {
 // GetApiOk returns a tuple with the Api field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANApi) GetApiOk() (*UpdatePANApiApi, bool) {
-	if o == nil || isNil(o.Api) {
+	if o == nil || IsNil(o.Api) {
 		return nil, false
 	}
 	return o.Api, true
@@ -60,7 +60,7 @@ func (o *UpdatePANApi) GetApiOk() (*UpdatePANApiApi, bool) {
 
 // HasApi returns a boolean if a field has been set.
 func (o *UpdatePANApi) HasApi() bool {
-	if o != nil && !isNil(o.Api) {
+	if o != nil && !IsNil(o.Api) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o UpdatePANApi) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANApi) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Api) {
+	if !IsNil(o.Api) {
 		toSerialize["api"] = o.Api
 	}
 	return toSerialize, nil

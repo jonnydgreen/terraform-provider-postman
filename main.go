@@ -33,7 +33,7 @@ func main() {
 	flag.BoolVar(&debugMode, "debug", false, "set to true to run the provider with support for debuggers like delve")
 	flag.Parse()
 
-	providerserver.Serve(context.Background(), postman.Provider(version), providerserver.ServeOpts{
+	providerserver.Serve(context.Background(), postman.New(version), providerserver.ServeOpts{
 		Address: "registry.terraform.io/jonnydgreen/postman",
 		Debug:   debugMode,
 	})

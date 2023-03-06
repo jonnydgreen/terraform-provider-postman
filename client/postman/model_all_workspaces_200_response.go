@@ -42,7 +42,7 @@ func NewAllWorkspaces200ResponseWithDefaults() *AllWorkspaces200Response {
 
 // GetWorkspaces returns the Workspaces field value if set, zero value otherwise.
 func (o *AllWorkspaces200Response) GetWorkspaces() []AllWorkspaces200ResponseWorkspacesInner {
-	if o == nil || isNil(o.Workspaces) {
+	if o == nil || IsNil(o.Workspaces) {
 		var ret []AllWorkspaces200ResponseWorkspacesInner
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *AllWorkspaces200Response) GetWorkspaces() []AllWorkspaces200ResponseWor
 // GetWorkspacesOk returns a tuple with the Workspaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllWorkspaces200Response) GetWorkspacesOk() ([]AllWorkspaces200ResponseWorkspacesInner, bool) {
-	if o == nil || isNil(o.Workspaces) {
+	if o == nil || IsNil(o.Workspaces) {
 		return nil, false
 	}
 	return o.Workspaces, true
@@ -60,7 +60,7 @@ func (o *AllWorkspaces200Response) GetWorkspacesOk() ([]AllWorkspaces200Response
 
 // HasWorkspaces returns a boolean if a field has been set.
 func (o *AllWorkspaces200Response) HasWorkspaces() bool {
-	if o != nil && !isNil(o.Workspaces) {
+	if o != nil && !IsNil(o.Workspaces) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o AllWorkspaces200Response) MarshalJSON() ([]byte, error) {
 
 func (o AllWorkspaces200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Workspaces) {
+	if !IsNil(o.Workspaces) {
 		toSerialize["workspaces"] = o.Workspaces
 	}
 	return toSerialize, nil

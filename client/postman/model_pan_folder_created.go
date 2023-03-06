@@ -60,7 +60,7 @@ func NewPANFolderCreatedWithDefaults() *PANFolderCreated {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -70,7 +70,7 @@ func (o *PANFolderCreated) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -78,7 +78,7 @@ func (o *PANFolderCreated) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -92,7 +92,7 @@ func (o *PANFolderCreated) SetCreatedAt(v time.Time) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetCreatedBy() int32 {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret int32
 		return ret
 	}
@@ -102,7 +102,7 @@ func (o *PANFolderCreated) GetCreatedBy() int32 {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetCreatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -110,7 +110,7 @@ func (o *PANFolderCreated) GetCreatedByOk() (*int32, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -124,7 +124,7 @@ func (o *PANFolderCreated) SetCreatedBy(v int32) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -134,7 +134,7 @@ func (o *PANFolderCreated) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -142,7 +142,7 @@ func (o *PANFolderCreated) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -156,7 +156,7 @@ func (o *PANFolderCreated) SetDescription(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetId() int32 {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret int32
 		return ret
 	}
@@ -166,7 +166,7 @@ func (o *PANFolderCreated) GetId() int32 {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetIdOk() (*int32, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -174,7 +174,7 @@ func (o *PANFolderCreated) GetIdOk() (*int32, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -188,7 +188,7 @@ func (o *PANFolderCreated) SetId(v int32) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -198,7 +198,7 @@ func (o *PANFolderCreated) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -206,7 +206,7 @@ func (o *PANFolderCreated) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -220,7 +220,7 @@ func (o *PANFolderCreated) SetName(v string) {
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -230,7 +230,7 @@ func (o *PANFolderCreated) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -238,7 +238,7 @@ func (o *PANFolderCreated) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -252,7 +252,7 @@ func (o *PANFolderCreated) SetParentFolderId(v int32) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -262,7 +262,7 @@ func (o *PANFolderCreated) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -270,7 +270,7 @@ func (o *PANFolderCreated) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -284,7 +284,7 @@ func (o *PANFolderCreated) SetType(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -294,7 +294,7 @@ func (o *PANFolderCreated) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -302,7 +302,7 @@ func (o *PANFolderCreated) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -316,7 +316,7 @@ func (o *PANFolderCreated) SetUpdatedAt(v time.Time) {
 
 // GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
 func (o *PANFolderCreated) GetUpdatedBy() int32 {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		var ret int32
 		return ret
 	}
@@ -326,7 +326,7 @@ func (o *PANFolderCreated) GetUpdatedBy() int32 {
 // GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANFolderCreated) GetUpdatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		return nil, false
 	}
 	return o.UpdatedBy, true
@@ -334,7 +334,7 @@ func (o *PANFolderCreated) GetUpdatedByOk() (*int32, bool) {
 
 // HasUpdatedBy returns a boolean if a field has been set.
 func (o *PANFolderCreated) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
+	if o != nil && !IsNil(o.UpdatedBy) {
 		return true
 	}
 
@@ -356,31 +356,31 @@ func (o PANFolderCreated) MarshalJSON() ([]byte, error) {
 
 func (o PANFolderCreated) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.CreatedBy) {
+	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !isNil(o.UpdatedBy) {
+	if !IsNil(o.UpdatedBy) {
 		toSerialize["updatedBy"] = o.UpdatedBy
 	}
 	return toSerialize, nil

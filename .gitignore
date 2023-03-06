@@ -44,3 +44,6 @@ client/*
 !client/postman/
 client/postman/*
 !client/postman/*.go
+
+# Binaries
+terraform-provider-postman

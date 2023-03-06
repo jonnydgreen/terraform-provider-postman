@@ -43,7 +43,7 @@ func NewDeleteWorkspace200ResponseWorkspaceWithDefaults() *DeleteWorkspace200Res
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *DeleteWorkspace200ResponseWorkspace) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -53,7 +53,7 @@ func (o *DeleteWorkspace200ResponseWorkspace) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeleteWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -61,7 +61,7 @@ func (o *DeleteWorkspace200ResponseWorkspace) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *DeleteWorkspace200ResponseWorkspace) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -83,7 +83,7 @@ func (o DeleteWorkspace200ResponseWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o DeleteWorkspace200ResponseWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	return toSerialize, nil

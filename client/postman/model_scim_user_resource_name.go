@@ -45,7 +45,7 @@ func NewScimUserResourceNameWithDefaults() *ScimUserResourceName {
 
 // GetFamilyName returns the FamilyName field value if set, zero value otherwise.
 func (o *ScimUserResourceName) GetFamilyName() string {
-	if o == nil || isNil(o.FamilyName) {
+	if o == nil || IsNil(o.FamilyName) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *ScimUserResourceName) GetFamilyName() string {
 // GetFamilyNameOk returns a tuple with the FamilyName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResourceName) GetFamilyNameOk() (*string, bool) {
-	if o == nil || isNil(o.FamilyName) {
+	if o == nil || IsNil(o.FamilyName) {
 		return nil, false
 	}
 	return o.FamilyName, true
@@ -63,7 +63,7 @@ func (o *ScimUserResourceName) GetFamilyNameOk() (*string, bool) {
 
 // HasFamilyName returns a boolean if a field has been set.
 func (o *ScimUserResourceName) HasFamilyName() bool {
-	if o != nil && !isNil(o.FamilyName) {
+	if o != nil && !IsNil(o.FamilyName) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *ScimUserResourceName) SetFamilyName(v string) {
 
 // GetGivenName returns the GivenName field value if set, zero value otherwise.
 func (o *ScimUserResourceName) GetGivenName() string {
-	if o == nil || isNil(o.GivenName) {
+	if o == nil || IsNil(o.GivenName) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *ScimUserResourceName) GetGivenName() string {
 // GetGivenNameOk returns a tuple with the GivenName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResourceName) GetGivenNameOk() (*string, bool) {
-	if o == nil || isNil(o.GivenName) {
+	if o == nil || IsNil(o.GivenName) {
 		return nil, false
 	}
 	return o.GivenName, true
@@ -95,7 +95,7 @@ func (o *ScimUserResourceName) GetGivenNameOk() (*string, bool) {
 
 // HasGivenName returns a boolean if a field has been set.
 func (o *ScimUserResourceName) HasGivenName() bool {
-	if o != nil && !isNil(o.GivenName) {
+	if o != nil && !IsNil(o.GivenName) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o ScimUserResourceName) MarshalJSON() ([]byte, error) {
 
 func (o ScimUserResourceName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.FamilyName) {
+	if !IsNil(o.FamilyName) {
 		toSerialize["familyName"] = o.FamilyName
 	}
-	if !isNil(o.GivenName) {
+	if !IsNil(o.GivenName) {
 		toSerialize["givenName"] = o.GivenName
 	}
 	return toSerialize, nil
