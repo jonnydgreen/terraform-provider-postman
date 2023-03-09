@@ -8,7 +8,6 @@ require (
 	github.com/hashicorp/terraform-plugin-go v0.14.3
 	github.com/hashicorp/terraform-plugin-log v0.8.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.25.0
-	golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2
 	gopkg.in/yaml.v2 v2.4.0
 )
 

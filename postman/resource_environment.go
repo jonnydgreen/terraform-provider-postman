@@ -55,9 +55,8 @@ func environmentSchema() schema.Schema {
 				Required:    true,
 			},
 			"workspace": schema.StringAttribute{
-				Description: "The workspace's ID.",
-				// TODO: is this optional?
-				Optional: true,
+				Description: "The environment's workspace ID. If not specified, the default workspace is used.",
+				Optional:    true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},

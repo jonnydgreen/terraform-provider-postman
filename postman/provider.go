@@ -110,6 +110,7 @@ func (p *postmanProvider) Configure(ctx context.Context, req provider.ConfigureR
 func (p *postmanProvider) DataSources(_ context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
 		NewWorkspaceDataSource,
+		NewEnvironmentDataSource,
 	}
 }
 

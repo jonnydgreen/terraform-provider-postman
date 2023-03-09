@@ -356,8 +356,6 @@ paths:
     get:
       description: Gets information about an environment.
       operationId: singleEnvironment
-      parameters:
-      - $ref: '#/components/parameters/environmentId'
       responses:
         "200":
           content:
@@ -448,6 +446,8 @@ paths:
       summary: Get an environment
       tags:
       - Environments
+    parameters:
+    - $ref: '#/components/parameters/environmentId'
     put:
       description: Updates an environment.
       operationId: updateEnvironment
