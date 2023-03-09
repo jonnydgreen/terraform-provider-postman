@@ -117,6 +117,7 @@ func (p *postmanProvider) DataSources(_ context.Context) []func() datasource.Dat
 func (p *postmanProvider) Resources(_ context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewWorkspaceResource,
+		NewEnvironmentResource,
 	}
 }
 

@@ -55,8 +55,7 @@ func randString(t *testing.T, length int) string {
 	return acctest.RandString(length)
 }
 
-// TODO
-// Make better
+// TODO: make better
 func getProviderClient(t *testing.T) *postman.APIClient {
 	failIfEmpty(t, "POSTMAN_API_KEY", "static credentials value when using POSTMAN_API_KEY")
 	apiKey := os.Getenv("POSTMAN_API_KEY")
@@ -65,7 +64,6 @@ func getProviderClient(t *testing.T) *postman.APIClient {
 	return postman.NewAPIClient(configuration)
 }
 
-// TODO
 func testAccErrorCheck(t *testing.T) resource.ErrorCheckFunc {
 	return func(err error) error {
 		// Placeholder function for now to allow for common issues to be skipped

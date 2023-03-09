@@ -16,6 +16,17 @@ TODO
 - [Terraform](https://www.terraform.io/downloads.html) >= 0.13.x
 - [Go](https://golang.org/doc/install) >= 1.18
 
+## Supported Features
+
+| Feature      | Resource           | Data Source        | Import             |
+| ------------ | ------------------ | ------------------ | ------------------ |
+| Workspaces   | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Environments | :construction:     | :construction:     | :construction:     |
+| Apis         | :x:                | :x:                | :x:                |
+| Collections  | :x:                | :x:                | :x:                |
+| Mocks        | :x:                | :x:                | :x:                |
+| Monitors     | :x:                | :x:                | :x:                |
+
 ## Using the provider
 
 TODO
@@ -46,7 +57,17 @@ See the [contributing guide](./CONTRIBUTING.md) for more details.
 - Workspace query string for all requests is not `workspaceId` but `workspace`.
 - Environment values has double nested array in both request and responses
 
-## TODO
+## Future work
+
+- [ ] Improve testing for workspace descriptions
+- [ ] Support for Environments
+- [ ] Support for Environment Values
+- [ ] Support for APIs
+- [ ] Support for Collections
+- [ ] Support for Mocks
+- [ ] Support for Monitors
+- [ ] Support for input validators
+- [ ] Support for automated acceptance testing
 
 ### Acceptance tests ideas
 
