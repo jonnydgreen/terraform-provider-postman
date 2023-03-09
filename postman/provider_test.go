@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
@@ -65,9 +66,9 @@ func getProviderClient(t *testing.T) *postman.APIClient {
 }
 
 // TODO
-// func testAccErrorCheck(t *testing.T) resource.ErrorCheckFunc {
-// 	return func(err error) error {
-// 		// Placeholder function for now to allow for common issues to be skipped
-// 		return err
-// 	}
-// }
+func testAccErrorCheck(t *testing.T) resource.ErrorCheckFunc {
+	return func(err error) error {
+		// Placeholder function for now to allow for common issues to be skipped
+		return err
+	}
+}

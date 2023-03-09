@@ -13,6 +13,7 @@ description: |-
 ## Example Usage
 
 ```terraform
+# Manage postman workspace.
 resource "postman_workspace" "example" {
   name = "My Workspace"
   type = "personal"
@@ -94,4 +95,11 @@ Read-Only:
 - `name` (String) The name of the Workspace Monitor.
 - `uid` (String) The UID of the Workspace Monitor.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+# Workspace can be imported by specifying the UUID identifier.
+terraform import postman_workspace.example 8ce9271d-d4ea-458c-8aef-02cf08ca9558
+```

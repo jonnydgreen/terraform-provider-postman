@@ -1,28 +1,61 @@
 package postman
 
-// func TestAccWorkspaceDataSource(t *testing.T) {
-//     resource.Test(t, resource.TestCase{
-//         ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-//         Steps: []resource.TestStep{
-//             // Read testing
-//             {
-//                 Config: providerConfig + `data "postman_workspace" "test" {}`,
-//                 Check: resource.ComposeAggregateTestCheckFunc(
-//                     // Verify number of workspace returned
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.#", "9"),
-//                     // Verify the first coffee to ensure all attributes are set
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.description", ""),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.id", "1"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.image", "/hashicorp.png"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.ingredients.#", "1"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.ingredients.0.id", "6"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.name", "HCP Aeropress"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.price", "200"),
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "workspace.0.teaser", "Automation in a cup"),
-//                     // Verify placeholder id attribute
-//                     resource.TestCheckResourceAttr("data.postman_workspace.test", "id", "placeholder"),
-//                 ),
-//             },
-//         },
-//     })
-// }
+import (
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+)
+
+func TestAccWorkspaceDataSource__basic(t *testing.T) {
+	resourceName := "postman_workspace.default"
+	dataSourceName := "data.postman_workspace.default"
+	workspaceName := acctest.RandomWithPrefix("tf-test")
+	workspaceType := "personal"
+	context := map[string]interface{}{
+		"name": workspaceName,
+		"type": workspaceType,
+	}
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 testAccPreCheck(t),
+		ErrorCheck:               testAccErrorCheck(t),
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			// Read testing
+			{
+				Config: testAccWorkspaceDataSource__basic(context),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttrPair(dataSourceName, "id", resourceName, "id"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "name", resourceName, "name"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "type", resourceName, "type"),
+					// TODO: description
+					// resource.TestCheckResourceAttr(dataSourceName, "description", ""),
+					resource.TestCheckResourceAttrPair(dataSourceName, "apis", resourceName, "apis"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "collections", resourceName, "collections"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "environments", resourceName, "environments"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "mocks", resourceName, "mocks"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "monitors", resourceName, "monitors"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "visibility", resourceName, "visibility"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "created_at", resourceName, "created_at"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "created_by", resourceName, "created_by"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "updated_at", resourceName, "updated_at"),
+					resource.TestCheckResourceAttrPair(dataSourceName, "updated_by", resourceName, "updated_by"),
+				),
+			},
+		},
+	})
+}
+
+func testAccWorkspaceDataSource__basic(context map[string]interface{}) string {
+	return Nprintf(providerConfig+`
+resource "postman_workspace" "default" {
+  name = "%{name}"
+  type = "%{type}"
+}
+
+data "postman_workspace" "default" {
+	id = postman_workspace.default.id
+}
+`, context)
+}

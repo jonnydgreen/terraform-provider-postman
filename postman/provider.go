@@ -25,10 +25,8 @@ func New(version string) func() provider.Provider {
 	}
 }
 
-// TODO: add api_key to model
 // postmanProvider is the provider implementation.
-type postmanProvider struct {
-}
+type postmanProvider struct{}
 
 // Metadata returns the provider type name.
 func (p *postmanProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
@@ -40,8 +38,9 @@ func (p *postmanProvider) Schema(_ context.Context, _ provider.SchemaRequest, re
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"api_key": schema.StringAttribute{
-				Optional:  true,
-				Sensitive: true,
+				Description: "API Key for the Postman API. May also be provided via POSTMAN_API_KEY environment variable.",
+				Optional:    true,
+				Sensitive:   true,
 			},
 		},
 	}

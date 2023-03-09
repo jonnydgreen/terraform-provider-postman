@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
@@ -207,6 +206,11 @@ func (r *workspaceDataSource) Configure(_ context.Context, req datasource.Config
 func (d *workspaceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
 	// Get current state
 	var state workspaceDataSourceModel
+	diags := resp.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 
 	// Get refreshed workspace value from Postman
 	workspaceID, err := expandWorkspaceID(state.ID)
@@ -221,7 +225,9 @@ func (d *workspaceDataSource) Read(ctx context.Context, req datasource.ReadReque
 	}
 
 	// Overwrite with refreshed state
-	var diags diag.Diagnostics
+	state.Name = flattenWorkspaceName(response.Workspace.Name)
+	state.Type = flattenWorkspaceType(response.Workspace.Type)
+	state.Description = flattenWorkspaceDescription(response.Workspace.Description)
 	state.Collections, diags = flattenWorkspaceCollections(ctx, response.Workspace.Collections)
 	resp.Diagnostics.Append(diags...)
 	state.Environments, diags = flattenWorkspaceEnvironments(ctx, response.Workspace.Environments)

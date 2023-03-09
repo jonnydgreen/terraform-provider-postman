@@ -1,9 +1,3 @@
-terraform {
-  required_providers {
-    postman = {
-      source = "jonnydgreen/postman"
-    }
-  }
+provider "postman" {
+  api_key = "postman_api_key"
 }
-
-provider "postman" {}

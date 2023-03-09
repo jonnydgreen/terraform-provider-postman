@@ -22,6 +22,7 @@
     "stringplanmodifier",
     "tflog",
     "tfplugindocs",
+    "tfprotov",
     "tfsdk"
   ],
   "search.exclude": {

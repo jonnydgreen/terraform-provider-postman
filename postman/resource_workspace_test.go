@@ -20,9 +20,8 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 	}
 
 	resource.ParallelTest(t, resource.TestCase{
-		PreCheck: testAccPreCheck(t),
-		// TODO
-		// ErrorCheck:        testAccErrorCheck(t),
+		PreCheck:                 testAccPreCheck(t),
+		ErrorCheck:               testAccErrorCheck(t),
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
 		CheckDestroy:             testAccCheckWorkspaceDoesNotExist(t, resourceName),
 		Steps: []resource.TestStep{
@@ -32,9 +31,8 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "name", workspaceName),
 					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
-					// TODO: description
+					// TODO: desc
 					// resource.TestCheckResourceAttr(resourceName, "description", ""),
-					// TODO: other computed props
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
 			},
@@ -59,7 +57,21 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 					// https://github.com/hashicorp/terraform-plugin-framework/pull/176
 					// TODO: description
 					// resource.TestCheckResourceAttr(resourceName, "description", ""),
-					// TODO: other computed props
+					// Verify computed attributes.
+					resource.TestCheckResourceAttr(resourceName, "apis.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "collections.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "environments.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "mocks.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "monitors.#", "0"),
+
+					// Verify dynamic values have any value set in the state.
+					resource.TestCheckResourceAttrSet(resourceName, "id"),
+					resource.TestCheckResourceAttrSet(resourceName, "visibility"),
+					resource.TestCheckResourceAttrSet(resourceName, "created_at"),
+					resource.TestCheckResourceAttrSet(resourceName, "created_by"),
+					resource.TestCheckResourceAttrSet(resourceName, "updated_at"),
+					resource.TestCheckResourceAttrSet(resourceName, "updated_by"),
+
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
 			},
