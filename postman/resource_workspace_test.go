@@ -23,7 +23,7 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 		PreCheck:                 testAccPreCheck(t),
 		ErrorCheck:               testAccErrorCheck(t),
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-		CheckDestroy:             testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		CheckDestroy:             testAccCheckWorkspaceDestroy(t, resourceName),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
@@ -87,7 +87,7 @@ func TestAccWorkspaceResource__basicWithDescription(t *testing.T) {
 		PreCheck:                 testAccPreCheck(t),
 		ErrorCheck:               testAccErrorCheck(t),
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-		CheckDestroy:             testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		CheckDestroy:             testAccCheckWorkspaceDestroy(t, resourceName),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
@@ -139,112 +139,32 @@ func TestAccWorkspaceResource__basicWithDescription(t *testing.T) {
 	})
 }
 
-// func TestAccWorkspaceResource__name(t *testing.T) {
-// 	nameBefore := acctest.RandomWithPrefix("tf-test-before")
-// 	nameAfter := acctest.RandomWithPrefix("tf-test-before")
-// 	resourceName := "postman_workspace.default"
-// 	contextBefore := map[string]interface{}{
-// 		"name": nameBefore,
-// 		"type": "personal",
-// 	}
-// 	contextAfter := map[string]interface{}{
-// 		"name": nameAfter,
-// 		"type": "personal",
-// 	}
+func TestAccWorkspaceResource__disappearsBasic(t *testing.T) {
+	resourceName := "postman_workspace.default"
+	workspaceName := acctest.RandomWithPrefix("tf-test")
+	workspaceType := "personal"
+	context := map[string]interface{}{
+		"name": workspaceName,
+		"type": workspaceType,
+	}
 
-// 	resource.ParallelTest(t, resource.TestCase{
-// 		PreCheck:          testAccPreCheck(t),
-// 		ErrorCheck:        testAccErrorCheck(t),
-// 		ProviderFactories: providerFactories,
-// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-// 		Steps: []resource.TestStep{
-// 			{
-// 				Config: testAccWorkspaceResource__basic(contextBefore),
-// 				Check: resource.ComposeTestCheckFunc(
-// 					testAccCheckWorkspaceExists(t, resourceName),
-// 				),
-// 			},
-// 			{
-// 				ResourceName:      resourceName,
-// 				ImportState:       true,
-// 				ImportStateVerify: true,
-// 			},
-// 			{
-// 				Config: testAccWorkspaceResource__basic(contextAfter),
-// 				Check: resource.ComposeTestCheckFunc(
-// 					testAccCheckWorkspaceExists(t, resourceName),
-// 				),
-// 			},
-// 		},
-// 	})
-// }
-
-// func TestAccWorkspaceResource__description(t *testing.T) {
-// 	name := acctest.RandomWithPrefix("tf-test")
-// 	resourceName := "postman_workspace.description"
-// 	contextBefore := map[string]interface{}{
-// 		"name":        name,
-// 		"type":        "personal",
-// 		"description": "Description before",
-// 	}
-// 	contextAfter := map[string]interface{}{
-// 		"name":        name,
-// 		"type":        "personal",
-// 		"description": "Description after",
-// 	}
-
-// 	resource.ParallelTest(t, resource.TestCase{
-// 		PreCheck:          testAccPreCheck(t),
-// 		ErrorCheck:        testAccErrorCheck(t),
-// 		ProviderFactories: providerFactories,
-// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-// 		Steps: []resource.TestStep{
-// 			{
-// 				Config: testAccWorkspaceResource__description(contextBefore),
-// 				Check: resource.ComposeTestCheckFunc(
-// 					testAccCheckWorkspaceExists(t, resourceName),
-// 				),
-// 			},
-// 			{
-// 				ResourceName:      resourceName,
-// 				ImportState:       true,
-// 				ImportStateVerify: true,
-// 			},
-// 			{
-// 				Config: testAccWorkspaceResource__description(contextAfter),
-// 				Check: resource.ComposeTestCheckFunc(
-// 					testAccCheckWorkspaceExists(t, resourceName),
-// 				),
-// 			},
-// 		},
-// 	})
-// }
-
-// func TestAccWorkspaceResource__disappears_basic(t *testing.T) {
-// 	name := acctest.RandomWithPrefix("tf-test")
-// 	resourceName := "postman_workspace.default"
-// 	context := map[string]interface{}{
-// 		"name": name,
-// 		"type": "personal",
-// 	}
-
-// 	resource.ParallelTest(t, resource.TestCase{
-// 		PreCheck:          testAccPreCheck(t),
-// 		ErrorCheck:        testAccErrorCheck(t),
-// 		ProviderFactories: providerFactories,
-// 		CheckDestroy:      testAccCheckWorkspaceDoesNotExist(t, resourceName),
-// 		Steps: []resource.TestStep{
-// 			{
-// 				Config: testAccWorkspaceResource__basic(context),
-// 				Check: resource.ComposeTestCheckFunc(
-// 					testAccCheckWorkspaceExists(t, resourceName),
-// 					testAccCheckWorkspaceDisappears(t, resourceName),
-// 				),
-// 				ExpectNonEmptyPlan: true,
-// 			},
-// 		},
-// 	})
-// }
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 testAccPreCheck(t),
+		ErrorCheck:               testAccErrorCheck(t),
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		CheckDestroy:             testAccCheckWorkspaceDestroy(t, resourceName),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccWorkspaceResource__basic(context),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckWorkspaceExists(t, resourceName),
+					testAccCheckWorkspaceDisappears(t, resourceName),
+				),
+				ExpectNonEmptyPlan: true,
+			},
+		},
+	})
+}
 
 func testAccWorkspaceResource__basic(context map[string]interface{}) string {
 	return Nprintf(providerConfig+`
@@ -289,27 +209,29 @@ func testAccCheckWorkspaceExists(t *testing.T, resourceName string) resource.Tes
 	}
 }
 
-func testAccCheckWorkspaceDoesNotExist(t *testing.T, resourceName string) resource.TestCheckFunc {
+func testAccCheckWorkspaceDestroy(t *testing.T, resourceName string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[resourceName]
-		if !ok {
-			return fmt.Errorf("Resource not found: %s", resourceName)
-		}
-
-		if rs.Primary.ID == "" {
-			return fmt.Errorf("No resource ID is set")
-		}
-
-		workspaceID := rs.Primary.ID
-		c := getProviderClient(t)
-		_, raw, err := c.WorkspacesApi.SingleWorkspace(context.Background(), workspaceID).Execute()
-		if err != nil {
-			if raw.StatusCode == 404 {
-				return nil
+		for _, rs := range s.RootModule().Resources {
+			if rs.Type != "postman_workspace" {
+				continue
 			}
-			return err
+
+			if rs.Primary.ID == "" {
+				return fmt.Errorf("No resource ID is set")
+			}
+
+			workspaceID := rs.Primary.ID
+			c := getProviderClient(t)
+			_, raw, err := c.WorkspacesApi.SingleWorkspace(context.Background(), workspaceID).Execute()
+			if err != nil {
+				if raw.StatusCode == 404 {
+					continue
+				}
+				return err
+			}
+			return fmt.Errorf("Postman Workspace with ID %s exists", workspaceID)
 		}
-		return fmt.Errorf("Postman Workspace with ID %s exists", workspaceID)
+		return nil
 	}
 }
 

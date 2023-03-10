@@ -26,7 +26,7 @@ func TestAccEnvironmentResource__basic(t *testing.T) {
 		PreCheck:                 testAccPreCheck(t),
 		ErrorCheck:               testAccErrorCheck(t),
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-		CheckDestroy:             testAccCheckEnvironmentDoesNotExist(t, resourceName),
+		CheckDestroy:             testAccCheckEnvironmentDestroy(t),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
@@ -98,7 +98,7 @@ func TestAccEnvironmentResource__basicValues(t *testing.T) {
 		PreCheck:                 testAccPreCheck(t),
 		ErrorCheck:               testAccErrorCheck(t),
 		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
-		CheckDestroy:             testAccCheckEnvironmentDoesNotExist(t, resourceName),
+		CheckDestroy:             testAccCheckEnvironmentDestroy(t),
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
@@ -180,6 +180,35 @@ func TestAccEnvironmentResource__basicValues(t *testing.T) {
 	})
 }
 
+func TestAccEnvironmentResource__disappearsBasic(t *testing.T) {
+	resourceName := "postman_environment.default"
+	environmentName := acctest.RandomWithPrefix("tf-test")
+	workspaceName := acctest.RandomWithPrefix("tf-test")
+	workspaceType := "personal"
+	context := map[string]interface{}{
+		"name":          environmentName,
+		"workspaceName": workspaceName,
+		"workspaceType": workspaceType,
+	}
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 testAccPreCheck(t),
+		ErrorCheck:               testAccErrorCheck(t),
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		CheckDestroy:             testAccCheckEnvironmentDestroy(t),
+		Steps: []resource.TestStep{
+			{
+				Config: testAccEnvironmentResource__basic(context),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					testAccCheckEnvironmentExists(t, resourceName),
+					testAccCheckEnvironmentDisappears(t, resourceName),
+				),
+				ExpectNonEmptyPlan: true,
+			},
+		},
+	})
+}
+
 func testAccEnvironmentResource__basic(context map[string]interface{}) string {
 	return Nprintf(providerConfig+`
 resource "postman_workspace" "default" {
@@ -256,27 +285,29 @@ func testAccCheckEnvironmentExists(t *testing.T, resourceName string) resource.T
 	}
 }
 
-func testAccCheckEnvironmentDoesNotExist(t *testing.T, resourceName string) resource.TestCheckFunc {
+func testAccCheckEnvironmentDestroy(t *testing.T) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[resourceName]
-		if !ok {
-			return fmt.Errorf("Resource not found: %s", resourceName)
-		}
-
-		if rs.Primary.ID == "" {
-			return fmt.Errorf("No resource ID is set")
-		}
-
-		environmentID := rs.Primary.ID
-		c := getProviderClient(t)
-		_, raw, err := c.EnvironmentsApi.SingleEnvironment(context.Background(), environmentID).Execute()
-		if err != nil {
-			if raw.StatusCode == 404 {
-				return nil
+		for _, rs := range s.RootModule().Resources {
+			if rs.Type != "postman_environment" {
+				continue
 			}
-			return err
+
+			if rs.Primary.ID == "" {
+				return fmt.Errorf("No resource ID is set")
+			}
+
+			environmentID := rs.Primary.ID
+			c := getProviderClient(t)
+			_, raw, err := c.EnvironmentsApi.SingleEnvironment(context.Background(), environmentID).Execute()
+			if err != nil {
+				if raw.StatusCode == 404 {
+					continue
+				}
+				return err
+			}
+			return fmt.Errorf("Postman Environment with ID %s exists", environmentID)
 		}
-		return fmt.Errorf("Postman Environment with ID %s exists", environmentID)
+		return nil
 	}
 }
 

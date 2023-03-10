@@ -439,7 +439,7 @@ func (r *workspaceResource) Read(ctx context.Context, req resource.ReadRequest, 
 	if err != nil {
 		if raw.StatusCode == 404 {
 			tflog.Debug(ctx, fmt.Sprintf("[DEBUG] %s for: %s, removing from state file", err, workspaceID))
-			state.ID = flattenWorkspaceID("")
+			resp.State.RemoveResource(ctx)
 			return
 		}
 		resp.Diagnostics.AddError("Error reading workspace", "Could not read workspace, unexpected error: "+err.Error())
