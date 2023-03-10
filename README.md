@@ -21,7 +21,7 @@ TODO
 | Feature      | Resource           | Data Source        | Import             |
 | ------------ | ------------------ | ------------------ | ------------------ |
 | Workspaces   | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Environments | :construction:     | :construction:     | :construction:     |
+| Environments | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Apis         | :x:                | :x:                | :x:                |
 | Collections  | :x:                | :x:                | :x:                |
 | Mocks        | :x:                | :x:                | :x:                |
