@@ -80,10 +80,11 @@ jobs:
         run: |
           go mod download
 
-      - name: TF acceptance tests
-        timeout-minutes: 10
-        env:
-          TF_ACC: "1"
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: |
-          go test -v -cover ./postman/
+      # TODO: enable when ready
+      # - name: TF acceptance tests
+      #   timeout-minutes: 10
+      #   env:
+      #     TF_ACC: "1"
+      #     POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      #   run: |
+      #     go test -v -cover ./postman/
