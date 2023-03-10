@@ -197,7 +197,7 @@ func (r *environmentResource) Create(ctx context.Context, req resource.CreateReq
 	input.SetEnvironment(*environment)
 	createEnvironmentRequest := r.client.EnvironmentsApi.CreateEnvironment(ctx).CreateEnvironmentRequest(*input)
 	if environmentWorkspace != nil {
-		createEnvironmentRequest.Workspace(*environmentWorkspace)
+		createEnvironmentRequest = createEnvironmentRequest.Workspace(*environmentWorkspace)
 	}
 	response, _, err := createEnvironmentRequest.Execute()
 	if err != nil {
