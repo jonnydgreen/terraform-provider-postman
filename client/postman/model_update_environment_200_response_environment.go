@@ -44,7 +44,7 @@ func NewUpdateEnvironment200ResponseEnvironmentWithDefaults() *UpdateEnvironment
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *UpdateEnvironment200ResponseEnvironment) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -54,7 +54,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -62,7 +62,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -76,7 +76,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateEnvironment200ResponseEnvironment) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -86,7 +86,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -94,7 +94,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -108,7 +108,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) SetName(v string) {
 
 // GetUid returns the Uid field value if set, zero value otherwise.
 func (o *UpdateEnvironment200ResponseEnvironment) GetUid() string {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		var ret string
 		return ret
 	}
@@ -118,7 +118,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetUid() string {
 // GetUidOk returns a tuple with the Uid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) GetUidOk() (*string, bool) {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		return nil, false
 	}
 	return o.Uid, true
@@ -126,7 +126,7 @@ func (o *UpdateEnvironment200ResponseEnvironment) GetUidOk() (*string, bool) {
 
 // HasUid returns a boolean if a field has been set.
 func (o *UpdateEnvironment200ResponseEnvironment) HasUid() bool {
-	if o != nil && !isNil(o.Uid) {
+	if o != nil && !IsNil(o.Uid) {
 		return true
 	}
 
@@ -148,13 +148,13 @@ func (o UpdateEnvironment200ResponseEnvironment) MarshalJSON() ([]byte, error) {
 
 func (o UpdateEnvironment200ResponseEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Uid) {
+	if !IsNil(o.Uid) {
 		toSerialize["uid"] = o.Uid
 	}
 	return toSerialize, nil

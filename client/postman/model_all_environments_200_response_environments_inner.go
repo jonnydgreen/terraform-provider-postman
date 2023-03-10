@@ -56,7 +56,7 @@ func NewAllEnvironments200ResponseEnvironmentsInnerWithDefaults() *AllEnvironmen
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -66,7 +66,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -74,7 +74,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetCreatedAtOk() (*time.Ti
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -88,7 +88,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetCreatedAt(v time.Time) 
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -98,7 +98,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -106,7 +106,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetIdOk() (*string, bool) 
 
 // HasId returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -120,7 +120,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetId(v string) {
 
 // GetIsPublic returns the IsPublic field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetIsPublic() bool {
-	if o == nil || isNil(o.IsPublic) {
+	if o == nil || IsNil(o.IsPublic) {
 		var ret bool
 		return ret
 	}
@@ -130,7 +130,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetIsPublic() bool {
 // GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetIsPublicOk() (*bool, bool) {
-	if o == nil || isNil(o.IsPublic) {
+	if o == nil || IsNil(o.IsPublic) {
 		return nil, false
 	}
 	return o.IsPublic, true
@@ -138,7 +138,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetIsPublicOk() (*bool, bo
 
 // HasIsPublic returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasIsPublic() bool {
-	if o != nil && !isNil(o.IsPublic) {
+	if o != nil && !IsNil(o.IsPublic) {
 		return true
 	}
 
@@ -152,7 +152,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetIsPublic(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -162,7 +162,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -170,7 +170,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetNameOk() (*string, bool
 
 // HasName returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -184,7 +184,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetName(v string) {
 
 // GetOwner returns the Owner field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetOwner() string {
-	if o == nil || isNil(o.Owner) {
+	if o == nil || IsNil(o.Owner) {
 		var ret string
 		return ret
 	}
@@ -194,7 +194,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetOwner() string {
 // GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetOwnerOk() (*string, bool) {
-	if o == nil || isNil(o.Owner) {
+	if o == nil || IsNil(o.Owner) {
 		return nil, false
 	}
 	return o.Owner, true
@@ -202,7 +202,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetOwnerOk() (*string, boo
 
 // HasOwner returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasOwner() bool {
-	if o != nil && !isNil(o.Owner) {
+	if o != nil && !IsNil(o.Owner) {
 		return true
 	}
 
@@ -216,7 +216,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetOwner(v string) {
 
 // GetUid returns the Uid field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetUid() string {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		var ret string
 		return ret
 	}
@@ -226,7 +226,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetUid() string {
 // GetUidOk returns a tuple with the Uid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetUidOk() (*string, bool) {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		return nil, false
 	}
 	return o.Uid, true
@@ -234,7 +234,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetUidOk() (*string, bool)
 
 // HasUid returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasUid() bool {
-	if o != nil && !isNil(o.Uid) {
+	if o != nil && !IsNil(o.Uid) {
 		return true
 	}
 
@@ -248,7 +248,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) SetUid(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -258,7 +258,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -266,7 +266,7 @@ func (o *AllEnvironments200ResponseEnvironmentsInner) GetUpdatedAtOk() (*time.Ti
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *AllEnvironments200ResponseEnvironmentsInner) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -288,25 +288,25 @@ func (o AllEnvironments200ResponseEnvironmentsInner) MarshalJSON() ([]byte, erro
 
 func (o AllEnvironments200ResponseEnvironmentsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.IsPublic) {
+	if !IsNil(o.IsPublic) {
 		toSerialize["isPublic"] = o.IsPublic
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Owner) {
+	if !IsNil(o.Owner) {
 		toSerialize["owner"] = o.Owner
 	}
-	if !isNil(o.Uid) {
+	if !IsNil(o.Uid) {
 		toSerialize["uid"] = o.Uid
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	return toSerialize, nil

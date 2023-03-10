@@ -13,6 +13,7 @@ description: |-
 ## Example Usage
 
 ```terraform
+# Manage postman workspace.
 resource "postman_workspace" "example" {
   name = "My Workspace"
   type = "personal"
@@ -33,14 +34,14 @@ resource "postman_workspace" "example" {
 
 ### Read-Only
 
-- `apis` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--apis))
-- `collections` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--collections))
+- `apis` (Attributes List) The Workspace's APIs. (see [below for nested schema](#nestedatt--apis))
+- `collections` (Attributes List) The workspace's Collections. (see [below for nested schema](#nestedatt--collections))
 - `created_at` (String) The date and time at which the workspace was created.
 - `created_by` (String) The user ID of the user who created the workspace.
-- `environments` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--environments))
+- `environments` (Attributes List) The Workspace's Environments. (see [below for nested schema](#nestedatt--environments))
 - `id` (String) The workspace's ID.
-- `mocks` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--mocks))
-- `monitors` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--monitors))
+- `mocks` (Attributes List) The Workspace's Mocks. (see [below for nested schema](#nestedatt--mocks))
+- `monitors` (Attributes List) The Workspace's Monitors. (see [below for nested schema](#nestedatt--monitors))
 - `updated_at` (String) The date and time at which the workspace was last updated.
 - `updated_by` (String) The user ID of the user who last updated the workspace.
 - `visibility` (String) The workspace's visibility. [Visibility](https://learning.postman.com/docs/collaborating-in-postman/using-workspaces/managing-workspaces/#changing-workspace-visibility) determines who can access the workspace.
@@ -50,9 +51,9 @@ resource "postman_workspace" "example" {
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace API.
+- `name` (String) The name of the Workspace API.
+- `uid` (String) The UID of the Workspace API.
 
 
 <a id="nestedatt--collections"></a>
@@ -60,9 +61,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the workspace Collection.
+- `name` (String) The name of the workspace Collection.
+- `uid` (String) The UID of the workspace Collection.
 
 
 <a id="nestedatt--environments"></a>
@@ -70,9 +71,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Environment.
+- `name` (String) The name of the Workspace Environment.
+- `uid` (String) The UID of the Workspace Environment.
 
 
 <a id="nestedatt--mocks"></a>
@@ -80,9 +81,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Mock.
+- `name` (String) The name of the Workspace Mock.
+- `uid` (String) The UID of the Workspace Mock.
 
 
 <a id="nestedatt--monitors"></a>
@@ -90,8 +91,15 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Monitor.
+- `name` (String) The name of the Workspace Monitor.
+- `uid` (String) The UID of the Workspace Monitor.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+# Workspace can be imported by specifying the UUID identifier.
+terraform import postman_workspace.example 8ce9271d-d4ea-458c-8aef-02cf08ca9558
+```

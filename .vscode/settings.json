@@ -1,14 +1,32 @@
 {
   "cSpell.words": [
     "acctest",
+    "anymore",
+    "apikey",
+    "basetypes",
+    "boolmodifier",
+    "boolplanmodifier",
+    "datasource",
     "demoapp",
     "diag",
     "goreleaser",
+    "listplanmodifier",
+    "newrelic",
     "Nprintf",
+    "objectplanmodifier",
     "openapi",
     "Passthrough",
+    "planmodifier",
+    "PMAK",
+    "providerserver",
+    "resp",
+    "scim",
     "securityprovider",
-    "tfplugindocs"
+    "stringplanmodifier",
+    "tflog",
+    "tfplugindocs",
+    "tfprotov",
+    "tfsdk"
   ],
   "search.exclude": {
     "**/vendor": true,

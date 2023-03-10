@@ -49,7 +49,7 @@ func NewCreateEnvironmentRequestEnvironmentValuesInnerWithDefaults() *CreateEnvi
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetEnabled() bool {
-	if o == nil || isNil(o.Enabled) {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetEnabledOk() (*bool, bool) {
-	if o == nil || isNil(o.Enabled) {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -67,7 +67,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetEnabledOk() (*bool, 
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) HasEnabled() bool {
-	if o != nil && !isNil(o.Enabled) {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) SetEnabled(v bool) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetKey() string {
-	if o == nil || isNil(o.Key) {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetKeyOk() (*string, bool) {
-	if o == nil || isNil(o.Key) {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -99,7 +99,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetKeyOk() (*string, bo
 
 // HasKey returns a boolean if a field has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) HasKey() bool {
-	if o != nil && !isNil(o.Key) {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -113,7 +113,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) SetKey(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -131,7 +131,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetTypeOk() (*string, b
 
 // HasType returns a boolean if a field has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -145,7 +145,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) SetType(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetValue() string {
-	if o == nil || isNil(o.Value) {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetValueOk() (*string, bool) {
-	if o == nil || isNil(o.Value) {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -163,7 +163,7 @@ func (o *CreateEnvironmentRequestEnvironmentValuesInner) GetValueOk() (*string, 
 
 // HasValue returns a boolean if a field has been set.
 func (o *CreateEnvironmentRequestEnvironmentValuesInner) HasValue() bool {
-	if o != nil && !isNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -185,16 +185,16 @@ func (o CreateEnvironmentRequestEnvironmentValuesInner) MarshalJSON() ([]byte, e
 
 func (o CreateEnvironmentRequestEnvironmentValuesInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Enabled) {
+	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !isNil(o.Key) {
+	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !isNil(o.Value) {
+	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
 	return toSerialize, nil

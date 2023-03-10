@@ -1,43 +1,35 @@
 package postman
 
 import (
-	"context"
-	"log"
 	"os"
 	"sync"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-framework/providerserver"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
 )
 
-var testAccProvider *schema.Provider
+var (
+	// providerConfig is a shared configuration to combine with the actual
+	// test configuration so the Postman client is properly configured.
+	// The POSTMAN_API_KEY environment must be set.
+	providerConfig = `
+provider "postman" {}
+`
+)
 
-// providerFactories are used to instantiate a provider during acceptance testing.
-// The factory function will be invoked for every Terraform CLI command executed
-// to create a provider server to which the CLI can reattach.
-var providerFactories = map[string]func() (*schema.Provider, error){
-	"postman": func() (*schema.Provider, error) {
-		return testAccProvider, nil
-	},
-}
-
-func init() {
-	testAccProvider = Provider("dev")()
-	err := testAccProvider.Configure(context.Background(), terraform.NewResourceConfigRaw(nil))
-	if err != nil {
-		log.Fatal(err)
+var (
+	// testAccProtoV6ProviderFactories are used to instantiate a provider during
+	// acceptance testing. The factory function will be invoked for every Terraform
+	// CLI command executed to create a provider server to which the CLI can
+	// reattach.
+	testAccProtoV6ProviderFactories = map[string]func() (tfprotov6.ProviderServer, error){
+		"postman": providerserver.NewProtocol6WithError(New("dev")()),
 	}
-}
-
-func TestProvider(t *testing.T) {
-	if err := Provider("dev")().InternalValidate(); err != nil {
-		t.Fatalf("err: %s", err)
-	}
-}
+)
 
 var testAccProviderConfigure sync.Once
 
@@ -55,14 +47,7 @@ func failIfEmpty(t *testing.T, name string, usageMessage string) string {
 
 func testAccPreCheck(t *testing.T) func() {
 	return func() {
-		// Since we are outside the scope of the Terraform configuration we must
-		// call Configure() to properly initialize the provider configuration.
-
 		failIfEmpty(t, "POSTMAN_API_KEY", "static credentials value when using POSTMAN_API_KEY")
-		err := testAccProvider.Configure(context.Background(), terraform.NewResourceConfigRaw(nil))
-		if err != nil {
-			t.Fatal(err)
-		}
 	}
 }
 
@@ -70,8 +55,13 @@ func randString(t *testing.T, length int) string {
 	return acctest.RandString(length)
 }
 
+// TODO: make better
 func getProviderClient(t *testing.T) *postman.APIClient {
-	return testAccProvider.Meta().(*postman.APIClient)
+	failIfEmpty(t, "POSTMAN_API_KEY", "static credentials value when using POSTMAN_API_KEY")
+	apiKey := os.Getenv("POSTMAN_API_KEY")
+	configuration := postman.NewConfiguration()
+	configuration.AddDefaultHeader("x-api-key", apiKey)
+	return postman.NewAPIClient(configuration)
 }
 
 func testAccErrorCheck(t *testing.T) resource.ErrorCheckFunc {

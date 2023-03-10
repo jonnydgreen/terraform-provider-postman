@@ -47,7 +47,7 @@ func NewUpdatePANFolderFolderWithDefaults() *UpdatePANFolderFolder {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdatePANFolderFolder) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -57,7 +57,7 @@ func (o *UpdatePANFolderFolder) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANFolderFolder) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -65,7 +65,7 @@ func (o *UpdatePANFolderFolder) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdatePANFolderFolder) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -79,7 +79,7 @@ func (o *UpdatePANFolderFolder) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdatePANFolderFolder) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -89,7 +89,7 @@ func (o *UpdatePANFolderFolder) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANFolderFolder) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -97,7 +97,7 @@ func (o *UpdatePANFolderFolder) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdatePANFolderFolder) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -111,7 +111,7 @@ func (o *UpdatePANFolderFolder) SetName(v string) {
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *UpdatePANFolderFolder) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *UpdatePANFolderFolder) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANFolderFolder) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -129,7 +129,7 @@ func (o *UpdatePANFolderFolder) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *UpdatePANFolderFolder) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -151,13 +151,13 @@ func (o UpdatePANFolderFolder) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANFolderFolder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
 	return toSerialize, nil

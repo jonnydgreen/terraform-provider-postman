@@ -45,7 +45,7 @@ func NewDeleteEnvironment200ResponseEnvironmentWithDefaults() *DeleteEnvironment
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *DeleteEnvironment200ResponseEnvironment) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *DeleteEnvironment200ResponseEnvironment) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeleteEnvironment200ResponseEnvironment) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -63,7 +63,7 @@ func (o *DeleteEnvironment200ResponseEnvironment) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *DeleteEnvironment200ResponseEnvironment) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *DeleteEnvironment200ResponseEnvironment) SetId(v string) {
 
 // GetUid returns the Uid field value if set, zero value otherwise.
 func (o *DeleteEnvironment200ResponseEnvironment) GetUid() string {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *DeleteEnvironment200ResponseEnvironment) GetUid() string {
 // GetUidOk returns a tuple with the Uid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeleteEnvironment200ResponseEnvironment) GetUidOk() (*string, bool) {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		return nil, false
 	}
 	return o.Uid, true
@@ -95,7 +95,7 @@ func (o *DeleteEnvironment200ResponseEnvironment) GetUidOk() (*string, bool) {
 
 // HasUid returns a boolean if a field has been set.
 func (o *DeleteEnvironment200ResponseEnvironment) HasUid() bool {
-	if o != nil && !isNil(o.Uid) {
+	if o != nil && !IsNil(o.Uid) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o DeleteEnvironment200ResponseEnvironment) MarshalJSON() ([]byte, error) {
 
 func (o DeleteEnvironment200ResponseEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Uid) {
+	if !IsNil(o.Uid) {
 		toSerialize["uid"] = o.Uid
 	}
 	return toSerialize, nil

@@ -45,7 +45,7 @@ func NewCreateEnvironment403ResponseErrorWithDefaults() *CreateEnvironment403Res
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *CreateEnvironment403ResponseError) GetMessage() string {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *CreateEnvironment403ResponseError) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironment403ResponseError) GetMessageOk() (*string, bool) {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -63,7 +63,7 @@ func (o *CreateEnvironment403ResponseError) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *CreateEnvironment403ResponseError) HasMessage() bool {
-	if o != nil && !isNil(o.Message) {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *CreateEnvironment403ResponseError) SetMessage(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateEnvironment403ResponseError) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *CreateEnvironment403ResponseError) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateEnvironment403ResponseError) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -95,7 +95,7 @@ func (o *CreateEnvironment403ResponseError) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateEnvironment403ResponseError) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o CreateEnvironment403ResponseError) MarshalJSON() ([]byte, error) {
 
 func (o CreateEnvironment403ResponseError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Message) {
+	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	return toSerialize, nil

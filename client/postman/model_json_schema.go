@@ -45,7 +45,7 @@ func NewJsonSchemaWithDefaults() *JsonSchema {
 
 // GetInput returns the Input field value if set, zero value otherwise.
 func (o *JsonSchema) GetInput() map[string]interface{} {
-	if o == nil || isNil(o.Input) {
+	if o == nil || IsNil(o.Input) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *JsonSchema) GetInput() map[string]interface{} {
 // GetInputOk returns a tuple with the Input field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *JsonSchema) GetInputOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.Input) {
+	if o == nil || IsNil(o.Input) {
 		return map[string]interface{}{}, false
 	}
 	return o.Input, true
@@ -63,7 +63,7 @@ func (o *JsonSchema) GetInputOk() (map[string]interface{}, bool) {
 
 // HasInput returns a boolean if a field has been set.
 func (o *JsonSchema) HasInput() bool {
-	if o != nil && !isNil(o.Input) {
+	if o != nil && !IsNil(o.Input) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *JsonSchema) SetInput(v map[string]interface{}) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *JsonSchema) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *JsonSchema) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *JsonSchema) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -95,7 +95,7 @@ func (o *JsonSchema) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *JsonSchema) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o JsonSchema) MarshalJSON() ([]byte, error) {
 
 func (o JsonSchema) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Input) {
+	if !IsNil(o.Input) {
 		toSerialize["input"] = o.Input
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil

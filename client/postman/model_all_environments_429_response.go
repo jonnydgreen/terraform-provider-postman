@@ -45,7 +45,7 @@ func NewAllEnvironments429ResponseWithDefaults() *AllEnvironments429Response {
 
 // GetError returns the Error field value if set, zero value otherwise.
 func (o *AllEnvironments429Response) GetError() string {
-	if o == nil || isNil(o.Error) {
+	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *AllEnvironments429Response) GetError() string {
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments429Response) GetErrorOk() (*string, bool) {
-	if o == nil || isNil(o.Error) {
+	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
 	return o.Error, true
@@ -63,7 +63,7 @@ func (o *AllEnvironments429Response) GetErrorOk() (*string, bool) {
 
 // HasError returns a boolean if a field has been set.
 func (o *AllEnvironments429Response) HasError() bool {
-	if o != nil && !isNil(o.Error) {
+	if o != nil && !IsNil(o.Error) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *AllEnvironments429Response) SetError(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *AllEnvironments429Response) GetMessage() string {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *AllEnvironments429Response) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllEnvironments429Response) GetMessageOk() (*string, bool) {
-	if o == nil || isNil(o.Message) {
+	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
 	return o.Message, true
@@ -95,7 +95,7 @@ func (o *AllEnvironments429Response) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *AllEnvironments429Response) HasMessage() bool {
-	if o != nil && !isNil(o.Message) {
+	if o != nil && !IsNil(o.Message) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o AllEnvironments429Response) MarshalJSON() ([]byte, error) {
 
 func (o AllEnvironments429Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Error) {
+	if !IsNil(o.Error) {
 		toSerialize["error"] = o.Error
 	}
-	if !isNil(o.Message) {
+	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
 	return toSerialize, nil

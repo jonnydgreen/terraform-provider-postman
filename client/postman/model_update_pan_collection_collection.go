@@ -45,7 +45,7 @@ func NewUpdatePANCollectionCollectionWithDefaults() *UpdatePANCollectionCollecti
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *UpdatePANCollectionCollection) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *UpdatePANCollectionCollection) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANCollectionCollection) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -63,7 +63,7 @@ func (o *UpdatePANCollectionCollection) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *UpdatePANCollectionCollection) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *UpdatePANCollectionCollection) SetParentFolderId(v int32) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *UpdatePANCollectionCollection) GetSummary() string {
-	if o == nil || isNil(o.Summary) {
+	if o == nil || IsNil(o.Summary) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *UpdatePANCollectionCollection) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdatePANCollectionCollection) GetSummaryOk() (*string, bool) {
-	if o == nil || isNil(o.Summary) {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
 	return o.Summary, true
@@ -95,7 +95,7 @@ func (o *UpdatePANCollectionCollection) GetSummaryOk() (*string, bool) {
 
 // HasSummary returns a boolean if a field has been set.
 func (o *UpdatePANCollectionCollection) HasSummary() bool {
-	if o != nil && !isNil(o.Summary) {
+	if o != nil && !IsNil(o.Summary) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o UpdatePANCollectionCollection) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePANCollectionCollection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
-	if !isNil(o.Summary) {
+	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
 	return toSerialize, nil

@@ -47,7 +47,7 @@ func NewUpdateWorkspaceRequestWorkspaceWithDefaults() *UpdateWorkspaceRequestWor
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateWorkspaceRequestWorkspace) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -57,7 +57,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWorkspaceRequestWorkspace) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -65,7 +65,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateWorkspaceRequestWorkspace) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -79,7 +79,7 @@ func (o *UpdateWorkspaceRequestWorkspace) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateWorkspaceRequestWorkspace) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -89,7 +89,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWorkspaceRequestWorkspace) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -97,7 +97,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateWorkspaceRequestWorkspace) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -111,7 +111,7 @@ func (o *UpdateWorkspaceRequestWorkspace) SetName(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *UpdateWorkspaceRequestWorkspace) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWorkspaceRequestWorkspace) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -129,7 +129,7 @@ func (o *UpdateWorkspaceRequestWorkspace) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *UpdateWorkspaceRequestWorkspace) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -151,13 +151,13 @@ func (o UpdateWorkspaceRequestWorkspace) MarshalJSON() ([]byte, error) {
 
 func (o UpdateWorkspaceRequestWorkspace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	return toSerialize, nil

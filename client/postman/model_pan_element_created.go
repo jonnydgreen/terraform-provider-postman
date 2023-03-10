@@ -68,7 +68,7 @@ func NewPANElementCreatedWithDefaults() *PANElementCreated {
 
 // GetAddedAt returns the AddedAt field value if set, zero value otherwise.
 func (o *PANElementCreated) GetAddedAt() time.Time {
-	if o == nil || isNil(o.AddedAt) {
+	if o == nil || IsNil(o.AddedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -78,7 +78,7 @@ func (o *PANElementCreated) GetAddedAt() time.Time {
 // GetAddedAtOk returns a tuple with the AddedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetAddedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.AddedAt) {
+	if o == nil || IsNil(o.AddedAt) {
 		return nil, false
 	}
 	return o.AddedAt, true
@@ -86,7 +86,7 @@ func (o *PANElementCreated) GetAddedAtOk() (*time.Time, bool) {
 
 // HasAddedAt returns a boolean if a field has been set.
 func (o *PANElementCreated) HasAddedAt() bool {
-	if o != nil && !isNil(o.AddedAt) {
+	if o != nil && !IsNil(o.AddedAt) {
 		return true
 	}
 
@@ -100,7 +100,7 @@ func (o *PANElementCreated) SetAddedAt(v time.Time) {
 
 // GetAddedBy returns the AddedBy field value if set, zero value otherwise.
 func (o *PANElementCreated) GetAddedBy() int32 {
-	if o == nil || isNil(o.AddedBy) {
+	if o == nil || IsNil(o.AddedBy) {
 		var ret int32
 		return ret
 	}
@@ -110,7 +110,7 @@ func (o *PANElementCreated) GetAddedBy() int32 {
 // GetAddedByOk returns a tuple with the AddedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetAddedByOk() (*int32, bool) {
-	if o == nil || isNil(o.AddedBy) {
+	if o == nil || IsNil(o.AddedBy) {
 		return nil, false
 	}
 	return o.AddedBy, true
@@ -118,7 +118,7 @@ func (o *PANElementCreated) GetAddedByOk() (*int32, bool) {
 
 // HasAddedBy returns a boolean if a field has been set.
 func (o *PANElementCreated) HasAddedBy() bool {
-	if o != nil && !isNil(o.AddedBy) {
+	if o != nil && !IsNil(o.AddedBy) {
 		return true
 	}
 
@@ -132,7 +132,7 @@ func (o *PANElementCreated) SetAddedBy(v int32) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PANElementCreated) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -142,7 +142,7 @@ func (o *PANElementCreated) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -150,7 +150,7 @@ func (o *PANElementCreated) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *PANElementCreated) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -164,7 +164,7 @@ func (o *PANElementCreated) SetCreatedAt(v time.Time) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *PANElementCreated) GetCreatedBy() int32 {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret int32
 		return ret
 	}
@@ -174,7 +174,7 @@ func (o *PANElementCreated) GetCreatedBy() int32 {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetCreatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -182,7 +182,7 @@ func (o *PANElementCreated) GetCreatedByOk() (*int32, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *PANElementCreated) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -196,7 +196,7 @@ func (o *PANElementCreated) SetCreatedBy(v int32) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *PANElementCreated) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -206,7 +206,7 @@ func (o *PANElementCreated) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -214,7 +214,7 @@ func (o *PANElementCreated) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *PANElementCreated) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -228,7 +228,7 @@ func (o *PANElementCreated) SetDescription(v string) {
 
 // GetHref returns the Href field value if set, zero value otherwise.
 func (o *PANElementCreated) GetHref() string {
-	if o == nil || isNil(o.Href) {
+	if o == nil || IsNil(o.Href) {
 		var ret string
 		return ret
 	}
@@ -238,7 +238,7 @@ func (o *PANElementCreated) GetHref() string {
 // GetHrefOk returns a tuple with the Href field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetHrefOk() (*string, bool) {
-	if o == nil || isNil(o.Href) {
+	if o == nil || IsNil(o.Href) {
 		return nil, false
 	}
 	return o.Href, true
@@ -246,7 +246,7 @@ func (o *PANElementCreated) GetHrefOk() (*string, bool) {
 
 // HasHref returns a boolean if a field has been set.
 func (o *PANElementCreated) HasHref() bool {
-	if o != nil && !isNil(o.Href) {
+	if o != nil && !IsNil(o.Href) {
 		return true
 	}
 
@@ -260,7 +260,7 @@ func (o *PANElementCreated) SetHref(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *PANElementCreated) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -270,7 +270,7 @@ func (o *PANElementCreated) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -278,7 +278,7 @@ func (o *PANElementCreated) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *PANElementCreated) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -292,7 +292,7 @@ func (o *PANElementCreated) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PANElementCreated) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -302,7 +302,7 @@ func (o *PANElementCreated) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -310,7 +310,7 @@ func (o *PANElementCreated) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *PANElementCreated) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -324,7 +324,7 @@ func (o *PANElementCreated) SetName(v string) {
 
 // GetParentFolderId returns the ParentFolderId field value if set, zero value otherwise.
 func (o *PANElementCreated) GetParentFolderId() int32 {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		var ret int32
 		return ret
 	}
@@ -334,7 +334,7 @@ func (o *PANElementCreated) GetParentFolderId() int32 {
 // GetParentFolderIdOk returns a tuple with the ParentFolderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetParentFolderIdOk() (*int32, bool) {
-	if o == nil || isNil(o.ParentFolderId) {
+	if o == nil || IsNil(o.ParentFolderId) {
 		return nil, false
 	}
 	return o.ParentFolderId, true
@@ -342,7 +342,7 @@ func (o *PANElementCreated) GetParentFolderIdOk() (*int32, bool) {
 
 // HasParentFolderId returns a boolean if a field has been set.
 func (o *PANElementCreated) HasParentFolderId() bool {
-	if o != nil && !isNil(o.ParentFolderId) {
+	if o != nil && !IsNil(o.ParentFolderId) {
 		return true
 	}
 
@@ -356,7 +356,7 @@ func (o *PANElementCreated) SetParentFolderId(v int32) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
 func (o *PANElementCreated) GetSummary() string {
-	if o == nil || isNil(o.Summary) {
+	if o == nil || IsNil(o.Summary) {
 		var ret string
 		return ret
 	}
@@ -366,7 +366,7 @@ func (o *PANElementCreated) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetSummaryOk() (*string, bool) {
-	if o == nil || isNil(o.Summary) {
+	if o == nil || IsNil(o.Summary) {
 		return nil, false
 	}
 	return o.Summary, true
@@ -374,7 +374,7 @@ func (o *PANElementCreated) GetSummaryOk() (*string, bool) {
 
 // HasSummary returns a boolean if a field has been set.
 func (o *PANElementCreated) HasSummary() bool {
-	if o != nil && !isNil(o.Summary) {
+	if o != nil && !IsNil(o.Summary) {
 		return true
 	}
 
@@ -388,7 +388,7 @@ func (o *PANElementCreated) SetSummary(v string) {
 
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *PANElementCreated) GetType() string {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
 	}
@@ -398,7 +398,7 @@ func (o *PANElementCreated) GetType() string {
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetTypeOk() (*string, bool) {
-	if o == nil || isNil(o.Type) {
+	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
 	return o.Type, true
@@ -406,7 +406,7 @@ func (o *PANElementCreated) GetTypeOk() (*string, bool) {
 
 // HasType returns a boolean if a field has been set.
 func (o *PANElementCreated) HasType() bool {
-	if o != nil && !isNil(o.Type) {
+	if o != nil && !IsNil(o.Type) {
 		return true
 	}
 
@@ -420,7 +420,7 @@ func (o *PANElementCreated) SetType(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *PANElementCreated) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -430,7 +430,7 @@ func (o *PANElementCreated) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -438,7 +438,7 @@ func (o *PANElementCreated) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *PANElementCreated) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -452,7 +452,7 @@ func (o *PANElementCreated) SetUpdatedAt(v time.Time) {
 
 // GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
 func (o *PANElementCreated) GetUpdatedBy() int32 {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		var ret int32
 		return ret
 	}
@@ -462,7 +462,7 @@ func (o *PANElementCreated) GetUpdatedBy() int32 {
 // GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PANElementCreated) GetUpdatedByOk() (*int32, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		return nil, false
 	}
 	return o.UpdatedBy, true
@@ -470,7 +470,7 @@ func (o *PANElementCreated) GetUpdatedByOk() (*int32, bool) {
 
 // HasUpdatedBy returns a boolean if a field has been set.
 func (o *PANElementCreated) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
+	if o != nil && !IsNil(o.UpdatedBy) {
 		return true
 	}
 
@@ -492,43 +492,43 @@ func (o PANElementCreated) MarshalJSON() ([]byte, error) {
 
 func (o PANElementCreated) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AddedAt) {
+	if !IsNil(o.AddedAt) {
 		toSerialize["addedAt"] = o.AddedAt
 	}
-	if !isNil(o.AddedBy) {
+	if !IsNil(o.AddedBy) {
 		toSerialize["addedBy"] = o.AddedBy
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !isNil(o.CreatedBy) {
+	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Href) {
+	if !IsNil(o.Href) {
 		toSerialize["href"] = o.Href
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.ParentFolderId) {
+	if !IsNil(o.ParentFolderId) {
 		toSerialize["parentFolderId"] = o.ParentFolderId
 	}
-	if !isNil(o.Summary) {
+	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
-	if !isNil(o.Type) {
+	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !isNil(o.UpdatedBy) {
+	if !IsNil(o.UpdatedBy) {
 		toSerialize["updatedBy"] = o.UpdatedBy
 	}
 	return toSerialize, nil

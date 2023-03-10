@@ -53,7 +53,7 @@ func NewScimUserResourceWithDefaults() *ScimUserResource {
 
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *ScimUserResource) GetActive() bool {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
 	}
@@ -63,7 +63,7 @@ func (o *ScimUserResource) GetActive() bool {
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
 	return o.Active, true
@@ -71,7 +71,7 @@ func (o *ScimUserResource) GetActiveOk() (*bool, bool) {
 
 // HasActive returns a boolean if a field has been set.
 func (o *ScimUserResource) HasActive() bool {
-	if o != nil && !isNil(o.Active) {
+	if o != nil && !IsNil(o.Active) {
 		return true
 	}
 
@@ -85,7 +85,7 @@ func (o *ScimUserResource) SetActive(v bool) {
 
 // GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *ScimUserResource) GetExternalId() string {
-	if o == nil || isNil(o.ExternalId) {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *ScimUserResource) GetExternalId() string {
 // GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetExternalIdOk() (*string, bool) {
-	if o == nil || isNil(o.ExternalId) {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
 	return o.ExternalId, true
@@ -103,7 +103,7 @@ func (o *ScimUserResource) GetExternalIdOk() (*string, bool) {
 
 // HasExternalId returns a boolean if a field has been set.
 func (o *ScimUserResource) HasExternalId() bool {
-	if o != nil && !isNil(o.ExternalId) {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
@@ -117,7 +117,7 @@ func (o *ScimUserResource) SetExternalId(v string) {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ScimUserResource) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -127,7 +127,7 @@ func (o *ScimUserResource) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -135,7 +135,7 @@ func (o *ScimUserResource) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ScimUserResource) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -149,7 +149,7 @@ func (o *ScimUserResource) SetId(v string) {
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
 func (o *ScimUserResource) GetMeta() ScimUserResourceMeta {
-	if o == nil || isNil(o.Meta) {
+	if o == nil || IsNil(o.Meta) {
 		var ret ScimUserResourceMeta
 		return ret
 	}
@@ -159,7 +159,7 @@ func (o *ScimUserResource) GetMeta() ScimUserResourceMeta {
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetMetaOk() (*ScimUserResourceMeta, bool) {
-	if o == nil || isNil(o.Meta) {
+	if o == nil || IsNil(o.Meta) {
 		return nil, false
 	}
 	return o.Meta, true
@@ -167,7 +167,7 @@ func (o *ScimUserResource) GetMetaOk() (*ScimUserResourceMeta, bool) {
 
 // HasMeta returns a boolean if a field has been set.
 func (o *ScimUserResource) HasMeta() bool {
-	if o != nil && !isNil(o.Meta) {
+	if o != nil && !IsNil(o.Meta) {
 		return true
 	}
 
@@ -181,7 +181,7 @@ func (o *ScimUserResource) SetMeta(v ScimUserResourceMeta) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *ScimUserResource) GetName() ScimUserResourceName {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret ScimUserResourceName
 		return ret
 	}
@@ -191,7 +191,7 @@ func (o *ScimUserResource) GetName() ScimUserResourceName {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetNameOk() (*ScimUserResourceName, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -199,7 +199,7 @@ func (o *ScimUserResource) GetNameOk() (*ScimUserResourceName, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *ScimUserResource) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -213,7 +213,7 @@ func (o *ScimUserResource) SetName(v ScimUserResourceName) {
 
 // GetSchemas returns the Schemas field value if set, zero value otherwise.
 func (o *ScimUserResource) GetSchemas() []string {
-	if o == nil || isNil(o.Schemas) {
+	if o == nil || IsNil(o.Schemas) {
 		var ret []string
 		return ret
 	}
@@ -223,7 +223,7 @@ func (o *ScimUserResource) GetSchemas() []string {
 // GetSchemasOk returns a tuple with the Schemas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetSchemasOk() ([]string, bool) {
-	if o == nil || isNil(o.Schemas) {
+	if o == nil || IsNil(o.Schemas) {
 		return nil, false
 	}
 	return o.Schemas, true
@@ -231,7 +231,7 @@ func (o *ScimUserResource) GetSchemasOk() ([]string, bool) {
 
 // HasSchemas returns a boolean if a field has been set.
 func (o *ScimUserResource) HasSchemas() bool {
-	if o != nil && !isNil(o.Schemas) {
+	if o != nil && !IsNil(o.Schemas) {
 		return true
 	}
 
@@ -245,7 +245,7 @@ func (o *ScimUserResource) SetSchemas(v []string) {
 
 // GetUserName returns the UserName field value if set, zero value otherwise.
 func (o *ScimUserResource) GetUserName() string {
-	if o == nil || isNil(o.UserName) {
+	if o == nil || IsNil(o.UserName) {
 		var ret string
 		return ret
 	}
@@ -255,7 +255,7 @@ func (o *ScimUserResource) GetUserName() string {
 // GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimUserResource) GetUserNameOk() (*string, bool) {
-	if o == nil || isNil(o.UserName) {
+	if o == nil || IsNil(o.UserName) {
 		return nil, false
 	}
 	return o.UserName, true
@@ -263,7 +263,7 @@ func (o *ScimUserResource) GetUserNameOk() (*string, bool) {
 
 // HasUserName returns a boolean if a field has been set.
 func (o *ScimUserResource) HasUserName() bool {
-	if o != nil && !isNil(o.UserName) {
+	if o != nil && !IsNil(o.UserName) {
 		return true
 	}
 
@@ -285,25 +285,25 @@ func (o ScimUserResource) MarshalJSON() ([]byte, error) {
 
 func (o ScimUserResource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Active) {
+	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
-	if !isNil(o.ExternalId) {
+	if !IsNil(o.ExternalId) {
 		toSerialize["externalId"] = o.ExternalId
 	}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Meta) {
+	if !IsNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Schemas) {
+	if !IsNil(o.Schemas) {
 		toSerialize["schemas"] = o.Schemas
 	}
-	if !isNil(o.UserName) {
+	if !IsNil(o.UserName) {
 		toSerialize["userName"] = o.UserName
 	}
 	return toSerialize, nil

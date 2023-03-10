@@ -25,16 +25,19 @@ data "postman_workspace" "example" {
 
 - `id` (String) The workspace's ID.
 
+### Optional
+
+- `description` (String) The workspace's description.
+
 ### Read-Only
 
-- `apis` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--apis))
-- `collections` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--collections))
+- `apis` (Attributes List) The Workspace's APIs. (see [below for nested schema](#nestedatt--apis))
+- `collections` (Attributes List) The workspace's Collections. (see [below for nested schema](#nestedatt--collections))
 - `created_at` (String) The date and time at which the workspace was created.
 - `created_by` (String) The user ID of the user who created the workspace.
-- `description` (String) The workspace's description.
-- `environments` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--environments))
-- `mocks` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--mocks))
-- `monitors` (List of Object) The workspace's collections. (see [below for nested schema](#nestedatt--monitors))
+- `environments` (Attributes List) The Workspace's Environments. (see [below for nested schema](#nestedatt--environments))
+- `mocks` (Attributes List) The Workspace's Mocks. (see [below for nested schema](#nestedatt--mocks))
+- `monitors` (Attributes List) The Workspace's Monitors. (see [below for nested schema](#nestedatt--monitors))
 - `name` (String) The workspace's name.
 - `type` (String) The type of workspace. One of: personal|team
 - `updated_at` (String) The date and time at which the workspace was last updated.
@@ -46,9 +49,9 @@ data "postman_workspace" "example" {
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace API.
+- `name` (String) The name of the Workspace API.
+- `uid` (String) The UID of the Workspace API.
 
 
 <a id="nestedatt--collections"></a>
@@ -56,9 +59,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the workspace Collection.
+- `name` (String) The name of the workspace Collection.
+- `uid` (String) The UID of the workspace Collection.
 
 
 <a id="nestedatt--environments"></a>
@@ -66,9 +69,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Environment.
+- `name` (String) The name of the Workspace Environment.
+- `uid` (String) The UID of the Workspace Environment.
 
 
 <a id="nestedatt--mocks"></a>
@@ -76,9 +79,9 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Mock.
+- `name` (String) The name of the Workspace Mock.
+- `uid` (String) The UID of the Workspace Mock.
 
 
 <a id="nestedatt--monitors"></a>
@@ -86,8 +89,8 @@ Read-Only:
 
 Read-Only:
 
-- `id` (String)
-- `name` (String)
-- `uid` (String)
+- `id` (String) The ID of the Workspace Monitor.
+- `name` (String) The name of the Workspace Monitor.
+- `uid` (String) The UID of the Workspace Monitor.
 
 

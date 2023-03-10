@@ -49,7 +49,7 @@ func NewSingleWorkspace200ResponseWorkspaceMonitorsInnerWithDefaults() *SingleWo
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -59,7 +59,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -67,7 +67,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetIdOk() (*string, b
 
 // HasId returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) HasId() bool {
-	if o != nil && !isNil(o.Id) {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) SetId(v string) {
 // GetName returns the Name field value if set, zero value otherwise.
 // Deprecated
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetName() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -101,7 +101,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetNameOk() (*string,
 
 // HasName returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -117,7 +117,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) SetName(v string) {
 // GetUid returns the Uid field value if set, zero value otherwise.
 // Deprecated
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetUid() string {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		var ret string
 		return ret
 	}
@@ -128,7 +128,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetUid() string {
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetUidOk() (*string, bool) {
-	if o == nil || isNil(o.Uid) {
+	if o == nil || IsNil(o.Uid) {
 		return nil, false
 	}
 	return o.Uid, true
@@ -136,7 +136,7 @@ func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) GetUidOk() (*string, 
 
 // HasUid returns a boolean if a field has been set.
 func (o *SingleWorkspace200ResponseWorkspaceMonitorsInner) HasUid() bool {
-	if o != nil && !isNil(o.Uid) {
+	if o != nil && !IsNil(o.Uid) {
 		return true
 	}
 
@@ -159,13 +159,13 @@ func (o SingleWorkspace200ResponseWorkspaceMonitorsInner) MarshalJSON() ([]byte,
 
 func (o SingleWorkspace200ResponseWorkspaceMonitorsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Uid) {
+	if !IsNil(o.Uid) {
 		toSerialize["uid"] = o.Uid
 	}
 	return toSerialize, nil

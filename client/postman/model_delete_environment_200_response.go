@@ -42,7 +42,7 @@ func NewDeleteEnvironment200ResponseWithDefaults() *DeleteEnvironment200Response
 
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *DeleteEnvironment200Response) GetEnvironment() DeleteEnvironment200ResponseEnvironment {
-	if o == nil || isNil(o.Environment) {
+	if o == nil || IsNil(o.Environment) {
 		var ret DeleteEnvironment200ResponseEnvironment
 		return ret
 	}
@@ -52,7 +52,7 @@ func (o *DeleteEnvironment200Response) GetEnvironment() DeleteEnvironment200Resp
 // GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeleteEnvironment200Response) GetEnvironmentOk() (*DeleteEnvironment200ResponseEnvironment, bool) {
-	if o == nil || isNil(o.Environment) {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
 	return o.Environment, true
@@ -60,7 +60,7 @@ func (o *DeleteEnvironment200Response) GetEnvironmentOk() (*DeleteEnvironment200
 
 // HasEnvironment returns a boolean if a field has been set.
 func (o *DeleteEnvironment200Response) HasEnvironment() bool {
-	if o != nil && !isNil(o.Environment) {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
@@ -82,7 +82,7 @@ func (o DeleteEnvironment200Response) MarshalJSON() ([]byte, error) {
 
 func (o DeleteEnvironment200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Environment) {
+	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
 	}
 	return toSerialize, nil

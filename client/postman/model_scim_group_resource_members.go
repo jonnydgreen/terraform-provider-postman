@@ -45,7 +45,7 @@ func NewScimGroupResourceMembersWithDefaults() *ScimGroupResourceMembers {
 
 // GetDisplay returns the Display field value if set, zero value otherwise.
 func (o *ScimGroupResourceMembers) GetDisplay() string {
-	if o == nil || isNil(o.Display) {
+	if o == nil || IsNil(o.Display) {
 		var ret string
 		return ret
 	}
@@ -55,7 +55,7 @@ func (o *ScimGroupResourceMembers) GetDisplay() string {
 // GetDisplayOk returns a tuple with the Display field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResourceMembers) GetDisplayOk() (*string, bool) {
-	if o == nil || isNil(o.Display) {
+	if o == nil || IsNil(o.Display) {
 		return nil, false
 	}
 	return o.Display, true
@@ -63,7 +63,7 @@ func (o *ScimGroupResourceMembers) GetDisplayOk() (*string, bool) {
 
 // HasDisplay returns a boolean if a field has been set.
 func (o *ScimGroupResourceMembers) HasDisplay() bool {
-	if o != nil && !isNil(o.Display) {
+	if o != nil && !IsNil(o.Display) {
 		return true
 	}
 
@@ -77,7 +77,7 @@ func (o *ScimGroupResourceMembers) SetDisplay(v string) {
 
 // GetValue returns the Value field value if set, zero value otherwise.
 func (o *ScimGroupResourceMembers) GetValue() string {
-	if o == nil || isNil(o.Value) {
+	if o == nil || IsNil(o.Value) {
 		var ret string
 		return ret
 	}
@@ -87,7 +87,7 @@ func (o *ScimGroupResourceMembers) GetValue() string {
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ScimGroupResourceMembers) GetValueOk() (*string, bool) {
-	if o == nil || isNil(o.Value) {
+	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
 	return o.Value, true
@@ -95,7 +95,7 @@ func (o *ScimGroupResourceMembers) GetValueOk() (*string, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *ScimGroupResourceMembers) HasValue() bool {
-	if o != nil && !isNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -117,10 +117,10 @@ func (o ScimGroupResourceMembers) MarshalJSON() ([]byte, error) {
 
 func (o ScimGroupResourceMembers) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Display) {
+	if !IsNil(o.Display) {
 		toSerialize["display"] = o.Display
 	}
-	if !isNil(o.Value) {
+	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
 	return toSerialize, nil
