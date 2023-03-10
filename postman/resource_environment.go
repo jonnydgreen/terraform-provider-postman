@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/jonnydgreen/terraform-provider-postman/client/postman"
+	"github.com/terraform-community-providers/terraform-plugin-framework-utils/modifiers"
 )
 
 // Ensure the implementation satisfies the expected interfaces.
@@ -88,39 +89,41 @@ func environmentSchema() schema.Schema {
 					boolplanmodifier.UseStateForUnknown(),
 				},
 			},
-			// TODO: move to a separate resource
-			// "values": {
-			// 	Type:        schema.TypeList,
-			// 	Description: "Information about the environment's variables",
-			// 	Optional:    true,
-			// 	Elem: &schema.Resource{
-			// 		Schema: map[string]*schema.Schema{
-			// 			"key": {
-			// 				Type:        schema.TypeString,
-			// 				Description: "The variable's name.",
-			// 				Required:    true,
-			// 			},
-			// 			"type": {
-			// 				Type:        schema.TypeString,
-			// 				Description: "The variable type.",
-			// 				Optional:    true,
-			// 				Default:     "default",
-			// 			},
-			// 			"value": {
-			// 				Type:        schema.TypeString,
-			// 				Description: "The variable's value.",
-			// 				Optional:    true,
-			// 				Sensitive:   true,
-			// 			},
-			// 			"enabled": {
-			// 				Type:        schema.TypeBool,
-			// 				Description: "If true, the variable is enabled.",
-			// 				Optional:    true,
-			// 				Default:     true,
-			// 			},
-			// 		},
-			// 	},
-			// },
+			"values": schema.ListNestedAttribute{
+				Description: "The environment's values. If defined, existing values will be overridden. This can be bypassed through the use of lifecycle.ignore_changes.",
+				Optional:    true,
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"key": schema.StringAttribute{
+							Description: "The environment value's key.",
+							Required:    true,
+						},
+						"value": schema.StringAttribute{
+							Description: "The environment value's value.",
+							Required:    true,
+							Sensitive:   true,
+						},
+						"type": schema.StringAttribute{
+							Description: "The environment value's key. Valid values: default|secret|any. Default: `default`",
+							Optional:    true,
+							Computed:    true,
+							// TODO: statically add default here when supported: https://github.com/hashicorp/terraform-plugin-framework/issues/668
+							PlanModifiers: []planmodifier.String{
+								modifiers.DefaultString("default"),
+							},
+						},
+						"enabled": schema.BoolAttribute{
+							Description: "If true, the value is enabled. Default: `true`",
+							Optional:    true,
+							Computed:    true,
+							// TODO: statically add default here when supported: https://github.com/hashicorp/terraform-plugin-framework/issues/668
+							PlanModifiers: []planmodifier.Bool{
+								modifiers.DefaultBool(true),
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -132,13 +135,21 @@ func (r *environmentResource) Schema(_ context.Context, _ resource.SchemaRequest
 
 // environmentResourceModel maps the resource schema data.
 type environmentResourceModel struct {
-	ID        types.String `tfsdk:"id"`
-	Name      types.String `tfsdk:"name"`
-	Workspace types.String `tfsdk:"workspace"`
-	IsPublic  types.Bool   `tfsdk:"is_public"`
-	Owner     types.String `tfsdk:"owner"`
-	CreatedAt types.String `tfsdk:"created_at"`
-	UpdatedAt types.String `tfsdk:"updated_at"`
+	ID        types.String                    `tfsdk:"id"`
+	Name      types.String                    `tfsdk:"name"`
+	Values    []environmentValueResourceModel `tfsdk:"values"`
+	Workspace types.String                    `tfsdk:"workspace"`
+	IsPublic  types.Bool                      `tfsdk:"is_public"`
+	Owner     types.String                    `tfsdk:"owner"`
+	CreatedAt types.String                    `tfsdk:"created_at"`
+	UpdatedAt types.String                    `tfsdk:"updated_at"`
+}
+
+type environmentValueResourceModel struct {
+	Key     types.String `tfsdk:"key"`
+	Value   types.String `tfsdk:"value"`
+	Type    types.String `tfsdk:"type"`
+	Enabled types.Bool   `tfsdk:"enabled"`
 }
 
 // Configure adds the provider configured client to the resource.
@@ -171,7 +182,15 @@ func (r *environmentResource) Create(ctx context.Context, req resource.CreateReq
 		resp.Diagnostics.AddError("Error parsing environment workspace", err.Error())
 		return
 	}
+	environmentValues, err := expandEnvironmentValues(plan.Values)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing environment values", err.Error())
+		return
+	}
 	environment := postman.NewCreateEnvironmentRequestEnvironment(environmentName)
+	if environmentValues != nil {
+		environment.SetValues(environmentValues)
+	}
 
 	// Create new environment
 	input := postman.NewCreateEnvironmentRequest()
@@ -244,6 +263,7 @@ func (r *environmentResource) Read(ctx context.Context, req resource.ReadRequest
 
 	// Overwrite with refreshed state
 	state.Name = flattenEnvironmentName(response.Environment.Name)
+	state.Values = flattenEnvironmentValues(response.Environment.Values)
 	state.CreatedAt = flattenEnvironmentCreatedAt(response.Environment.CreatedAt)
 	state.UpdatedAt = flattenEnvironmentUpdatedAt(response.Environment.UpdatedAt)
 	state.IsPublic = flattenEnvironmentIsPublic(response.Environment.IsPublic)
@@ -278,12 +298,20 @@ func (r *environmentResource) Update(ctx context.Context, req resource.UpdateReq
 		resp.Diagnostics.AddError("Error parsing environment name", err.Error())
 		return
 	}
-	environment := postman.NewUpdateEnvironmentRequestEnvironment(environmentName)
+	environmentValues, err := expandEnvironmentValues(plan.Values)
+	if err != nil {
+		resp.Diagnostics.AddError("Error parsing environment values", err.Error())
+		return
+	}
+	environment := postman.NewCreateEnvironmentRequestEnvironment(environmentName)
+	if environmentValues != nil {
+		environment.SetValues(environmentValues)
+	}
 
 	// Update environment
-	input := postman.NewUpdateEnvironmentRequest()
+	input := postman.NewCreateEnvironmentRequest()
 	input.SetEnvironment(*environment)
-	_, _, err = r.client.EnvironmentsApi.UpdateEnvironment(ctx, environmentID).UpdateEnvironmentRequest(*input).Execute()
+	_, _, err = r.client.EnvironmentsApi.UpdateEnvironment(ctx, environmentID).CreateEnvironmentRequest(*input).Execute()
 	if err != nil {
 		resp.Diagnostics.AddError("Error updating environment", "Could not update environment, unexpected error: "+err.Error())
 		return
@@ -405,4 +433,102 @@ func flattenEnvironmentCreatedAt(v *time.Time) basetypes.StringValue {
 
 func flattenEnvironmentUpdatedAt(v *time.Time) basetypes.StringValue {
 	return types.StringValue((*v).Format(time.RFC3339))
+}
+
+func expandEnvironmentValueKey(v basetypes.StringValue) (string, error) {
+	return v.ValueString(), nil
+}
+
+func flattenEnvironmentValueKey(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func expandEnvironmentValueValue(v basetypes.StringValue) (string, error) {
+	return v.ValueString(), nil
+}
+
+func flattenEnvironmentValueValue(v *string) basetypes.StringValue {
+	return types.StringValue(*v)
+}
+
+func expandEnvironmentValueType(v basetypes.StringValue) (*string, error) {
+	if v.IsNull() {
+		return nil, nil
+	}
+	valueType := v.ValueString()
+	return &valueType, nil
+}
+
+func flattenEnvironmentValueType(v *string) basetypes.StringValue {
+	if v == nil {
+		return types.StringNull()
+	}
+	return types.StringValue(*v)
+}
+
+func expandEnvironmentValueEnabled(v basetypes.BoolValue) (*bool, error) {
+	if v.IsNull() {
+		return nil, nil
+	}
+	valueType := v.ValueBool()
+	return &valueType, nil
+}
+
+func flattenEnvironmentValueEnabled(v *bool) basetypes.BoolValue {
+	if v == nil {
+		return types.BoolNull()
+	}
+	return types.BoolValue(*v)
+}
+
+func expandEnvironmentValues(v []environmentValueResourceModel) ([]postman.CreateEnvironmentRequestEnvironmentValuesInner, error) {
+	if v == nil {
+		return nil, nil
+	}
+	environmentValues := []postman.CreateEnvironmentRequestEnvironmentValuesInner{}
+	for _, environmentValue := range v {
+		key, err := expandEnvironmentValueKey(environmentValue.Key)
+		if err != nil {
+			return nil, err
+		}
+		value, err := expandEnvironmentValueValue(environmentValue.Value)
+		if err != nil {
+			return nil, err
+		}
+		valueType, err := expandEnvironmentValueType(environmentValue.Type)
+		if err != nil {
+			return nil, err
+		}
+		enabled, err := expandEnvironmentValueEnabled(environmentValue.Enabled)
+		if err != nil {
+			return nil, err
+		}
+		environmentValues = append(environmentValues, postman.CreateEnvironmentRequestEnvironmentValuesInner{
+			Key:     &key,
+			Value:   &value,
+			Type:    valueType,
+			Enabled: enabled,
+		})
+	}
+	return environmentValues, nil
+}
+
+func flattenEnvironmentValues(v []postman.CreateEnvironmentRequestEnvironmentValuesInner) []environmentValueResourceModel {
+	environmentValues := []environmentValueResourceModel{}
+	for _, environmentValue := range v {
+		key := flattenEnvironmentValueKey(environmentValue.Key)
+		value := flattenEnvironmentValueValue(environmentValue.Value)
+		valueType := flattenEnvironmentValueType(environmentValue.Type)
+		enabled := flattenEnvironmentValueEnabled(environmentValue.Enabled)
+		environmentValues = append(environmentValues, environmentValueResourceModel{
+			Key:     key,
+			Value:   value,
+			Type:    valueType,
+			Enabled: enabled,
+		})
+	}
+	if len(environmentValues) == 0 {
+		return nil
+	}
+	return environmentValues
 }

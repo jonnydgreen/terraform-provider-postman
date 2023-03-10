@@ -64,19 +64,49 @@ func (d *environmentDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 				Computed:    true,
 				Optional:    true,
 			},
+			"values": schema.ListNestedAttribute{
+				Description: "The environment's values. If defined, existing values will be overridden. This can be bypassed through the use of lifecycle.ignore_changes.",
+				Optional:    true,
+				Computed:    true,
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"key": schema.StringAttribute{
+							Description: "The environment value's key.",
+							Computed:    true,
+						},
+						"value": schema.StringAttribute{
+							Description: "The environment value's value.",
+							Computed:    true,
+							Sensitive:   true,
+						},
+						"type": schema.StringAttribute{
+							Description: "The environment value's key. Valid values: default|secret|any. Default: `default`",
+							Computed:    true,
+							Optional:    true,
+						},
+						"enabled": schema.BoolAttribute{
+							Description: "If true, the value is enabled. Default: `true`",
+							Computed:    true,
+							Optional:    true,
+						},
+					},
+				},
+			},
 		},
 	}
 }
 
 // environmentDataSourceModel maps the data source schema data.
 type environmentDataSourceModel struct {
-	ID        types.String `tfsdk:"id"`
-	Name      types.String `tfsdk:"name"`
-	Workspace types.String `tfsdk:"workspace"`
-	IsPublic  types.Bool   `tfsdk:"is_public"`
-	Owner     types.String `tfsdk:"owner"`
-	CreatedAt types.String `tfsdk:"created_at"`
-	UpdatedAt types.String `tfsdk:"updated_at"`
+	ID   types.String `tfsdk:"id"`
+	Name types.String `tfsdk:"name"`
+	// TODO: maybe just use a list type here
+	Values    []environmentValueResourceModel `tfsdk:"values"`
+	Workspace types.String                    `tfsdk:"workspace"`
+	IsPublic  types.Bool                      `tfsdk:"is_public"`
+	Owner     types.String                    `tfsdk:"owner"`
+	CreatedAt types.String                    `tfsdk:"created_at"`
+	UpdatedAt types.String                    `tfsdk:"updated_at"`
 }
 
 // Configure adds the provider configured client to the data source.
@@ -112,6 +142,7 @@ func (d *environmentDataSource) Read(ctx context.Context, req datasource.ReadReq
 
 	// Overwrite with refreshed state
 	state.Name = flattenEnvironmentName(response.Environment.Name)
+	state.Values = flattenEnvironmentValues(response.Environment.Values)
 	state.CreatedAt = flattenEnvironmentCreatedAt(response.Environment.CreatedAt)
 	state.UpdatedAt = flattenEnvironmentUpdatedAt(response.Environment.UpdatedAt)
 	state.IsPublic = flattenEnvironmentIsPublic(response.Environment.IsPublic)

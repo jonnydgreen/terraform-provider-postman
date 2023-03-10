@@ -473,30 +473,28 @@ paths:
                     values:
                       description: Information about the environment's variables.
                       items:
-                        items:
-                          properties:
-                            enabled:
-                              description: If true, the variable is enabled.
-                              example: true
-                              type: boolean
-                            key:
-                              description: The variable's name.
-                              example: apiKey
-                              type: string
-                            type:
-                              description: The variable type.
-                              enum:
-                              - secret
-                              - default
-                              - any
-                              example: secret
-                              type: string
-                            value:
-                              description: The variable's value.
-                              example: PMAK-1234-5678-0987-6543
-                              type: string
-                          type: object
-                        type: array
+                        properties:
+                          enabled:
+                            description: If true, the variable is enabled.
+                            example: true
+                            type: boolean
+                          key:
+                            description: The variable's name.
+                            example: apiKey
+                            type: string
+                          type:
+                            description: The variable type.
+                            enum:
+                            - secret
+                            - default
+                            - any
+                            example: secret
+                            type: string
+                          value:
+                            description: The variable's value.
+                            example: PMAK-1234-5678-0987-6543
+                            type: string
+                        type: object
                       type: array
                   required:
                   - name

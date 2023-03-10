@@ -699,11 +699,11 @@ type ApiUpdateEnvironmentRequest struct {
 	ctx context.Context
 	ApiService *EnvironmentsApiService
 	environmentId string
-	updateEnvironmentRequest *UpdateEnvironmentRequest
+	createEnvironmentRequest *CreateEnvironmentRequest
 }
 
-func (r ApiUpdateEnvironmentRequest) UpdateEnvironmentRequest(updateEnvironmentRequest UpdateEnvironmentRequest) ApiUpdateEnvironmentRequest {
-	r.updateEnvironmentRequest = &updateEnvironmentRequest
+func (r ApiUpdateEnvironmentRequest) CreateEnvironmentRequest(createEnvironmentRequest CreateEnvironmentRequest) ApiUpdateEnvironmentRequest {
+	r.createEnvironmentRequest = &createEnvironmentRequest
 	return r
 }
 
@@ -768,7 +768,7 @@ func (a *EnvironmentsApiService) UpdateEnvironmentExecute(r ApiUpdateEnvironment
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateEnvironmentRequest
+	localVarPostBody = r.createEnvironmentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -36,6 +36,7 @@ resource "postman_environment_value" "example" {
 
 - `is_public` (Boolean) If true, the environment is public.
 - `owner` (String) The environment owner's ID.
+- `values` (Attributes List) The environment's values. If defined, existing values will be overridden. This can be bypassed through the use of lifecycle.ignore_changes. (see [below for nested schema](#nestedatt--values))
 - `workspace` (String) The environment's workspace ID. If not specified, the default workspace is used.
 
 ### Read-Only
@@ -43,5 +44,18 @@ resource "postman_environment_value" "example" {
 - `created_at` (String) The date and time at which the environment was created.
 - `id` (String) The environment's ID.
 - `updated_at` (String) The date and time at which the environment was last updated.
+
+<a id="nestedatt--values"></a>
+### Nested Schema for `values`
+
+Required:
+
+- `key` (String) The environment value's key.
+- `value` (String, Sensitive) The environment value's value.
+
+Optional:
+
+- `enabled` (Boolean) If true, the value is enabled. Default: `true`
+- `type` (String) The environment value's key. Valid values: default|secret|any. Default: `default`
 
 

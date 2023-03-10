@@ -251,6 +251,9 @@ github.com/shopspring/decimal
 # github.com/spf13/cast v1.5.0
 ## explicit; go 1.18
 github.com/spf13/cast
+# github.com/terraform-community-providers/terraform-plugin-framework-utils v0.3.0
+## explicit; go 1.18
+github.com/terraform-community-providers/terraform-plugin-framework-utils/modifiers
 # github.com/vmihailenco/msgpack v4.0.4+incompatible
 ## explicit
 github.com/vmihailenco/msgpack
