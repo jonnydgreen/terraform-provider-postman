@@ -3,14 +3,18 @@
 page_title: "postman_workspace Data Source - postman"
 subcategory: ""
 description: |-
-  
+  The data source postman_workspace fetches a Postman Workspace.
 ---
 
 # postman_workspace (Data Source)
 
+The data source postman_workspace fetches a Postman Workspace.
 
+~> **Warning** The Terraform Provider for Postman makes use of the Postman API. Before proceeding, please ensure you have checked your Postman API usage plans on your personal/team account [resource usage page](https://web.postman.co/billing/add-ons/overview).
 
 ## Example Usage
+
+### Basic
 
 ```terraform
 data "postman_workspace" "example" {
@@ -92,5 +96,3 @@ Read-Only:
 - `id` (String) The ID of the Workspace Monitor.
 - `name` (String) The name of the Workspace Monitor.
 - `uid` (String) The UID of the Workspace Monitor.
-
-

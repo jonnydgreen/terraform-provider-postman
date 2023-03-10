@@ -31,8 +31,6 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "name", workspaceName),
 					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
-					// TODO: desc
-					// resource.TestCheckResourceAttr(resourceName, "description", ""),
 					testAccCheckWorkspaceExists(t, resourceName),
 				),
 			},
@@ -51,12 +49,74 @@ func TestAccWorkspaceResource__basic(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					resource.TestCheckResourceAttr(resourceName, "name", workspaceName+"-2"),
 					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
-					// TODO
-					// https://github.com/hashicorp/terraform-plugin-framework/issues/175
-					// https://github.com/hashicorp/terraform-provider-aws/issues/28638
-					// https://github.com/hashicorp/terraform-plugin-framework/pull/176
-					// TODO: description
-					// resource.TestCheckResourceAttr(resourceName, "description", ""),
+
+					// Verify computed attributes.
+					resource.TestCheckResourceAttr(resourceName, "apis.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "collections.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "environments.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "mocks.#", "0"),
+					resource.TestCheckResourceAttr(resourceName, "monitors.#", "0"),
+
+					// Verify dynamic values have any value set in the state.
+					resource.TestCheckResourceAttrSet(resourceName, "id"),
+					resource.TestCheckResourceAttrSet(resourceName, "visibility"),
+					resource.TestCheckResourceAttrSet(resourceName, "created_at"),
+					resource.TestCheckResourceAttrSet(resourceName, "created_by"),
+					resource.TestCheckResourceAttrSet(resourceName, "updated_at"),
+					resource.TestCheckResourceAttrSet(resourceName, "updated_by"),
+
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+		},
+	})
+}
+
+func TestAccWorkspaceResource__basicWithDescription(t *testing.T) {
+	resourceName := "postman_workspace.default"
+	workspaceName := acctest.RandomWithPrefix("tf-test")
+	workspaceType := "personal"
+	workspaceDescription := "Some description"
+	context := map[string]interface{}{
+		"name":        workspaceName,
+		"type":        workspaceType,
+		"description": workspaceDescription,
+	}
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 testAccPreCheck(t),
+		ErrorCheck:               testAccErrorCheck(t),
+		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		CheckDestroy:             testAccCheckWorkspaceDoesNotExist(t, resourceName),
+		Steps: []resource.TestStep{
+			// Create and Read testing
+			{
+				Config: testAccWorkspaceResource__basicDescription(context),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resourceName, "name", workspaceName),
+					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
+					resource.TestCheckResourceAttr(resourceName, "description", workspaceDescription),
+					testAccCheckWorkspaceExists(t, resourceName),
+				),
+			},
+			// ImportState testing
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+			// Update and Read testing
+			{
+				Config: testAccWorkspaceResource__basicDescription(map[string]interface{}{
+					"name":        workspaceName,
+					"type":        workspaceType,
+					"description": "Some other description",
+				}),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					resource.TestCheckResourceAttr(resourceName, "name", workspaceName),
+					resource.TestCheckResourceAttr(resourceName, "type", workspaceType),
+					resource.TestCheckResourceAttr(resourceName, "description", "Some other description"),
+
 					// Verify computed attributes.
 					resource.TestCheckResourceAttr(resourceName, "apis.#", "0"),
 					resource.TestCheckResourceAttr(resourceName, "collections.#", "0"),
@@ -195,9 +255,9 @@ resource "postman_workspace" "default" {
 `, context)
 }
 
-func testAccWorkspaceResource__description(context map[string]interface{}) string {
+func testAccWorkspaceResource__basicDescription(context map[string]interface{}) string {
 	return Nprintf(providerConfig+`
-resource "postman_workspace" "description" {
+resource "postman_workspace" "default" {
   name        = "%{name}"
   type        = "%{type}"
 	description = "%{description}"

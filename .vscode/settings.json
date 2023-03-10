@@ -23,6 +23,8 @@
     "scim",
     "securityprovider",
     "stringplanmodifier",
+    "testacc",
+    "TESTARGS",
     "tflog",
     "tfplugindocs",
     "tfprotov",

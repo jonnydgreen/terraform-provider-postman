@@ -43,6 +43,7 @@ func (r *environmentResource) Metadata(_ context.Context, req resource.MetadataR
 
 func environmentSchema() schema.Schema {
 	return schema.Schema{
+		Description: "The resource `postman_environment` creates a Postman Environment.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "The environment's ID.",
@@ -258,8 +259,6 @@ func (r *environmentResource) Read(ctx context.Context, req resource.ReadRequest
 		resp.Diagnostics.AddError("Error reading environment", "Could not read environment, unexpected error: "+err.Error())
 		return
 	}
-
-	// TODO: ensure that the environment belongs to this workspace
 
 	// Overwrite with refreshed state
 	state.Name = flattenEnvironmentName(response.Environment.Name)

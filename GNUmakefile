@@ -117,4 +117,4 @@ pre-commit:
 	make
 	make vet
 	make test
-	make docs && git add docs
+	make gen && git add docs examples

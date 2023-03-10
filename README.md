@@ -2,14 +2,49 @@
 
 - Tutorials:
   [learn.hashicorp.com](https://learn.hashicorp.com/terraform?track=getting-started#getting-started)
-- Documentation: TODO
+<!-- TODO: add documentation link when released -->
 
 The Terraform Postman provider is a plugin that allows
 [Terraform](https://www.terraform.io) to manage resources in Postman.
 
+**WARNING:** The Terraform Provider for Postman makes use of the Postman API. Before proceeding, please ensure you have checked your Postman API usage plans on your personal/team account [resource usage page](https://web.postman.co/billing/add-ons/overview) within Postman.
+
 ## Quick Starts
 
-TODO
+```terraform
+terraform {
+  required_providers {
+    postman = {
+      version = "0.2"
+      source  = "jonnydgreen/postman"
+    }
+  }
+}
+
+provider "postman" {}
+
+resource "postman_workspace" "example" {
+  name = "Example"
+  type = "personal"
+}
+
+resource "postman_environment" "example" {
+  name      = "Example"
+  workspace = postman_workspace.example.id
+  values = [
+    {
+      key   = "hello"
+      value = "there"
+    },
+    {
+      key     = "foo"
+      value   = "bar"
+      enabled = false
+      type    = "secret"
+    },
+  ]
+}
+```
 
 ## Requirements
 
@@ -29,10 +64,6 @@ TODO
 
 ## Using the provider
 
-TODO
-
-Fill this in for each provider.
-
 ### Upgrading the provider
 
 The Postman provider doesn't upgrade automatically once you've started using it.
@@ -50,18 +81,12 @@ your provider.
 
 ## Developing the Provider
 
+Contributions are very welcome! :)
+
 See the [contributing guide](./CONTRIBUTING.md) for more details.
-
-## Issues with Postman API definition
-
-- Workspace query string for all requests is not `workspaceId` but `workspace`.
-- Environment values has double nested array in both request and responses
 
 ## Future work
 
-- [ ] Improve testing for workspace descriptions
-- [ ] Support for Environments
-- [ ] Support for Environment Values
 - [ ] Support for APIs
 - [ ] Support for Collections
 - [ ] Support for Mocks
@@ -74,7 +99,3 @@ See the [contributing guide](./CONTRIBUTING.md) for more details.
 - Manual Dispatch
 - On main only
 - Or both of the above
-
-### Detailed instructions for contributing
-
-<!-- TODO -->

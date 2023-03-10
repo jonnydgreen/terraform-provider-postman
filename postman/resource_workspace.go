@@ -43,6 +43,7 @@ func (r *workspaceResource) Metadata(_ context.Context, req resource.MetadataReq
 
 func workspaceSchema() schema.Schema {
 	return schema.Schema{
+		Description: "The resource `postman_workspace` creates a Postman Workspace.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "The workspace's ID.",
