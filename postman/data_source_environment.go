@@ -33,6 +33,7 @@ func (d *environmentDataSource) Metadata(_ context.Context, req datasource.Metad
 // Schema defines the schema for the data source.
 func (d *environmentDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		Description: "The data source postman_environment fetches a Postman Environment.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "The environment's ID.",
@@ -98,9 +99,8 @@ func (d *environmentDataSource) Schema(_ context.Context, _ datasource.SchemaReq
 
 // environmentDataSourceModel maps the data source schema data.
 type environmentDataSourceModel struct {
-	ID   types.String `tfsdk:"id"`
-	Name types.String `tfsdk:"name"`
-	// TODO: maybe just use a list type here
+	ID        types.String                    `tfsdk:"id"`
+	Name      types.String                    `tfsdk:"name"`
 	Values    []environmentValueResourceModel `tfsdk:"values"`
 	Workspace types.String                    `tfsdk:"workspace"`
 	IsPublic  types.Bool                      `tfsdk:"is_public"`

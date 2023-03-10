@@ -43,6 +43,7 @@ func (r *workspaceResource) Metadata(_ context.Context, req resource.MetadataReq
 
 func workspaceSchema() schema.Schema {
 	return schema.Schema{
+		Description: "The resource `postman_workspace` creates a Postman Workspace.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "The workspace's ID.",
@@ -438,7 +439,7 @@ func (r *workspaceResource) Read(ctx context.Context, req resource.ReadRequest, 
 	if err != nil {
 		if raw.StatusCode == 404 {
 			tflog.Debug(ctx, fmt.Sprintf("[DEBUG] %s for: %s, removing from state file", err, workspaceID))
-			state.ID = flattenWorkspaceID("")
+			resp.State.RemoveResource(ctx)
 			return
 		}
 		resp.Diagnostics.AddError("Error reading workspace", "Could not read workspace, unexpected error: "+err.Error())

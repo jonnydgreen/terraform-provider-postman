@@ -3,14 +3,18 @@
 page_title: "postman_workspace Resource - postman"
 subcategory: ""
 description: |-
-  
+  The resource postman_workspace creates a Postman Workspace.
 ---
 
 # postman_workspace (Resource)
 
+The resource `postman_workspace` creates a Postman Workspace.
 
+~> **Warning** The Terraform Provider for Postman makes use of the Postman API. Before proceeding, please ensure you have checked your Postman API usage plans on your personal/team account [resource usage page](https://web.postman.co/billing/add-ons/overview).
 
 ## Example Usage
+
+### Basic
 
 ```terraform
 # Manage postman workspace.
@@ -99,7 +103,13 @@ Read-Only:
 
 Import is supported using the following syntax:
 
+```
+terraform import postman_workspace.<resource_name> <workspace_id>
+```
+
+### Example
+
 ```shell
-# Workspace can be imported by specifying the UUID identifier.
+# Workspaces can be imported by specifying the ID.
 terraform import postman_workspace.example 8ce9271d-d4ea-458c-8aef-02cf08ca9558
 ```

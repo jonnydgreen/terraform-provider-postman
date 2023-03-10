@@ -3,14 +3,18 @@
 page_title: "postman_environment Resource - postman"
 subcategory: ""
 description: |-
-  
+  The resource postman_environment creates a Postman Environment.
 ---
 
 # postman_environment (Resource)
 
+The resource `postman_environment` creates a Postman Environment.
 
+~> **Warning** The Terraform Provider for Postman makes use of the Postman API. Before proceeding, please ensure you have checked your Postman API usage plans on your personal/team account [resource usage page](https://web.postman.co/billing/add-ons/overview).
 
 ## Example Usage
+
+### Basic
 
 ```terraform
 resource "postman_environment" "example" {
@@ -58,4 +62,20 @@ Optional:
 - `enabled` (Boolean) If true, the value is enabled. Default: `true`
 - `type` (String) The environment value's key. Valid values: default|secret|any. Default: `default`
 
+## Import
 
+Import is supported using the following syntax:
+
+```
+terraform import postman_environment.<resource_name> [<workspace_id>,]<environment_id>
+```
+
+### Example
+
+```shell
+# Environments can be imported by specifying the ID of the workspace followed by the ID of the environment (separated by a comma)
+terraform import postman_environment.example f358135f-180e-4331-b533-cb23a72b745a,8ce9271d-d4ea-458c-8aef-02cf08ca9558
+
+# Alternatively, environments can be imported by just specifying the ID of the environment. In this case, the default workspace will be used.
+terraform import postman_environment.example f358135f-180e-4331-b533-cb23a72b745a,8ce9271d-d4ea-458c-8aef-02cf08ca9558
+```
