@@ -1,13 +1,17 @@
 # Terraform Provider for Postman
 
+- [Documentation](https://registry.terraform.io/providers/jonnydgreen/postman/latest/docs)
 - Tutorials:
   [learn.hashicorp.com](https://learn.hashicorp.com/terraform?track=getting-started#getting-started)
-<!-- TODO: add documentation link when released -->
 
 The Terraform Postman provider is a plugin that allows
 [Terraform](https://www.terraform.io) to manage resources in Postman.
 
-**WARNING:** The Terraform Provider for Postman makes use of the Postman API. Before proceeding, please ensure you have checked your Postman API usage plans on your personal/team account [resource usage page](https://web.postman.co/billing/add-ons/overview) within Postman.
+**WARNING:** The Terraform Provider for Postman makes use of the Postman API.
+Before proceeding, please ensure you have checked your Postman API usage plans
+on your personal/team account
+[resource usage page](https://web.postman.co/billing/add-ons/overview) within
+Postman.
 
 ## Quick Starts
 
