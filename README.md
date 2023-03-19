@@ -61,8 +61,8 @@ resource "postman_environment" "example" {
 | ------------ | ------------------ | ------------------ | ------------------ |
 | Workspaces   | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Environments | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Apis         | :x:                | :x:                | :x:                |
-| Collections  | :x:                | :x:                | :x:                |
+| Apis         | :construction:     | :construction:     | :construction:     |
+| Collections  | :construction:     | :construction:     | :construction:     |
 | Mocks        | :x:                | :x:                | :x:                |
 | Monitors     | :x:                | :x:                | :x:                |
 
