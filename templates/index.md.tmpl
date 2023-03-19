@@ -16,10 +16,10 @@ It currently supports the following:
 | ------------ | ------------------ | ------------------ | ------------------ |
 | Workspaces   | Supported | Supported | Supported |
 | Environments | Supported | Supported | Supported |
-| Apis         | Not yet supported                | Not yet supported                | Not yet supported                |
-| Collections  | Not yet supported                | Not yet supported                | Not yet supported                |
-| Mocks        | Not yet supported                | Not yet supported                | Not yet supported                |
-| Monitors     | Not yet supported                | Not yet supported                | Not yet supported                |
+| Apis         | In progress | In progress | In progress |
+| Collections  | In progress | In progress | In progress |
+| Mocks        | Not yet supported | Not yet supported | Not yet supported |
+| Monitors     | Not yet supported | Not yet supported | Not yet supported |
 
 Use the navigation to the left to read about the available resources.
 
